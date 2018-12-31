@@ -206,7 +206,7 @@ public class NetworkedMovement : NetworkBehaviour {
         uint client_tick_number = this.client_tick_number;
 
         client_timer += Time.deltaTime;
-        while (client_timer >= dt)
+
         while (client_timer >= dt)
         {
             client_timer -= dt;
