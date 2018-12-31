@@ -11,6 +11,10 @@ public class NetworkedMovement : NetworkBehaviour {
 
     float CurrentTime;
 
+    public int Corrections;
+
+    public GameObject correctionsHudPrefab;
+
     public Transform local_player_camera_transform;
     public GameObject proxy_player;
     public GameObject smoothed_client_player;
@@ -59,6 +63,12 @@ public class NetworkedMovement : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        if (isLocalPlayer)
+        {
+           var chud = Instantiate(correctionsHudPrefab);
+            chud.GetComponent<CorrectiosHUD>().SetMovementComponent(this);
+        }
 
         _rigidbody = GetComponent<Rigidbody>();
         InputMessageReceived += System.Convert.ToInt16(netId.Value);
@@ -137,12 +147,7 @@ public class NetworkedMovement : NetworkBehaviour {
     }
     
     public void OnPhysiscsUpdated()
-    {
-       
-       // ++server_tick_accumulator;
-                    
-        // Debug.Log("NetID : "+netId.Value+" | Server Tick : " + server_tick_number + " | Normalized Tick : " + (serverTickAtStart + realServerTick));
-                    
+    {            
         ++server_tick_accumulator;
         if (server_tick_accumulator >= server_snapshot_rate)
         {
@@ -158,7 +163,6 @@ public class NetworkedMovement : NetworkBehaviour {
             state_msg.angular_velocity = _rigidbody.angularVelocity;
 
             //SendMesageToClient
-            //base.connectionToClient.Send(StateMessageReceived, state_msg);
             NetworkServer.SendToClientOfPlayer(this.gameObject, StateMessageReceived, state_msg);
             serverPacketID++;
                     
@@ -200,19 +204,17 @@ public class NetworkedMovement : NetworkBehaviour {
                     PhysicsNetworkUpdater.Instance.OnReadyToSimulate();
 
                     ++server_tick_number;
-                    
-                    OnPhysiscsUpdated();
+
+                    //TODO : See the effects of remove this
+                  //  OnPhysiscsUpdated();
                    
                 }
 
-
-                //smoothed_client_player.transform.position = _rigidbody.position;
-                //smoothed_client_player.transform.rotation = _rigidbody.rotation;
             }
         }
 
        this.server_tick_number = server_tick_number;
-       //this.server_tick_accumulator = server_tick_accumulator;
+
     }
 
     void ClientUpdate()
@@ -293,7 +295,10 @@ public class NetworkedMovement : NetworkBehaviour {
                 if (position_error.sqrMagnitude > 0.0000001f ||
                     rotation_error > 0.00001f)
                 {
-                    Debug.Log("Correcting");
+                    if (isLocalPlayer)
+                    {
+                        Corrections++;
+                    }
 
                     // capture the current predicted pos for smoothing
                     Vector3 prev_pos = _rigidbody.position + client_pos_error;
@@ -387,9 +392,10 @@ public class NetworkedMovement : NetworkBehaviour {
 
     private bool ClientHasStateMessage()
     {
-        if (client_state_msgs.Peek() == null) return false;
-
-       // Debug.Log(CurrentTime + " vs " + client_state_msgs.Peek().Element.delivery_time);
+        if (client_state_msgs.Peek() == null)
+        {
+            return false;
+        }
 
         return client_state_msgs.Count > 0 && CurrentTime >= client_state_msgs.Peek().Element.delivery_time;
     }
