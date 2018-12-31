@@ -5,7 +5,7 @@ using System;
 
 public class SimpleUpdateManager : MonoBehaviour {
 
-    public SimpleUpdateManager instance;
+    public static SimpleUpdateManager instance;
 
     Dictionary<int, Action> _prePhysicsUpdatersByID = new Dictionary<int, Action>();
     Dictionary<int, Action> _physicsUpdatersByID = new Dictionary<int, Action>();

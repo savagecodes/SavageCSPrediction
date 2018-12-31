@@ -106,6 +106,7 @@ public class NetworkedMovement : NetworkBehaviour {
         }
         else
         {
+            PhysicsNetworkUpdater.Instance._movementComponents.Add(this);
             base.connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
         }
 
@@ -134,6 +135,39 @@ public class NetworkedMovement : NetworkBehaviour {
 
         client_state_msgs.Enqueue(new HeapElement<StateMessage>(message, message.packetId));
     }
+    
+    public void OnPhysiscsUpdated()
+    {
+       
+       // ++server_tick_accumulator;
+                    
+        // Debug.Log("NetID : "+netId.Value+" | Server Tick : " + server_tick_number + " | Normalized Tick : " + (serverTickAtStart + realServerTick));
+                    
+        ++server_tick_accumulator;
+        if (server_tick_accumulator >= server_snapshot_rate)
+        {
+            server_tick_accumulator = 0;
+                        
+            StateMessage state_msg = new StateMessage();
+            state_msg.packetId = serverPacketID;
+            state_msg.delivery_time = CurrentTime + server_input_msgs.Peek().Element.rtt / 2;
+            state_msg.tick_number = server_tick_number;
+            state_msg.position = _rigidbody.position;
+            state_msg.rotation = _rigidbody.rotation;
+            state_msg.velocity = _rigidbody.velocity;
+            state_msg.angular_velocity = _rigidbody.angularVelocity;
+
+            //SendMesageToClient
+            //base.connectionToClient.Send(StateMessageReceived, state_msg);
+            NetworkServer.SendToClientOfPlayer(this.gameObject, StateMessageReceived, state_msg);
+            serverPacketID++;
+                    
+        }
+        
+        smoothed_client_player.transform.position = _rigidbody.position;
+        smoothed_client_player.transform.rotation = _rigidbody.rotation;
+    }
+
 
     void ServerUpdate()
     {
@@ -161,39 +195,24 @@ public class NetworkedMovement : NetworkBehaviour {
                 for (int i = (int)start_i; i < input_msg.inputs.Length; ++i)
                 {
                     PrePhysicsStep(_rigidbody, input_msg.inputs[i]);
-                    Physics.Simulate(dt);
+                    // Physics.Simulate(dt);
+
+                    PhysicsNetworkUpdater.Instance.OnReadyToSimulate();
 
                     ++server_tick_number;
-                    ++server_tick_accumulator;
-                    if (server_tick_accumulator >= server_snapshot_rate)
-                    {
-                        server_tick_accumulator = 0;
-                        
-                     StateMessage state_msg = new StateMessage();
-                     state_msg.packetId = serverPacketID;
-                     state_msg.delivery_time = CurrentTime + server_input_msgs.Peek().Element.rtt / 2;
-                     state_msg.tick_number = server_tick_number;
-                     state_msg.position = _rigidbody.position;
-                     state_msg.rotation = _rigidbody.rotation;
-                     state_msg.velocity = _rigidbody.velocity;
-                     state_msg.angular_velocity = _rigidbody.angularVelocity;
-
-                     //SendMesageToClient
-                     //base.connectionToClient.Send(StateMessageReceived, state_msg);
-                     NetworkServer.SendToClientOfPlayer(this.gameObject, StateMessageReceived, state_msg);
-                     serverPacketID++;
                     
-                    }
+                    OnPhysiscsUpdated();
+                   
                 }
 
 
-                smoothed_client_player.transform.position = _rigidbody.position;
-                smoothed_client_player.transform.rotation = _rigidbody.rotation;
+                //smoothed_client_player.transform.position = _rigidbody.position;
+                //smoothed_client_player.transform.rotation = _rigidbody.rotation;
             }
         }
 
        this.server_tick_number = server_tick_number;
-       this.server_tick_accumulator = server_tick_accumulator;
+       //this.server_tick_accumulator = server_tick_accumulator;
     }
 
     void ClientUpdate()
@@ -387,7 +406,7 @@ public class NetworkedMovement : NetworkBehaviour {
 }
 
 [System.Serializable]
-struct Inputs
+public struct Inputs
 {
     public bool up;
     public bool down;
