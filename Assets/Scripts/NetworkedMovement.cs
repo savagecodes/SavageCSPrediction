@@ -24,8 +24,10 @@ public class NetworkedMovement : NetworkBehaviour {
     private ClientState[] client_state_buffer; // client stores predicted moves here
     private Inputs[] client_input_buffer; // client stores predicted inputs here
     private BinaryHeap<StateMessage> client_state_msgs;
+    private HashSet<uint> client_state_msgs_IDs = new HashSet<uint>();
     private Vector3 client_pos_error;
     private Quaternion client_rot_error;
+    uint clientPacketID;
 
     public bool client_enable_corrections = true;
     public bool client_correction_smoothing = true;
@@ -36,6 +38,8 @@ public class NetworkedMovement : NetworkBehaviour {
     private uint server_tick_number;
     private uint server_tick_accumulator;
     private BinaryHeap<InputMessage> server_input_msgs;
+    HashSet<uint> server_input_msgs_IDs = new HashSet<uint>();
+    uint serverPacketID;
 
     private void Awake()
     {
@@ -92,13 +96,21 @@ public class NetworkedMovement : NetworkBehaviour {
     {
         var message = netMsg.ReadMessage<InputMessage>();
 
-        this.server_input_msgs.Enqueue(new HeapElement<InputMessage>(message,message.start_tick_number));
+        if (server_input_msgs_IDs.Contains(message.packetId)) return;
+
+        server_input_msgs_IDs.Add(message.packetId);
+
+        this.server_input_msgs.Enqueue(new HeapElement<InputMessage>(message,message.packetId));
     }
 
     void OnStateMessageReceived(NetworkMessage netMsg)
     {
         var message = netMsg.ReadMessage<StateMessage>();
-        client_state_msgs.Enqueue(new HeapElement<StateMessage>(message, message.tick_number));
+
+        if (client_state_msgs_IDs.Contains(message.packetId)) return;
+        client_state_msgs_IDs.Add(message.packetId);
+
+        client_state_msgs.Enqueue(new HeapElement<StateMessage>(message, message.packetId));
     }
 
     void ServerUpdate()
@@ -137,8 +149,8 @@ public class NetworkedMovement : NetworkBehaviour {
                         server_tick_accumulator = 0;
                         
                      StateMessage state_msg = new StateMessage();
+                     state_msg.packetId = serverPacketID;
                      state_msg.delivery_time = CurrentTime + server_input_msgs.Peek().Element.rtt / 2;
-            
                      state_msg.tick_number = server_tick_number;
                      state_msg.position = server_rigidbody.position;
                      state_msg.rotation = server_rigidbody.rotation;
@@ -147,6 +159,8 @@ public class NetworkedMovement : NetworkBehaviour {
 
                      //SendMesageToClient
                      base.connectionToClient.Send(StateMessageReceived, state_msg);
+                     serverPacketID++;
+                    
                     }
                 }
 
@@ -195,6 +209,7 @@ public class NetworkedMovement : NetworkBehaviour {
        
             InputMessage input_msg = new InputMessage();
             var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
+            input_msg.packetId = clientPacketID;
             input_msg.delivery_time = CurrentTime + rtt / 2 ;
             input_msg.rtt = rtt;
             input_msg.start_tick_number = this.client_send_redundant_inputs ? this.client_last_received_state_tick : client_tick_number;
@@ -209,7 +224,8 @@ public class NetworkedMovement : NetworkBehaviour {
 
             //Sern Input Message To Server
             base.connectionToServer.Send(InputMessageReceived, input_msg);
-            
+            clientPacketID ++;
+
             ++client_tick_number;
         }
 
@@ -361,6 +377,7 @@ struct Inputs
 
 class InputMessage : MessageBase
 {
+    public uint packetId;
     public float delivery_time;
     public float rtt;
     public uint start_tick_number;
@@ -376,6 +393,7 @@ struct ClientState
 
 public class StateMessage : MessageBase
 {
+    public uint packetId;
     public float delivery_time;
     public uint tick_number;
     public Vector3 position;
