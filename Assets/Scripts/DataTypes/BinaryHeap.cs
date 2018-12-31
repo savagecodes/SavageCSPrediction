@@ -102,7 +102,7 @@ public class HeapElement<T>
 
 		var result =
 			other != null
-			&& other.Element.Equals(_element) //Very important to keep or A*'s "previous" tree will overwrite paths.
+			&& other.Element.Equals(_element) 
 			&& other.Weight == _weight;
 		
 		return result;

@@ -6,17 +6,17 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkedMovement : NetworkBehaviour {
 
-    const short InputMessageReceived = 1002;
-    const short StateMessageReceived = 1003;
+    short InputMessageReceived = 1002;
+    short StateMessageReceived = 1003;
 
-    public float CurrentTime;
+    float CurrentTime;
 
     public Transform local_player_camera_transform;
     public GameObject proxy_player;
+    public GameObject smoothed_client_player;
+
     public float player_movement_impulse;
     public float player_jump_y_threshold;
-
-    public GameObject smoothed_client_player;
 
     Rigidbody _rigidbody;
 
@@ -44,16 +44,34 @@ public class NetworkedMovement : NetworkBehaviour {
     HashSet<uint> server_input_msgs_IDs = new HashSet<uint>();
     uint serverPacketID;
 
-    private void Awake()
-    {
-        Application.targetFrameRate = 60;
+    //inputs
+    bool isPressingUp;
+    bool isPressingDown;
+    bool isPressingLeft;
+    bool isPressingRight;
+    bool isPressingJump;
 
-    }
+    public bool IsPressingUp { set { isPressingUp = value; } }
+    public bool IsPressingDown { set { isPressingDown = value; } }
+    public bool IsPressingLeft { set { isPressingLeft = value; } }
+    public bool IsPressingRight { set { isPressingRight = value; } }
+    public bool IsPressingJump { set { isPressingJump = value; } }
 
     // Use this for initialization
     void Start () {
 
         _rigidbody = GetComponent<Rigidbody>();
+        InputMessageReceived += System.Convert.ToInt16(netId.Value);
+        StateMessageReceived += System.Convert.ToInt16(netId.Value);
+
+        if (!isServer && !isLocalPlayer)
+        {
+            _rigidbody.isKinematic = true;
+            this.enabled = false;
+            var networkTransform = gameObject.AddComponent<NetworkTransform>();
+            networkTransform.transformSyncMode = NetworkTransform.TransformSyncMode.SyncTransform;
+            return;
+        }
 
         client_timer = 0.0f;
         client_tick_number = 0;
@@ -93,8 +111,6 @@ public class NetworkedMovement : NetworkBehaviour {
 
         NetworkServer.RegisterHandler(InputMessageReceived, OnInputMessageReceived);
 
-
-
     }
 
     void OnInputMessageReceived(NetworkMessage netMsg)
@@ -106,6 +122,7 @@ public class NetworkedMovement : NetworkBehaviour {
         server_input_msgs_IDs.Add(message.packetId);
 
         server_input_msgs.Enqueue(new HeapElement<InputMessage>(message,message.packetId));
+
     }
 
     void OnStateMessageReceived(NetworkMessage netMsg)
@@ -162,7 +179,8 @@ public class NetworkedMovement : NetworkBehaviour {
                      state_msg.angular_velocity = _rigidbody.angularVelocity;
 
                      //SendMesageToClient
-                     base.connectionToClient.Send(StateMessageReceived, state_msg);
+                     //base.connectionToClient.Send(StateMessageReceived, state_msg);
+                     NetworkServer.SendToClientOfPlayer(this.gameObject, StateMessageReceived, state_msg);
                      serverPacketID++;
                     
                     }
@@ -189,6 +207,7 @@ public class NetworkedMovement : NetworkBehaviour {
 
         client_timer += Time.deltaTime;
         while (client_timer >= dt)
+        while (client_timer >= dt)
         {
             client_timer -= dt;
 
@@ -196,11 +215,11 @@ public class NetworkedMovement : NetworkBehaviour {
 
             // sample and store inputs for this tick
             Inputs inputs;
-            inputs.up = Input.GetKey(KeyCode.W);
-            inputs.down = Input.GetKey(KeyCode.S);
-            inputs.left = Input.GetKey(KeyCode.A);
-            inputs.right = Input.GetKey(KeyCode.D);
-            inputs.jump = Input.GetKey(KeyCode.Space);
+            inputs.up = isPressingUp;
+            inputs.down = isPressingDown;
+            inputs.left = isPressingLeft;
+            inputs.right = isPressingRight;
+            inputs.jump = isPressingJump;
             client_input_buffer[buffer_slot] = inputs;
 
             // store state for this tick, then use current state + input to step simulation
@@ -227,6 +246,7 @@ public class NetworkedMovement : NetworkBehaviour {
 
             //Sern Input Message To Server
             base.connectionToServer.Send(InputMessageReceived, input_msg);
+
             clientPacketID ++;
 
             ++client_tick_number;
@@ -314,6 +334,7 @@ public class NetworkedMovement : NetworkBehaviour {
     }
 	
 	void Update () {
+
         if (isServer) ServerUpdate();
         else ClientUpdate();
 	}
@@ -362,7 +383,6 @@ public class NetworkedMovement : NetworkBehaviour {
         PrePhysicsStep(rigidbody, inputs);
         Physics.Simulate(dt);
     }
-
 
 }
 
