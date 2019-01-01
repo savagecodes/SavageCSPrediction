@@ -55,6 +55,11 @@ public class NetworkedMovement : NetworkBehaviour {
     bool isPressingRight;
     bool isPressingJump;
 
+    //client no local player
+    Vector3 non_local_client_target_position;
+    Quaternion non_local_client_target_rotation;
+    public float nonLocalSyncInterval = 0.1f;
+
     public bool IsPressingUp { set { isPressingUp = value; } }
     public bool IsPressingDown { set { isPressingDown = value; } }
     public bool IsPressingLeft { set { isPressingLeft = value; } }
@@ -77,9 +82,6 @@ public class NetworkedMovement : NetworkBehaviour {
         if (!isServer && !isLocalPlayer)
         {
             _rigidbody.isKinematic = true;
-            this.enabled = false;
-            var networkTransform = gameObject.AddComponent<NetworkTransform>();
-            networkTransform.transformSyncMode = NetworkTransform.TransformSyncMode.SyncTransform;
             return;
         }
 
@@ -102,6 +104,7 @@ public class NetworkedMovement : NetworkBehaviour {
             smoothed_client_player.transform.SetParent(null);
             proxy_player.GetComponent<MeshRenderer>().enabled = false;
             smoothed_client_player.GetComponent<MeshRenderer>().enabled = false;
+            StartCoroutine(SyncNonLocalClientTransform());
         }
         else
         {
@@ -122,6 +125,19 @@ public class NetworkedMovement : NetworkBehaviour {
 
         NetworkServer.RegisterHandler(InputMessageReceived, OnInputMessageReceived);
 
+        
+
+    }
+
+    IEnumerator SyncNonLocalClientTransform()
+    {
+        var wait = new WaitForSeconds(nonLocalSyncInterval);
+
+        while (true)
+        {
+            RpcTransformUpdate(transform.position,transform.rotation);
+            yield return wait;
+        }
     }
 
     void OnInputMessageReceived(NetworkMessage netMsg)
@@ -145,7 +161,8 @@ public class NetworkedMovement : NetworkBehaviour {
 
         client_state_msgs.Enqueue(new HeapElement<StateMessage>(message, message.packetId));
     }
-    
+
+
     public void OnPhysiscsUpdated()
     {            
         ++server_tick_accumulator;
@@ -213,7 +230,7 @@ public class NetworkedMovement : NetworkBehaviour {
             }
         }
 
-       this.server_tick_number = server_tick_number;
+        this.server_tick_number = server_tick_number;
 
     }
 
@@ -360,7 +377,9 @@ public class NetworkedMovement : NetworkBehaviour {
 	void Update () {
 
         if (isServer) ServerUpdate();
-        else ClientUpdate();
+        else if (isLocalPlayer) ClientUpdate();
+        else InterpolateTransform();
+
 	}
 
     private void PrePhysicsStep(Rigidbody rigidbody, Inputs inputs)
@@ -408,6 +427,24 @@ public class NetworkedMovement : NetworkBehaviour {
         PrePhysicsStep(rigidbody, inputs);
         Physics.Simulate(dt);
     }
+
+    [ClientRpc]
+    void RpcTransformUpdate(Vector3 position , Quaternion rotation)
+    {
+        non_local_client_target_position = position;
+        non_local_client_target_rotation = rotation;
+    }
+
+    //Only has to be called in Clients not local player
+
+    private void InterpolateTransform()
+    {
+        if (transform.position != non_local_client_target_position)
+            transform.position = Vector3.Lerp(transform.position, non_local_client_target_position, 4f * Time.deltaTime);
+        
+        if(transform.rotation != non_local_client_target_rotation)
+        transform.rotation = Quaternion.Lerp(transform.rotation, non_local_client_target_rotation, 14f * Time.deltaTime);
+    } 
 
 }
 
