@@ -7,6 +7,11 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour {
 
     NetworkedMovement _movementComponent;
+    [SyncVar]
+    Color _playerColor;
+    public GameObject correctionsHudPrefab;
+    public CorrectiosHUD HUD;
+    public MeshRenderer meshRenderer;
 
     [Header("Input Mapping")]
     [SerializeField]
@@ -23,11 +28,37 @@ public class PlayerController : NetworkBehaviour {
 	void Start () {
 
         _movementComponent = GetComponent<NetworkedMovement>();
-	}
+        meshRenderer = GetComponent<MeshRenderer>();
+
+        meshRenderer.material.color = _playerColor;
+
+        if (isLocalPlayer)
+        {
+            var chud = Instantiate(correctionsHudPrefab);
+            HUD = chud.GetComponent<CorrectiosHUD>();
+            HUD.SetMovementComponent(GetComponent<NetworkedMovement>());
+        }
+
+        if (isServer)
+        {
+            _playerColor = new Color(Random.Range(0f, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+   
+        }
+
+    }
+
+    public void SetColorPlayer(Color c)
+    {
+        _playerColor = c;
+        if (isLocalPlayer) HUD.SetColor(c);
+        GetComponent<MeshRenderer>().material.color = _playerColor;
+    }
 	
 	void Update ()
     {
+        if (meshRenderer.material.color != _playerColor) SetColorPlayer(_playerColor);
         if (!isLocalPlayer) return;
+        if(HUD.playerColorImage.color != _playerColor) SetColorPlayer(_playerColor);
 
         _movementComponent.IsPressingUp = Input.GetKey(UP);
         _movementComponent.IsPressingDown = Input.GetKey(DOWN);

@@ -13,8 +13,6 @@ public class NetworkedMovement : NetworkBehaviour {
 
     public int Corrections;
 
-    public GameObject correctionsHudPrefab;
-
     public Transform local_player_camera_transform;
     public GameObject proxy_player;
     public GameObject smoothed_client_player;
@@ -68,12 +66,6 @@ public class NetworkedMovement : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-
-        if (isLocalPlayer)
-        {
-           var chud = Instantiate(correctionsHudPrefab);
-            chud.GetComponent<CorrectiosHUD>().SetMovementComponent(this);
-        }
 
         _rigidbody = GetComponent<Rigidbody>();
         InputMessageReceived += System.Convert.ToInt16(netId.Value);
@@ -261,11 +253,7 @@ public class NetworkedMovement : NetworkBehaviour {
             client_input_buffer[buffer_slot] = inputs;
 
             // store state for this tick, then use current state + input to step simulation
-            ClientStoreCurrentStateAndStep(
-                ref client_state_buffer[buffer_slot],
-                _rigidbody,
-                inputs,
-                dt);
+            ClientStoreCurrentStateAndStep(ref client_state_buffer[buffer_slot],_rigidbody,inputs,dt);
        
             InputMessage input_msg = new InputMessage();
             var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
@@ -442,7 +430,7 @@ public class NetworkedMovement : NetworkBehaviour {
         if (transform.position != non_local_client_target_position)
             transform.position = Vector3.Lerp(transform.position, non_local_client_target_position, 4f * Time.deltaTime);
         
-        if(transform.rotation != non_local_client_target_rotation)
+        if(transform.rotation != non_local_client_target_rotation && non_local_client_target_rotation != new Quaternion(0,0,0,0))
         transform.rotation = Quaternion.Lerp(transform.rotation, non_local_client_target_rotation, 14f * Time.deltaTime);
     } 
 

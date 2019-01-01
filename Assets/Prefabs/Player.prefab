@@ -75,7 +75,7 @@ Transform:
   m_GameObject: {fileID: 1169352070377068}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_Children: []
   m_Father: {fileID: 4691017076279342}
   m_RootOrder: 0
@@ -272,6 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560c2faf3f6f08147b8a0b0efd252549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  correctionsHudPrefab: {fileID: 1645973854640804, guid: bed7273fd96024d429f2e427c008d100,
+    type: 2}
   UP: 119
   DOWN: 115
   LEFT: 97
@@ -289,8 +291,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Corrections: 0
-  correctionsHudPrefab: {fileID: 1645973854640804, guid: bed7273fd96024d429f2e427c008d100,
-    type: 2}
   local_player_camera_transform: {fileID: 4104845449139318, guid: 4e77eef2f95d75e4ca0e7ee59cce3e66,
     type: 2}
   proxy_player: {fileID: 1169352070377068}
@@ -301,6 +301,7 @@ MonoBehaviour:
   client_correction_smoothing: 0
   client_send_redundant_inputs: 1
   server_snapshot_rate: 64
+  nonLocalSyncInterval: 0.1
 --- !u!114 &114626291307642502
 MonoBehaviour:
   m_ObjectHideFlags: 1
