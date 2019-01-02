@@ -9,6 +9,10 @@ public class PhysicsNetworkUpdater : MonoBehaviour {
 
     private static PhysicsNetworkUpdater _instance;
 
+    //remove this when we have time
+    public GameObject ServerHUDPreab;
+    public GameObject ServerHudInstance;
+
     public List<NetworkedMovement> _movementComponents = new List<NetworkedMovement>();
 
     private uint clientsReady = 1;

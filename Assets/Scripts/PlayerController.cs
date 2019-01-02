@@ -42,7 +42,11 @@ public class PlayerController : NetworkBehaviour {
         if (isServer)
         {
             _playerColor = new Color(Random.Range(0f, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
-   
+            
+            if(PhysicsNetworkUpdater.Instance.ServerHudInstance == null)
+            {
+                PhysicsNetworkUpdater.Instance.ServerHudInstance = Instantiate(PhysicsNetworkUpdater.Instance.ServerHUDPreab);
+            }
         }
 
     }

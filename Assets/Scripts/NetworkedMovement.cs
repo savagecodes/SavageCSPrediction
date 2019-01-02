@@ -13,6 +13,9 @@ public class NetworkedMovement : NetworkBehaviour {
 
     public int Corrections;
 
+    bool firstSyncMessageRecived;
+    bool firstSynced;
+
     public Transform local_player_camera_transform;
     public GameObject proxy_player;
     public GameObject smoothed_client_player;
@@ -187,7 +190,7 @@ public class NetworkedMovement : NetworkBehaviour {
         CurrentTime += Time.deltaTime;
         float dt = Time.fixedDeltaTime;
         uint server_tick_number = this.server_tick_number;
-        uint server_tick_accumulator = this.server_tick_accumulator;
+        //uint server_tick_accumulator = this.server_tick_accumulator;
 
         while (server_input_msgs.Count > 0 && CurrentTime >= server_input_msgs.Peek().Element.delivery_time)
         {
@@ -421,12 +424,21 @@ public class NetworkedMovement : NetworkBehaviour {
     {
         non_local_client_target_position = position;
         non_local_client_target_rotation = rotation;
+        firstSyncMessageRecived = true;
     }
 
     //Only has to be called in Clients not local player
 
     private void InterpolateTransform()
     {
+        if (!firstSyncMessageRecived) return;
+        if (!firstSynced)
+        {
+            transform.position = non_local_client_target_position;
+            transform.rotation = non_local_client_target_rotation;
+            firstSynced = true;
+        }
+
         if (transform.position != non_local_client_target_position)
             transform.position = Vector3.Lerp(transform.position, non_local_client_target_position, 4f * Time.deltaTime);
         

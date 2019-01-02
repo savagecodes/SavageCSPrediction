@@ -299,6 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc309a6779299a44a16a7bebec723d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ServerHUDPreab: {fileID: 1373043332877542, guid: 9864f99dbdf95de4daa44950cebdf245,
+    type: 2}
+  ServerHudInstance: {fileID: 0}
   _movementComponents: []
 --- !u!1001 &1069927680
 Prefab:
