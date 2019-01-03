@@ -9,8 +9,6 @@ public class NetworkedMovement : NetworkBehaviour {
     private short _InputMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
 
-    private float _currentTime;
-
     private int _correctionsMadeOnClient;
 
     [Header("Required Compoennts")]
@@ -29,34 +27,37 @@ public class NetworkedMovement : NetworkBehaviour {
     [SerializeField]
     private float _jumpThresholdY;
 
+    private float _currentTime;
+    private uint _currentTickNumber;
+
+    //client specific
     private float _clientTimer;
-    private uint _clientTickNumber;
     private uint _clientLastRecivedStateTickNumber;
     private const int _clientBufferSize = 1024;
     private ClientState[] _clientStateBuffer; // client stores predicted moves here
     private Inputs[] _clientInputBuffer; // client stores predicted inputs here
     private BinaryHeap<StateMessage> _clientStateMessageQueue;
-    private HashSet<uint> _clientStateMessageIDs = new HashSet<uint>();
+    private HashSet<uint> _clientStateMessageIDs;
     private Vector3 _clientPositionError;
     private Quaternion _clientRotationError;
     private uint _clientPacketID;
 
     [Header("Client Replication Settings")]
     [SerializeField]
-    private bool _bEnableCorrectionsInClient = true;
+    private bool _enableCorrectionsInClient = true;
     [SerializeField]
-    private bool _bEnableCorrectionSmoothing = true;
+    private bool _enableCorrectionSmoothing = true;
     [SerializeField]
-    private bool _bSendRedundantInputsToServer = true;
+    private bool _sendRedundantInputsToServer = true;
 
     // server specific
     [Header("Server Replication Settings")]
     [SerializeField]
     private uint _serverSnapshotRate;
-    private uint _serverTickNumber;
+    // private uint _serverTickNumber;
     private uint _serverTickAccumulator;
     private BinaryHeap<InputMessage> _serverInputMessageQueue;
-    private HashSet<uint> _serverInputMessagesIDs = new HashSet<uint>();
+    private HashSet<uint> _serverInputMessagesIDs;
     private uint serverPacketID;
 
     //inputs
@@ -66,13 +67,13 @@ public class NetworkedMovement : NetworkBehaviour {
     private bool _isPressingRight;
     private bool _isPressingJump;
 
-    //client no local player
+    //client non local player
     private Vector3 _nonLocalClientTargetPosition;
     private Quaternion _nonLocalClientTargetRotation;
     [SerializeField]
-    private float nonLocalSyncInterval = 0.1f;
-    bool _firstSyncMessageRecived;
-    bool _firstSynced;
+    private float _nonLocalSyncInterval = 0.1f;
+    private bool _firstSyncMessageRecived;
+    private bool _firstSynced;
 
     #region Getters
 
@@ -84,14 +85,14 @@ public class NetworkedMovement : NetworkBehaviour {
 
     public int Corrections { get { return _correctionsMadeOnClient; } }
 
+    public GameObject SmoothedPlayerModel { get { return _smoothedPlayerModel; } }
+
     #endregion
 
     // Use this for initialization
     void Start () {
 
         _rigidbody = GetComponent<Rigidbody>();
-        _InputMessageReceivedID += System.Convert.ToInt16(netId.Value);
-        _StateMessageReceivedID += System.Convert.ToInt16(netId.Value);
 
         if (!isServer && !isLocalPlayer)
         {
@@ -99,60 +100,69 @@ public class NetworkedMovement : NetworkBehaviour {
             return;
         }
 
+        _InputMessageReceivedID += System.Convert.ToInt16(netId.Value);
+        _StateMessageReceivedID += System.Convert.ToInt16(netId.Value);
+
+        _currentTickNumber = 0;
+
+        #region Initializing Client Properties
+
         _clientTimer = 0.0f;
-        _clientTickNumber = 0;
         _clientLastRecivedStateTickNumber = 0;
         _clientStateBuffer = new ClientState[_clientBufferSize];
         _clientInputBuffer = new Inputs[_clientBufferSize];
         _clientStateMessageQueue = new BinaryHeap<StateMessage>();
+        _clientStateMessageIDs = new HashSet<uint>();
         _clientPositionError = Vector3.zero;
         _clientRotationError = Quaternion.identity;
 
-        _serverTickNumber = 0;
+        #endregion
+
+        #region Initializing Server properties
+
         _serverTickAccumulator = 0;
         _serverInputMessageQueue = new BinaryHeap<InputMessage>();
+        _serverInputMessagesIDs = new HashSet<uint>(); 
+
+        #endregion
+
 
         if (isServer)
         {
+            //-----------------
+            // Visual Debug , this component only should give/Expose the positions
+
             _serverGhostModel.transform.SetParent(null);
             _smoothedPlayerModel.transform.SetParent(null);
             _serverGhostModel.GetComponent<MeshRenderer>().enabled = false;
             _smoothedPlayerModel.GetComponent<MeshRenderer>().enabled = false;
+            //
+            //-----------------
+
             StartCoroutine(SyncNonLocalClientTransform());
+            PhysicsNetworkUpdater.Instance._movementComponents.Add(this);
+            connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
         }
         else
-        {
-            _serverGhostModel.transform.SetParent(null);
-            _smoothedPlayerModel.transform.SetParent(null);
-        }
-
-        if (!isServer)
         {
             NetworkManager.singleton.client.RegisterHandler(_StateMessageReceivedID, OnStateMessageReceived);
-            base.connectionToServer.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
+            connectionToServer.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
+
+            //-----------------
+            // Visual Debug , this component only should give/Expose the positions
+            GetComponent<MeshRenderer>().enabled = false;
+            _serverGhostModel.transform.SetParent(null);
+            _smoothedPlayerModel.transform.SetParent(null);
+            //
+            //-----------------
         }
-        else
-        {
-            PhysicsNetworkUpdater.Instance._movementComponents.Add(this);
-            base.connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
-        }
+
 
         NetworkServer.RegisterHandler(_InputMessageReceivedID, OnInputMessageReceived);
 
-        
-
     }
 
-    IEnumerator SyncNonLocalClientTransform()
-    {
-        var wait = new WaitForSeconds(nonLocalSyncInterval);
-
-        while (true)
-        {
-            RpcTransformUpdate(transform.position,transform.rotation);
-            yield return wait;
-        }
-    }
+    #region Network Messages Handlers
 
     void OnInputMessageReceived(NetworkMessage netMsg)
     {
@@ -176,24 +186,39 @@ public class NetworkedMovement : NetworkBehaviour {
         _clientStateMessageQueue.Enqueue(new HeapElement<StateMessage>(message, message.packetId));
     }
 
+    #endregion
+
+    #region Server Logic
+
+    IEnumerator SyncNonLocalClientTransform()
+    {
+        var wait = new WaitForSeconds(_nonLocalSyncInterval);
+
+        while (true)
+        {
+            RpcTransformUpdate(transform.position, transform.rotation);
+            yield return wait;
+        }
+    }
 
     public void OnPhysiscsUpdated()
     {            
-        ++_serverTickAccumulator;
+        _serverTickAccumulator++;
+
         if (_serverTickAccumulator >= _serverSnapshotRate)
         {
             _serverTickAccumulator = 0;
                         
             StateMessage state_msg = new StateMessage();
             state_msg.packetId = serverPacketID;
-            state_msg.delivery_time = _currentTime + _serverInputMessageQueue.Peek().Element.rtt / 2;
-            state_msg.tick_number = _serverTickNumber;
+            state_msg.deliveryTime = _currentTime + _serverInputMessageQueue.Peek().Element.rtt / 2;
+            state_msg.tickNumber = _currentTickNumber;
             state_msg.position = _rigidbody.position;
             state_msg.rotation = _rigidbody.rotation;
             state_msg.velocity = _rigidbody.velocity;
-            state_msg.angular_velocity = _rigidbody.angularVelocity;
+            state_msg.angularVelocity = _rigidbody.angularVelocity;
 
-            //SendMesageToClient
+            //Send Message To Client
             NetworkServer.SendToClientOfPlayer(this.gameObject, _StateMessageReceivedID, state_msg);
             serverPacketID++;
                     
@@ -208,57 +233,52 @@ public class NetworkedMovement : NetworkBehaviour {
     {
         _currentTime += Time.deltaTime;
 
-        uint server_tick_number = this._serverTickNumber;
-        //uint server_tick_accumulator = this.server_tick_accumulator;
-
-        while (_serverInputMessageQueue.Count > 0 && _currentTime >= _serverInputMessageQueue.Peek().Element.delivery_time)
+        while (_serverInputMessageQueue.Count > 0 && _currentTime >= _serverInputMessageQueue.Peek().Element.deliveryTime)
         {
-            InputMessage input_msg = _serverInputMessageQueue.Dequeue().Element;
+            InputMessage inputMessage = _serverInputMessageQueue.Dequeue().Element;
 
             // message contains an array of inputs, calculate what tick the final one is
-            uint max_tick = input_msg.start_tick_number + (uint)input_msg.inputs.Length - 1;
+            uint maxTick = inputMessage.startTickNumber + (uint)inputMessage.inputs.Length - 1;
 
             // if that tick is greater than or equal to the current tick we're on, then it
             // has inputs which are new
-            if (max_tick >= server_tick_number)
+            if (maxTick >= _currentTickNumber)
             {
                 // there may be some inputs in the array that we've already had,
                 // so figure out where to start
-                uint start_i = server_tick_number > input_msg.start_tick_number ? (server_tick_number - input_msg.start_tick_number) : 0;
+                uint startIndex = _currentTickNumber > inputMessage.startTickNumber ? (_currentTickNumber - inputMessage.startTickNumber) : 0;
 
                 // run through all relevant inputs, and step player forward
-                for (int i = (int)start_i; i < input_msg.inputs.Length; ++i)
+                for (int i = (int)startIndex; i < inputMessage.inputs.Length; ++i)
                 {
-                    PrePhysicsStep(_rigidbody, input_msg.inputs[i]);
+                    PrePhysicsStep(_rigidbody, inputMessage.inputs[i]);
 
                     PhysicsNetworkUpdater.Instance.OnReadyToSimulate();
 
-                    ++server_tick_number;
+                    _currentTickNumber++;
                    
                 }
-
             }
         }
 
-        this._serverTickNumber = server_tick_number;
 
     }
 
+    #endregion
+
+    #region Client Logic
+
     void ClientUpdate()
     {
-
         _currentTime += Time.deltaTime;
 
-        float client_timer = this._clientTimer;
-        uint client_tick_number = this._clientTickNumber;
+        _clientTimer += Time.deltaTime;
 
-        client_timer += Time.deltaTime;
-
-        while (client_timer >= Time.fixedDeltaTime)
+        while (_clientTimer >= Time.fixedDeltaTime)
         {
-            client_timer -= Time.fixedDeltaTime;
+            _clientTimer -= Time.fixedDeltaTime;
 
-            uint buffer_slot = client_tick_number % _clientBufferSize;
+            uint buffer_slot = _currentTickNumber % _clientBufferSize;
 
             // sample and store inputs for this tick
             Inputs inputs;
@@ -272,50 +292,51 @@ public class NetworkedMovement : NetworkBehaviour {
             // store state for this tick, then use current state + input to step simulation
             ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],_rigidbody,inputs, Time.fixedDeltaTime);
        
-            InputMessage input_msg = new InputMessage();
+            InputMessage inputMessage = new InputMessage();
             var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
-            input_msg.packetId = _clientPacketID;
-            input_msg.delivery_time = _currentTime + rtt / 2 ;
-            input_msg.rtt = rtt;
-            input_msg.start_tick_number = _bSendRedundantInputsToServer ? _clientLastRecivedStateTickNumber : client_tick_number;
-            var inputs_List = new List<Inputs>();
+            inputMessage.packetId = _clientPacketID;
+            inputMessage.deliveryTime = _currentTime + rtt / 2 ;
+            inputMessage.rtt = rtt;
+            inputMessage.startTickNumber = _sendRedundantInputsToServer ? _clientLastRecivedStateTickNumber : _currentTickNumber;
 
-            for (uint tick = input_msg.start_tick_number; tick <= client_tick_number; ++tick)
+            var inputList = new List<Inputs>();
+
+            for (uint tick = inputMessage.startTickNumber; tick <= _currentTickNumber; tick++)
             {
-                inputs_List.Add(_clientInputBuffer[tick % _clientBufferSize]);
+                inputList.Add(_clientInputBuffer[tick % _clientBufferSize]);
             }
 
-            input_msg.inputs = inputs_List.ToArray();
+            inputMessage.inputs = inputList.ToArray();
 
-            //Sern Input Message To Server
-            base.connectionToServer.Send(_InputMessageReceivedID, input_msg);
+            //Send Input Message To Server
+            connectionToServer.Send(_InputMessageReceivedID, inputMessage);
 
-            _clientPacketID ++;
+            _clientPacketID++;
 
-            ++client_tick_number;
+            _currentTickNumber++;
         }
 
         if (ClientHasStateMessage())
         {
-            StateMessage state_msg = _clientStateMessageQueue.Dequeue().Element;
+            StateMessage stateMessage = _clientStateMessageQueue.Dequeue().Element;
             while (ClientHasStateMessage()) // make sure if there are any newer state messages available, we use those instead
             {
-                state_msg = _clientStateMessageQueue.Dequeue().Element;
+                stateMessage = _clientStateMessageQueue.Dequeue().Element;
             }
 
-            _clientLastRecivedStateTickNumber = state_msg.tick_number;
+            _clientLastRecivedStateTickNumber = stateMessage.tickNumber;
 
-            _serverGhostModel.transform.position = state_msg.position;
-            _serverGhostModel.transform.rotation = state_msg.rotation;
+            _serverGhostModel.transform.position = stateMessage.position;
+            _serverGhostModel.transform.rotation = stateMessage.rotation;
 
-            if (_bEnableCorrectionsInClient)
+            if (_enableCorrectionsInClient)
             {
-                uint buffer_slot = state_msg.tick_number % _clientBufferSize;
-                Vector3 position_error = state_msg.position - _clientStateBuffer[buffer_slot].position;
-                float rotation_error = 1.0f - Quaternion.Dot(state_msg.rotation, _clientStateBuffer[buffer_slot].rotation);
+                uint bufferSlot = stateMessage.tickNumber % _clientBufferSize;
 
-                if (position_error.sqrMagnitude > 0.0000001f ||
-                    rotation_error > 0.00001f)
+                Vector3 positionError = stateMessage.position - _clientStateBuffer[bufferSlot].position;
+                float rotationError = 1.0f - Quaternion.Dot(stateMessage.rotation, _clientStateBuffer[bufferSlot].rotation);
+
+                if (positionError.sqrMagnitude > 0.0000001f || rotationError > 0.00001f)
                 {
                     if (isLocalPlayer)
                     {
@@ -323,48 +344,43 @@ public class NetworkedMovement : NetworkBehaviour {
                     }
 
                     // capture the current predicted pos for smoothing
-                    Vector3 prev_pos = _rigidbody.position + _clientPositionError;
-                    Quaternion prev_rot = _rigidbody.rotation * _clientRotationError;
+                    Vector3 prevPosition = _rigidbody.position + _clientPositionError;
+                    Quaternion prevRotation = _rigidbody.rotation * _clientRotationError;
 
                     // rewind & replay
-                    _rigidbody.position = state_msg.position;
-                    _rigidbody.rotation = state_msg.rotation;
-                    _rigidbody.velocity = state_msg.velocity;
-                    _rigidbody.angularVelocity = state_msg.angular_velocity;
+                    _rigidbody.position = stateMessage.position;
+                    _rigidbody.rotation = stateMessage.rotation;
+                    _rigidbody.velocity = stateMessage.velocity;
+                    _rigidbody.angularVelocity = stateMessage.angularVelocity;
               
 
-                    uint rewind_tick_number = state_msg.tick_number;
-                    while (rewind_tick_number < client_tick_number)
-                    {
-                        buffer_slot = rewind_tick_number % _clientBufferSize;
-                        ClientStoreCurrentStateAndStep(
-                            ref _clientStateBuffer[buffer_slot],
-                            _rigidbody,
-                            _clientInputBuffer[buffer_slot],
-                            Time.fixedDeltaTime);
+                    uint rewindTickNumber = stateMessage.tickNumber;
 
-                        ++rewind_tick_number;
+                    while (rewindTickNumber < _currentTickNumber)
+                    {
+                        bufferSlot = rewindTickNumber % _clientBufferSize;
+
+                        ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_rigidbody,_clientInputBuffer[bufferSlot],Time.fixedDeltaTime);
+
+                        rewindTickNumber++;
                     }
 
                     // if more than 2mts apart, just snap
-                    if ((prev_pos - _rigidbody.position).sqrMagnitude >= 4.0f)
+                    if ((prevPosition - _rigidbody.position).sqrMagnitude >= 4.0f)
                     {
                         _clientPositionError = Vector3.zero;
                         _clientRotationError = Quaternion.identity;
                     }
                     else
                     {
-                        _clientPositionError = prev_pos - _rigidbody.position;
-                        _clientRotationError = Quaternion.Inverse(_rigidbody.rotation) * prev_rot;
+                        _clientPositionError = prevPosition - _rigidbody.position;
+                        _clientRotationError = Quaternion.Inverse(_rigidbody.rotation) * prevRotation;
                     }
                 }
             }
         }
 
-        this._clientTimer = client_timer;
-        this._clientTickNumber = client_tick_number;
-
-        if (_bEnableCorrectionSmoothing)
+        if (_enableCorrectionSmoothing)
         {
             _clientPositionError *= 0.9f;
             _clientRotationError = Quaternion.Slerp(_clientRotationError, Quaternion.identity, 0.1f);
@@ -378,15 +394,65 @@ public class NetworkedMovement : NetworkBehaviour {
         _smoothedPlayerModel.transform.position = _rigidbody.position + _clientPositionError;
         _smoothedPlayerModel.transform.rotation = _rigidbody.rotation * _clientRotationError;
     }
-	
-	void Update () {
+
+    private bool ClientHasStateMessage()
+    {
+        if (_clientStateMessageQueue.Peek() == null) return false;
+
+        return _clientStateMessageQueue.Count > 0 && _currentTime >= _clientStateMessageQueue.Peek().Element.deliveryTime;
+    }
+
+    private void ClientStoreCurrentStateAndStep(ref ClientState currentState, Rigidbody rigidbody, Inputs inputs, float deltaTime)
+    {
+        currentState.position = rigidbody.position;
+        currentState.rotation = rigidbody.rotation;
+
+        PrePhysicsStep(rigidbody, inputs);
+        Physics.Simulate(deltaTime);
+    }
+
+    [ClientRpc]
+    void RpcTransformUpdate(Vector3 position, Quaternion rotation)
+    {
+        _nonLocalClientTargetPosition = position;
+        _nonLocalClientTargetRotation = rotation;
+        _firstSyncMessageRecived = true;
+    }
+
+    //Only should be called on non-local Clients Players
+    private void InterpolateTransform()
+    {
+        if (!_firstSyncMessageRecived) return;
+        if (!_firstSynced)
+        {
+            transform.position = _nonLocalClientTargetPosition;
+            transform.rotation = _nonLocalClientTargetRotation;
+            _firstSynced = true;
+        }
+
+        if (transform.position != _nonLocalClientTargetPosition)
+        {
+            transform.position = Vector3.Lerp(transform.position, _nonLocalClientTargetPosition, 4f * Time.deltaTime);
+        }
+
+        if (transform.rotation != _nonLocalClientTargetRotation && _nonLocalClientTargetRotation != new Quaternion(0, 0, 0, 0))
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, _nonLocalClientTargetRotation, 14f * Time.deltaTime);
+        }
+    }
+
+    #endregion
+
+    void Update ()
+    {
 
         if (isServer) ServerUpdate();
         else if (isLocalPlayer) ClientUpdate();
         else InterpolateTransform();
-
 	}
 
+
+    //Apply inputs to the Rigidbody, before triggering the physics simulation 
     private void PrePhysicsStep(Rigidbody rigidbody, Inputs inputs)
     {
         if (_cameraTransform != null)
@@ -414,51 +480,11 @@ public class NetworkedMovement : NetworkBehaviour {
         }
     }
 
-    private bool ClientHasStateMessage()
-    {
-        if (_clientStateMessageQueue.Peek() == null)
-        {
-            return false;
-        }
 
-        return _clientStateMessageQueue.Count > 0 && _currentTime >= _clientStateMessageQueue.Peek().Element.delivery_time;
+    private void OnDestroy()
+    {
+        PhysicsNetworkUpdater.Instance._movementComponents.Remove(this);
     }
-
-    private void ClientStoreCurrentStateAndStep(ref ClientState current_state, Rigidbody rigidbody, Inputs inputs, float deltaTime)
-    {
-        current_state.position = rigidbody.position;
-        current_state.rotation = rigidbody.rotation;
-
-        PrePhysicsStep(rigidbody, inputs);
-        Physics.Simulate(deltaTime);
-    }
-
-    [ClientRpc]
-    void RpcTransformUpdate(Vector3 position , Quaternion rotation)
-    {
-        _nonLocalClientTargetPosition = position;
-        _nonLocalClientTargetRotation = rotation;
-        _firstSyncMessageRecived = true;
-    }
-
-    //Only has to be called in Clients not local player
-
-    private void InterpolateTransform()
-    {
-        if (!_firstSyncMessageRecived) return;
-        if (!_firstSynced)
-        {
-            transform.position = _nonLocalClientTargetPosition;
-            transform.rotation = _nonLocalClientTargetRotation;
-            _firstSynced = true;
-        }
-
-        if (transform.position != _nonLocalClientTargetPosition)
-            transform.position = Vector3.Lerp(transform.position, _nonLocalClientTargetPosition, 4f * Time.deltaTime);
-        
-        if(transform.rotation != _nonLocalClientTargetRotation && _nonLocalClientTargetRotation != new Quaternion(0,0,0,0))
-        transform.rotation = Quaternion.Lerp(transform.rotation, _nonLocalClientTargetRotation, 14f * Time.deltaTime);
-    } 
 
 }
 
@@ -475,9 +501,9 @@ public struct Inputs
 class InputMessage : MessageBase
 {
     public uint packetId;
-    public float delivery_time;
+    public float deliveryTime;
     public float rtt;
-    public uint start_tick_number;
+    public uint startTickNumber;
     public Inputs[] inputs;
 }
 
@@ -491,11 +517,11 @@ struct ClientState
 public class StateMessage : MessageBase
 {
     public uint packetId;
-    public float delivery_time;
-    public uint tick_number;
+    public float deliveryTime;
+    public uint tickNumber;
     public Vector3 position;
     public Quaternion rotation;
     public Vector3 velocity;
-    public Vector3 angular_velocity;
+    public Vector3 angularVelocity;
 }
 

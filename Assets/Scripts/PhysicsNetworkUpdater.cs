@@ -15,13 +15,13 @@ public class PhysicsNetworkUpdater : MonoBehaviour {
 
     public List<NetworkedMovement> _movementComponents = new List<NetworkedMovement>();
 
-    private uint clientsReady = 1;
+    private uint clientsReady = 0;
 
     public void OnReadyToSimulate()
     {
 	    clientsReady++;
 
-	    if (clientsReady >= NetworkServer.connections.Count)
+        if (clientsReady >= NetworkManager.singleton.numPlayers)
 	    {
 		    SimulatePhysics();
 		    
@@ -31,7 +31,7 @@ public class PhysicsNetworkUpdater : MonoBehaviour {
 			    mc.OnPhysiscsUpdated();
 		    }
 		    
-		    clientsReady = 1;
+		    clientsReady = 0;
 	    }
     }
 

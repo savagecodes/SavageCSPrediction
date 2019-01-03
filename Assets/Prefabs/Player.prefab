@@ -274,6 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   correctionsHudPrefab: {fileID: 1645973854640804, guid: bed7273fd96024d429f2e427c008d100,
     type: 2}
+  HUD: {fileID: 0}
+  meshRenderer: {fileID: 0}
   UP: 119
   DOWN: 115
   LEFT: 97
@@ -290,17 +292,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6ada0ce0731b6499debf3d4a0cb633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Corrections: 0
-  local_player_camera_transform: {fileID: 4104845449139318, guid: 4e77eef2f95d75e4ca0e7ee59cce3e66,
+  _cameraTransform: {fileID: 4104845449139318, guid: 4e77eef2f95d75e4ca0e7ee59cce3e66,
     type: 2}
-  proxy_player: {fileID: 1169352070377068}
-  smoothed_client_player: {fileID: 1218203373154552}
-  player_movement_impulse: 4
-  player_jump_y_threshold: 1.5
-  client_enable_corrections: 1
-  client_correction_smoothing: 0
-  client_send_redundant_inputs: 1
-  server_snapshot_rate: 64
+  _serverGhostModel: {fileID: 1169352070377068}
+  _smoothedPlayerModel: {fileID: 1218203373154552}
+  _movementImpulse: 5
+  _jumpThresholdY: 1.5
+  _enableCorrectionsInClient: 1
+  _enableCorrectionSmoothing: 1
+  _sendRedundantInputsToServer: 1
+  _serverSnapshotRate: 64
   nonLocalSyncInterval: 0.1
 --- !u!114 &114626291307642502
 MonoBehaviour:

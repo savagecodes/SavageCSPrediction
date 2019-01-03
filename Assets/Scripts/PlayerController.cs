@@ -30,8 +30,6 @@ public class PlayerController : NetworkBehaviour {
         _movementComponent = GetComponent<NetworkedMovement>();
         meshRenderer = GetComponent<MeshRenderer>();
 
-        meshRenderer.material.color = _playerColor;
-
         if (isLocalPlayer)
         {
             var chud = Instantiate(correctionsHudPrefab);
@@ -42,8 +40,10 @@ public class PlayerController : NetworkBehaviour {
         if (isServer)
         {
             _playerColor = new Color(Random.Range(0f, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
-            
-            if(PhysicsNetworkUpdater.Instance.ServerHudInstance == null)
+
+            meshRenderer.material.color = _playerColor;
+
+            if (PhysicsNetworkUpdater.Instance.ServerHudInstance == null)
             {
                 PhysicsNetworkUpdater.Instance.ServerHudInstance = Instantiate(PhysicsNetworkUpdater.Instance.ServerHUDPreab);
             }
@@ -55,13 +55,17 @@ public class PlayerController : NetworkBehaviour {
     {
         _playerColor = c;
         if (isLocalPlayer) HUD.SetColor(c);
-        GetComponent<MeshRenderer>().material.color = _playerColor;
+        _movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color = _playerColor;
     }
 	
 	void Update ()
     {
-        if (meshRenderer.material.color != _playerColor) SetColorPlayer(_playerColor);
+        if (_movementComponent == null) return;
+
+        if (_movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color != _playerColor) SetColorPlayer(_playerColor);
+
         if (!isLocalPlayer) return;
+
         if(HUD.playerColorImage.color != _playerColor) SetColorPlayer(_playerColor);
 
         _movementComponent.IsPressingUp = Input.GetKey(UP);
