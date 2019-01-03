@@ -23,7 +23,7 @@ public class CorrectiosHUD : MonoBehaviour {
 	void Update () {
         if (_movementComponent == null || !_movementComponent.isLocalPlayer) return;
 
-        correctionsHUD.text = "Corrections Made : " + _movementComponent.Corrections;
+        correctionsHUD.text = "Corrections Made : " + _movementComponent._correctionsMadeOnClient;
      
 	}
 }
