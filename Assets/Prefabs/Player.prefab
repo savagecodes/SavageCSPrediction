@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33509828346258620}
   - component: {fileID: 23793667102247420}
   m_Layer: 0
-  m_Name: Proxy
+  m_Name: Server Ghost Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ MonoBehaviour:
   _enableCorrectionSmoothing: 1
   _sendRedundantInputsToServer: 1
   _serverSnapshotRate: 64
-  nonLocalSyncInterval: 0.1
+  _nonLocalSyncInterval: 0.1
 --- !u!114 &114626291307642502
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,6 +13,6 @@ public class ServerHUD : MonoBehaviour {
 	void Update ()
     {
         if (hudText == null) return;
-        hudText.text = "<b> SERVER </b> --> " + (NetworkServer.connections.Count-1) + " CLients Connected";
+        hudText.text = "<b> SERVER </b> --> " + NetworkManager.singleton.numPlayers + " CLients Connected";
 	}
 }

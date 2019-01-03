@@ -49,6 +49,8 @@ public class PlayerController : NetworkBehaviour {
             }
         }
 
+        
+
     }
 
     public void SetColorPlayer(Color c)
@@ -74,4 +76,15 @@ public class PlayerController : NetworkBehaviour {
         _movementComponent.IsPressingRight = Input.GetKey(RIGHT);
         _movementComponent.IsPressingJump = Input.GetKey(JUMP);
 	}
+
+    public override void OnNetworkDestroy()
+    {
+        base.OnNetworkDestroy();
+        Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        Destroy(HUD.gameObject);
+    }
 }
