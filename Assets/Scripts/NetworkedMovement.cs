@@ -9,6 +9,8 @@ public class NetworkedMovement : NetworkBehaviour {
     private short _InputMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
 
+    PhysicsScene LocalPhysicsScene;
+
     private int _correctionsMadeOnClient;
 
     [Header("Required Compoennts")]
@@ -98,6 +100,10 @@ public class NetworkedMovement : NetworkBehaviour {
         {
             _rigidbody.isKinematic = true;
             return;
+        }
+        else
+        {
+            PhysicsNetworkUpdater.Instance.CreatePhysicsSceneForGO(this.gameObject);
         }
 
         _InputMessageReceivedID += System.Convert.ToInt16(netId.Value);
@@ -253,7 +259,8 @@ public class NetworkedMovement : NetworkBehaviour {
                 {
                     PrePhysicsStep(_rigidbody, inputMessage.inputs[i]);
 
-                    PhysicsNetworkUpdater.Instance.OnReadyToSimulate();
+                    //PhysicsNetworkUpdater.Instance.OnReadyToSimulate();
+                    PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
 
                     _currentTickNumber++;
                    
@@ -408,7 +415,8 @@ public class NetworkedMovement : NetworkBehaviour {
         currentState.rotation = rigidbody.rotation;
 
         PrePhysicsStep(rigidbody, inputs);
-        Physics.Simulate(deltaTime);
+        PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
+        //Physics.Simulate(deltaTime);
     }
 
     [ClientRpc]

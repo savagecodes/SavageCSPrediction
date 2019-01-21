@@ -30,11 +30,14 @@ public class PlayerController : NetworkBehaviour {
         _movementComponent = GetComponent<NetworkedMovement>();
         meshRenderer = GetComponent<MeshRenderer>();
 
+
         if (isLocalPlayer)
         {
+            
             var chud = Instantiate(correctionsHudPrefab);
             HUD = chud.GetComponent<CorrectiosHUD>();
             HUD.SetMovementComponent(GetComponent<NetworkedMovement>());
+
         }
 
         if (isServer)
