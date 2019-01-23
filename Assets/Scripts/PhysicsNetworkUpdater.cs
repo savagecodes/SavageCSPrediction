@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class PhysicsNetworkUpdater : MonoBehaviour {
+public class PhysicsNetworkUpdater : MonoBehaviour
+{
 
     private static PhysicsNetworkUpdater _instance;
 
@@ -14,22 +15,34 @@ public class PhysicsNetworkUpdater : MonoBehaviour {
     public GameObject ServerHUDPreab;
     public GameObject ServerHudInstance;
     public GameObject StaticWorld;
-    Dictionary<GameObject, PhysicsScene> _PhysicsScenes = new Dictionary<GameObject, PhysicsScene>();
-    
 
-    public List<NetworkedMovement> _movementComponents = new List<NetworkedMovement>();
+    Dictionary<GameObject, Tuple<Scene, PhysicsScene>> _PhysicsScenes =
+        new Dictionary<GameObject, Tuple<Scene, PhysicsScene>>();
 
-    private uint clientsReady = 0;
+
+    void Awake()
+    {
+        if (_instance != null) Destroy(_instance);
+        _instance = this;
+    }
+
 
     public void CreatePhysicsSceneForGO(GameObject GO)
     {
         CreateSceneParameters csp = new CreateSceneParameters(LocalPhysicsMode.Physics3D);
-        Scene PhysicsScene = SceneManager.CreateScene("PSFor: "+ GO.name + " NetID " + GO.GetComponent<NetworkedMovement>().netId.Value , csp);
+        Scene PhysicsScene =
+            SceneManager.CreateScene("PSFor: " + GO.name + " NetID " + GO.GetComponent<NetworkedMovement>().netId.Value,
+                csp);
 
-        _PhysicsScenes.Add(GO, PhysicsScene.GetPhysicsScene());
+        _PhysicsScenes.Add(GO, Tuple.Create(PhysicsScene, PhysicsScene.GetPhysicsScene()));
 
         SceneManager.MoveGameObjectToScene(GetStaticWorldNoRenderer(), PhysicsScene);
         SceneManager.MoveGameObjectToScene(GO, PhysicsScene);
+    }
+
+    public void DestroyPhysicsSceneOfGO(GameObject GO)
+    {
+        SceneManager.UnloadSceneAsync(_PhysicsScenes[GO].Item1);
     }
 
     GameObject GetStaticWorldNoRenderer()
@@ -49,48 +62,14 @@ public class PhysicsNetworkUpdater : MonoBehaviour {
 
     public void UpdatePhysics(NetworkedMovement NM)
     {
-        //if (_PhysicsScenes[NM.gameObject].IsValid())
-        //{
-            _PhysicsScenes[NM.gameObject].Simulate(Time.fixedDeltaTime);
-            NM.OnPhysiscsUpdated();          
-        //}
-    }
+        _PhysicsScenes[NM.gameObject].Item2.Simulate(Time.fixedDeltaTime);
+        NM.OnPhysiscsUpdated();
 
-    public void OnReadyToSimulate()
-    {
-	    clientsReady++;
-
-        if (clientsReady >= NetworkManager.singleton.numPlayers)
-	    {
-		    SimulatePhysics();
-		    
-		    foreach (var mc in _movementComponents)
-		    {
-			 
-			    //mc.OnPhysiscsUpdated();
-		    }
-		    
-		    clientsReady = 0;
-	    }
     }
 
 
     public static PhysicsNetworkUpdater Instance
     {
-	    get { return _instance; }
+        get { return _instance; }
     }
-
-
-    // Use this for initialization
-	void Awake ()
-	{
-		if (_instance != null) Destroy(_instance);
-		_instance = this;
-	}
-
-	public void SimulatePhysics()
-	{
-		Physics.Simulate(Time.fixedDeltaTime);
-	}
-	
 }

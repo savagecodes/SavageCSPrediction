@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Sergi\.Rider2018.3\config\extensions" t="IncludeRecursive" />
-    <e p="C:\Users\Sergi\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Sergi\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_UnityCSP-Physics.-786932232.00" t="ExcludeRecursive" />
-    <e p="H:\Projects\UnityCSP-Physics" t="IncludeRecursive">
+    <e p="C:\Projects\UnityCSP-Physics" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="CorrectiosHUD.cs" t="Include" />
           <e p="DataTypes" t="Include">
             <e p="BinaryHeap.cs" t="Include" />
             <e p="DynArray.cs" t="Include" />
           </e>
           <e p="NetworkedMovement.cs" t="Include" />
-          <e p="NetworkedMovement1.cs" t="Include" />
           <e p="PhysicsNetworkUpdater.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
+          <e p="ServerHUD.cs" t="Include" />
           <e p="SimpleUpdateManager.cs" t="Include" />
         </e>
       </e>
@@ -27,5 +25,7 @@
       </e>
       <e p="UnityCSP-Physics.sln" t="IncludeFlat" />
     </e>
+    <e p="C:\Users\NGD_8700_04\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\NGD_8700_04\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_UnityCSP-Physics.-748135437.00" t="ExcludeRecursive" />
   </component>
 </project>
