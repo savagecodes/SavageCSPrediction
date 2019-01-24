@@ -52,8 +52,6 @@ public class PlayerController : NetworkBehaviour {
             }
         }
 
-        
-
     }
 
     public void SetColorPlayer(Color c)
@@ -88,6 +86,6 @@ public class PlayerController : NetworkBehaviour {
 
     void OnDestroy()
     {
-        Destroy(HUD.gameObject);
+        if(!isServer) Destroy(HUD.gameObject);
     }
 }

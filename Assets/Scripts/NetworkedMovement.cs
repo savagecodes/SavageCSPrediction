@@ -146,7 +146,6 @@ public class NetworkedMovement : NetworkBehaviour {
             //-----------------
 
             StartCoroutine(SyncNonLocalClientTransform());
-            PhysicsNetworkUpdater.Instance._movementComponents.Add(this);
             connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
         }
         else
@@ -491,7 +490,7 @@ public class NetworkedMovement : NetworkBehaviour {
 
     private void OnDestroy()
     {
-        PhysicsNetworkUpdater.Instance._movementComponents.Remove(this);
+        PhysicsNetworkUpdater.Instance.DestroyPhysicsSceneOfGO(this.gameObject);
     }
 
 }
