@@ -52,8 +52,6 @@ public class PlayerController : NetworkBehaviour {
             }
         }
 
-        
-
     }
 
     public void SetColorPlayer(Color c)

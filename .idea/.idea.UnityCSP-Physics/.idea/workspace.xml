@@ -2,85 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be15d91e-0e87-405b-bc41-91c8a1ea8590" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NetworkedMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NetworkedMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PhysicsNetworkUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PhysicsNetworkUpdater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/1.0/machine.config" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/1.0/machine.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/Browsers/Compat.browser" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/Browsers/Compat.browser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/machine.config" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/machine.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/settings.map" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/settings.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/2.0/web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/browscap.ini" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/browscap.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/config" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/mconfig/config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/Mono/etc/mono/mconfig/config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AIModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AIModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ARModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ARModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AccessibilityModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AccessibilityModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AnimationModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AnimationModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AssetBundleModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AssetBundleModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AudioModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.AudioModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.BaselibModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.BaselibModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ClothModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ClothModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ClusterInputModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ClusterInputModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ClusterRendererModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ClusterRendererModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.CoreModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.CoreModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.CrashReportingModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.CrashReportingModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.DirectorModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.DirectorModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.FileSystemHttpModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.FileSystemHttpModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.GameCenterModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.GameCenterModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.GridModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.GridModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.HotReloadModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.HotReloadModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.IMGUIModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.IMGUIModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ImageConversionModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ImageConversionModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.InputModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.InputModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.JSONSerializeModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.JSONSerializeModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.LocalizationModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.LocalizationModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ParticleSystemModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ParticleSystemModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.PerformanceReportingModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.PerformanceReportingModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.Physics2DModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.Physics2DModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.PhysicsModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.PhysicsModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ProfilerModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ProfilerModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ScreenCaptureModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.ScreenCaptureModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SharedInternalsModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SharedInternalsModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SpriteMaskModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SpriteMaskModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SpriteShapeModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SpriteShapeModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.StreamingModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.StreamingModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.StyleSheetsModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.StyleSheetsModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SubstanceModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.SubstanceModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TLSModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TLSModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TerrainModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TerrainModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TerrainPhysicsModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TerrainPhysicsModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TextCoreModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TextCoreModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TextRenderingModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TextRenderingModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TilemapModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TilemapModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TimelineModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.TimelineModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UIElementsModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UIElementsModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UIModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UIModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UNETModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UNETModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UmbraModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UmbraModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityAnalyticsModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityAnalyticsModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityConnectModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityConnectModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityTestProtocolModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityTestProtocolModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestAudioModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestAudioModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestTextureModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestTextureModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestWWWModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.UnityWebRequestWWWModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VFXModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VFXModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VRModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VRModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VehiclesModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VehiclesModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VideoModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.VideoModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.WindModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.WindModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.XRModule.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.XRModule.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/Managed/UnityEngine.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/app.info" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/app.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/boot.config" beforeDir="false" afterPath="$PROJECT_DIR$/PhysicsSceneBuilds/unity_physics_csp_Data/boot.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UnityCSP-Physics.sln" beforeDir="false" afterPath="$PROJECT_DIR$/UnityCSP-Physics.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SimpleUpdateManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SimpleUpdateManager.cs.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,104 +14,95 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/SimpleUpdateManager.cs">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/NetworkedMovement.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="32">
+              <caret line="439" column="64" lean-forward="true" selection-start-line="439" selection-start-column="64" selection-end-line="439" selection-end-column="64" />
               <folding>
-                <marker date="1548088711107" expanded="false" signature="6:92" ph="..." />
-                <marker date="1548088711107" expanded="true" signature="143:2599" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="522:606" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="671:859" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="731:804" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="927:1081" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="987:1027" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1143:1321" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1200:1270" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1386:1534" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1443:1483" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1602:1795" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1664:1739" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1865:2023" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="1927:1967" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="2083:2439" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="2216:2380" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="2496:2596" ph="{...}" />
-                <marker date="1548088711107" expanded="true" signature="2542:2590" ph="{...}" />
+                <marker date="1548262559546" expanded="false" signature="6:108" ph="..." />
+                <marker date="1548262559546" expanded="true" signature="198:17408" ph="{...}" />
+                <marker date="1548262559546" expanded="false" signature="2493:3020" ph="Getters" />
+                <marker date="1548262559546" expanded="true" signature="3075:5559" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="3167:3250" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="3263:3368" ph="{...}" />
+                <marker date="1548262559546" expanded="false" signature="3556:4034" ph="Initializing Client Properties" />
+                <marker date="1548262559546" expanded="false" signature="4044:4262" ph="Initializing Server properties" />
+                <marker date="1548262559546" expanded="true" signature="4286:4891" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="4309:4411" ph="/* ----------------- ... */" />
+                <marker date="1548262559546" expanded="true" signature="4697:4731" ph="/* ----------------- ... */" />
+                <marker date="1548262559546" expanded="true" signature="4904:5462" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="5128:5230" ph="/* ----------------- ... */" />
+                <marker date="1548262559546" expanded="true" signature="5418:5452" ph="/* ----------------- ... */" />
+                <marker date="1548262559546" expanded="false" signature="5565:6323" ph="Network Messages Handlers" />
+                <marker date="1548262559546" expanded="true" signature="5654:5954" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="6010:6307" ph="{...}" />
+                <marker date="1548262559546" expanded="false" signature="6329:9155" ph="Server Logic" />
+                <marker date="1548262559546" expanded="true" signature="6396:6615" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="6486:6609" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="6652:7688" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="6764:7531" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="7714:9139" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="7884:9131" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="8178:8296" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
+                <marker date="1548262559546" expanded="true" signature="8343:9121" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="8374:8486" ph="/* there may be some inputs in the array that we've already had, ... */" />
+                <marker date="1548262559546" expanded="true" signature="8789:9107" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="9161:16079" ph="Client Logic" />
+                <marker date="1548262559546" expanded="true" signature="9206:14348" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="9346:10967" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="10609:10714" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="11005:13810" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="11226:11329" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="11597:13800" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="12011:13786" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="12068:12164" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="12879:13198" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="13340:13513" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="13538:13768" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="13851:14015" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="14028:14153" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="14390:14593" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="14725:14984" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="15068:15221" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="15319:16063" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="15399:15580" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="15646:15785" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="15914:16057" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="16099:16232" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="16381:17281" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="16425:17275" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="16462:16590" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="16619:16748" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="16777:16904" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="16934:17060" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="17142:17265" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="17312:17405" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="17452:17565" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="17599:17743" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="17785:17850" ph="{...}" />
+                <marker date="1548262559546" expanded="true" signature="17891:18106" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/NetworkedMovement.cs">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="492" column="80" lean-forward="true" selection-start-line="492" selection-start-column="80" selection-end-line="492" selection-end-column="80" />
+            <state relative-caret-position="-153">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
               <folding>
-                <marker date="1548261646551" expanded="false" signature="6:108" ph="..." />
-                <marker date="1548261646551" expanded="true" signature="198:17408" ph="{...}" />
-                <marker date="1548261646551" expanded="false" signature="2493:3020" ph="Getters" />
-                <marker date="1548261646551" expanded="true" signature="3075:5559" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="3167:3250" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="3263:3368" ph="{...}" />
-                <marker date="1548261646551" expanded="false" signature="3556:4034" ph="Initializing Client Properties" />
-                <marker date="1548261646551" expanded="false" signature="4044:4262" ph="Initializing Server properties" />
-                <marker date="1548261646551" expanded="true" signature="4286:4891" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="4309:4411" ph="/* ----------------- ... */" />
-                <marker date="1548261646551" expanded="true" signature="4697:4731" ph="/* ----------------- ... */" />
-                <marker date="1548261646551" expanded="true" signature="4904:5462" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="5128:5230" ph="/* ----------------- ... */" />
-                <marker date="1548261646551" expanded="true" signature="5418:5452" ph="/* ----------------- ... */" />
-                <marker date="1548261646551" expanded="false" signature="5565:6323" ph="Network Messages Handlers" />
-                <marker date="1548261646551" expanded="true" signature="5654:5954" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="6010:6307" ph="{...}" />
-                <marker date="1548261646551" expanded="false" signature="6329:9155" ph="Server Logic" />
-                <marker date="1548261646551" expanded="true" signature="6396:6615" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="6486:6609" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="6652:7688" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="6764:7531" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="7714:9139" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="7884:9131" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="8178:8296" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
-                <marker date="1548261646551" expanded="true" signature="8343:9121" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="8374:8486" ph="/* there may be some inputs in the array that we've already had, ... */" />
-                <marker date="1548261646551" expanded="true" signature="8789:9107" ph="{...}" />
-                <marker date="1548261646551" expanded="false" signature="9161:16079" ph="Client Logic" />
-                <marker date="1548261646551" expanded="true" signature="9206:14348" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="9346:10967" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="10609:10714" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="11005:13810" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="11226:11329" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="11597:13800" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="12011:13786" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="12068:12164" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="12879:13198" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="13340:13513" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="13538:13768" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="13851:14015" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="14028:14153" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="14390:14593" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="14725:14984" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="15068:15221" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="15319:16063" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="15399:15580" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="15646:15785" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="15914:16057" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="16099:16232" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="16381:17281" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="16425:17275" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="16462:16590" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="16619:16748" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="16777:16904" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="16934:17060" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="17142:17265" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="17312:17405" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="17452:17565" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="17599:17743" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="17785:17850" ph="{...}" />
-                <marker date="1548261646551" expanded="true" signature="17891:18106" ph="{...}" />
+                <marker date="1548262689215" expanded="false" signature="6:108" ph="..." />
+                <marker date="1548262689215" expanded="true" signature="205:2539" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="641:1447" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="789:1008" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="1031:1440" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="1275:1430" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="1488:1677" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="1695:2337" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="2382:2456" ph="{...}" />
+                <marker date="1548262689215" expanded="true" signature="2478:2537" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -197,17 +112,17 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/PhysicsNetworkUpdater.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="352">
-              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+              <caret line="28" selection-start-line="28" selection-end-line="28" />
               <folding>
-                <marker date="1548261602911" expanded="false" signature="6:176" ph="..." />
-                <marker date="1548261602911" expanded="true" signature="228:2057" ph="{...}" />
-                <marker date="1548261602911" expanded="true" signature="592:681" ph="{...}" />
-                <marker date="1548261602911" expanded="true" signature="738:1255" ph="{...}" />
-                <marker date="1548261602911" expanded="true" signature="1311:1388" ph="{...}" />
-                <marker date="1548261602911" expanded="true" signature="1431:1785" ph="{...}" />
-                <marker date="1548261602911" expanded="true" signature="1670:1756" ph="{...}" />
-                <marker date="1548261602911" expanded="true" signature="1838:1958" ph="{...}" />
-                <marker date="1548261602911" expanded="true" signature="2009:2055" ph="{...}" />
+                <marker date="1548262559543" expanded="false" signature="6:176" ph="..." />
+                <marker date="1548262559543" expanded="true" signature="228:2057" ph="{...}" />
+                <marker date="1548262559543" expanded="true" signature="592:681" ph="{...}" />
+                <marker date="1548262559543" expanded="true" signature="738:1255" ph="{...}" />
+                <marker date="1548262559543" expanded="true" signature="1311:1388" ph="{...}" />
+                <marker date="1548262559543" expanded="true" signature="1431:1785" ph="{...}" />
+                <marker date="1548262559543" expanded="true" signature="1670:1756" ph="{...}" />
+                <marker date="1548262559543" expanded="true" signature="1838:1958" ph="{...}" />
+                <marker date="1548262559543" expanded="true" signature="2009:2055" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -228,8 +143,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NetworkedMovement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SimpleUpdateManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PhysicsNetworkUpdater.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -237,6 +152,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/SimpleUpdateManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PhysicsNetworkUpdater.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/NetworkedMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
       </list>
     </option>
   </component>
@@ -305,12 +221,12 @@
       <workItem from="1546295258500" duration="51000" />
       <workItem from="1546295376563" duration="62000" />
       <workItem from="1548260990630" duration="337000" />
-      <workItem from="1548261397179" duration="264000" />
+      <workItem from="1548261397179" duration="1263000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10467000" />
+    <option name="totallyTimeSpent" value="11466000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -323,7 +239,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1756" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.07356077" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -416,26 +331,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
-            <marker date="1548088711107" expanded="false" signature="6:92" ph="..." />
-            <marker date="1548088711107" expanded="true" signature="143:2599" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="522:606" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="671:859" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="731:804" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="927:1081" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="987:1027" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1143:1321" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1200:1270" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1386:1534" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1443:1483" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1602:1795" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1664:1739" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1865:2023" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="1927:1967" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="2083:2439" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="2216:2380" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="2496:2596" ph="{...}" />
-            <marker date="1548088711107" expanded="true" signature="2542:2590" ph="{...}" />
+            <marker date="1548262689215" expanded="false" signature="6:108" ph="..." />
+            <marker date="1548262689215" expanded="true" signature="205:2539" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="641:1447" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="789:1008" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="1031:1440" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="1275:1430" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="1488:1677" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="1695:2337" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="2382:2456" ph="{...}" />
+            <marker date="1548262689215" expanded="true" signature="2478:2537" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -443,88 +356,88 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/PhysicsNetworkUpdater.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
-          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
           <folding>
-            <marker date="1548261602911" expanded="false" signature="6:176" ph="..." />
-            <marker date="1548261602911" expanded="true" signature="228:2057" ph="{...}" />
-            <marker date="1548261602911" expanded="true" signature="592:681" ph="{...}" />
-            <marker date="1548261602911" expanded="true" signature="738:1255" ph="{...}" />
-            <marker date="1548261602911" expanded="true" signature="1311:1388" ph="{...}" />
-            <marker date="1548261602911" expanded="true" signature="1431:1785" ph="{...}" />
-            <marker date="1548261602911" expanded="true" signature="1670:1756" ph="{...}" />
-            <marker date="1548261602911" expanded="true" signature="1838:1958" ph="{...}" />
-            <marker date="1548261602911" expanded="true" signature="2009:2055" ph="{...}" />
+            <marker date="1548262559543" expanded="false" signature="6:176" ph="..." />
+            <marker date="1548262559543" expanded="true" signature="228:2057" ph="{...}" />
+            <marker date="1548262559543" expanded="true" signature="592:681" ph="{...}" />
+            <marker date="1548262559543" expanded="true" signature="738:1255" ph="{...}" />
+            <marker date="1548262559543" expanded="true" signature="1311:1388" ph="{...}" />
+            <marker date="1548262559543" expanded="true" signature="1431:1785" ph="{...}" />
+            <marker date="1548262559543" expanded="true" signature="1670:1756" ph="{...}" />
+            <marker date="1548262559543" expanded="true" signature="1838:1958" ph="{...}" />
+            <marker date="1548262559543" expanded="true" signature="2009:2055" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/NetworkedMovement.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="492" column="80" lean-forward="true" selection-start-line="492" selection-start-column="80" selection-end-line="492" selection-end-column="80" />
+        <state relative-caret-position="32">
+          <caret line="439" column="64" lean-forward="true" selection-start-line="439" selection-start-column="64" selection-end-line="439" selection-end-column="64" />
           <folding>
-            <marker date="1548261646551" expanded="false" signature="6:108" ph="..." />
-            <marker date="1548261646551" expanded="true" signature="198:17408" ph="{...}" />
-            <marker date="1548261646551" expanded="false" signature="2493:3020" ph="Getters" />
-            <marker date="1548261646551" expanded="true" signature="3075:5559" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="3167:3250" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="3263:3368" ph="{...}" />
-            <marker date="1548261646551" expanded="false" signature="3556:4034" ph="Initializing Client Properties" />
-            <marker date="1548261646551" expanded="false" signature="4044:4262" ph="Initializing Server properties" />
-            <marker date="1548261646551" expanded="true" signature="4286:4891" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="4309:4411" ph="/* ----------------- ... */" />
-            <marker date="1548261646551" expanded="true" signature="4697:4731" ph="/* ----------------- ... */" />
-            <marker date="1548261646551" expanded="true" signature="4904:5462" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="5128:5230" ph="/* ----------------- ... */" />
-            <marker date="1548261646551" expanded="true" signature="5418:5452" ph="/* ----------------- ... */" />
-            <marker date="1548261646551" expanded="false" signature="5565:6323" ph="Network Messages Handlers" />
-            <marker date="1548261646551" expanded="true" signature="5654:5954" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="6010:6307" ph="{...}" />
-            <marker date="1548261646551" expanded="false" signature="6329:9155" ph="Server Logic" />
-            <marker date="1548261646551" expanded="true" signature="6396:6615" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="6486:6609" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="6652:7688" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="6764:7531" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="7714:9139" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="7884:9131" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="8178:8296" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
-            <marker date="1548261646551" expanded="true" signature="8343:9121" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="8374:8486" ph="/* there may be some inputs in the array that we've already had, ... */" />
-            <marker date="1548261646551" expanded="true" signature="8789:9107" ph="{...}" />
-            <marker date="1548261646551" expanded="false" signature="9161:16079" ph="Client Logic" />
-            <marker date="1548261646551" expanded="true" signature="9206:14348" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="9346:10967" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="10609:10714" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="11005:13810" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="11226:11329" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="11597:13800" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="12011:13786" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="12068:12164" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="12879:13198" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="13340:13513" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="13538:13768" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="13851:14015" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="14028:14153" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="14390:14593" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="14725:14984" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="15068:15221" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="15319:16063" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="15399:15580" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="15646:15785" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="15914:16057" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="16099:16232" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="16381:17281" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="16425:17275" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="16462:16590" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="16619:16748" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="16777:16904" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="16934:17060" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="17142:17265" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="17312:17405" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="17452:17565" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="17599:17743" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="17785:17850" ph="{...}" />
-            <marker date="1548261646551" expanded="true" signature="17891:18106" ph="{...}" />
+            <marker date="1548262559546" expanded="false" signature="6:108" ph="..." />
+            <marker date="1548262559546" expanded="true" signature="198:17408" ph="{...}" />
+            <marker date="1548262559546" expanded="false" signature="2493:3020" ph="Getters" />
+            <marker date="1548262559546" expanded="true" signature="3075:5559" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="3167:3250" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="3263:3368" ph="{...}" />
+            <marker date="1548262559546" expanded="false" signature="3556:4034" ph="Initializing Client Properties" />
+            <marker date="1548262559546" expanded="false" signature="4044:4262" ph="Initializing Server properties" />
+            <marker date="1548262559546" expanded="true" signature="4286:4891" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="4309:4411" ph="/* ----------------- ... */" />
+            <marker date="1548262559546" expanded="true" signature="4697:4731" ph="/* ----------------- ... */" />
+            <marker date="1548262559546" expanded="true" signature="4904:5462" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="5128:5230" ph="/* ----------------- ... */" />
+            <marker date="1548262559546" expanded="true" signature="5418:5452" ph="/* ----------------- ... */" />
+            <marker date="1548262559546" expanded="false" signature="5565:6323" ph="Network Messages Handlers" />
+            <marker date="1548262559546" expanded="true" signature="5654:5954" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="6010:6307" ph="{...}" />
+            <marker date="1548262559546" expanded="false" signature="6329:9155" ph="Server Logic" />
+            <marker date="1548262559546" expanded="true" signature="6396:6615" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="6486:6609" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="6652:7688" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="6764:7531" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="7714:9139" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="7884:9131" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="8178:8296" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
+            <marker date="1548262559546" expanded="true" signature="8343:9121" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="8374:8486" ph="/* there may be some inputs in the array that we've already had, ... */" />
+            <marker date="1548262559546" expanded="true" signature="8789:9107" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="9161:16079" ph="Client Logic" />
+            <marker date="1548262559546" expanded="true" signature="9206:14348" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="9346:10967" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="10609:10714" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="11005:13810" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="11226:11329" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="11597:13800" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="12011:13786" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="12068:12164" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="12879:13198" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="13340:13513" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="13538:13768" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="13851:14015" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="14028:14153" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="14390:14593" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="14725:14984" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="15068:15221" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="15319:16063" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="15399:15580" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="15646:15785" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="15914:16057" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="16099:16232" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="16381:17281" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="16425:17275" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="16462:16590" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="16619:16748" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="16777:16904" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="16934:17060" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="17142:17265" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="17312:17405" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="17452:17565" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="17599:17743" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="17785:17850" ph="{...}" />
+            <marker date="1548262559546" expanded="true" signature="17891:18106" ph="{...}" />
           </folding>
         </state>
       </provider>
