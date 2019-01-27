@@ -9,10 +9,12 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="CorrectiosHUD.cs" t="Include" />
+          <e p="CubeDemoInputExecuter.cs" t="Include" />
           <e p="DataTypes" t="Include">
             <e p="BinaryHeap.cs" t="Include" />
             <e p="DynArray.cs" t="Include" />
           </e>
+          <e p="InputExecuter.cs" t="Include" />
           <e p="NetworkedMovement.cs" t="Include" />
           <e p="PhysicsNetworkUpdater.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />

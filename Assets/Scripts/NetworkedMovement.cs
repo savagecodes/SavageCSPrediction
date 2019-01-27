@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -12,22 +13,16 @@ public class NetworkedMovement : NetworkBehaviour {
     PhysicsScene LocalPhysicsScene;
 
     private int _correctionsMadeOnClient;
+    
+    public event Action<Inputs> OnInputExecutionRequest = x => { };
 
     [Header("Required Compoennts")]
-    [SerializeField]
-    private Transform _cameraTransform;
     [SerializeField]
     private GameObject _serverGhostModel;
     [SerializeField]
     private GameObject _smoothedPlayerModel;
 
     Rigidbody _rigidbody;
-
-    [Header("Movement Settings")]
-    [SerializeField]
-    private float _movementImpulse;
-    [SerializeField]
-    private float _jumpThresholdY;
 
     private float _currentTime;
     private uint _currentTickNumber;
@@ -62,12 +57,6 @@ public class NetworkedMovement : NetworkBehaviour {
     private HashSet<uint> _serverPredictedMessagesIDs;
     private uint serverPacketID;
 
-    //inputs
-    private bool _isPressingUp;
-    private bool _isPressingDown;
-    private bool _isPressingLeft;
-    private bool _isPressingRight;
-    private bool _isPressingJump;
 
     public Inputs CurrentInputState;
 
@@ -80,12 +69,6 @@ public class NetworkedMovement : NetworkBehaviour {
     private bool _firstSynced;
 
     #region Getters
-
-    public bool IsPressingUp { set { _isPressingUp = value; } }
-    public bool IsPressingDown { set { _isPressingDown = value; } }
-    public bool IsPressingLeft { set { _isPressingLeft = value; } }
-    public bool IsPressingRight { set { _isPressingRight = value; } }
-    public bool IsPressingJump { set { _isPressingJump = value; } }
 
     public int Corrections { get { return _correctionsMadeOnClient; } }
 
@@ -255,9 +238,8 @@ public class NetworkedMovement : NetworkBehaviour {
                 // run through all relevant inputs, and step player forward
                 for (int i = (int)startIndex; i < PredictedMessage.inputs.Length; ++i)
                 {
-                    PrePhysicsStep(_rigidbody, PredictedMessage.inputs[i]);
+                    OnInputExecutionRequest(PredictedMessage.inputs[i]);
 
-                    //PhysicsNetworkUpdater.Instance.OnReadyToSimulate();
                     PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
 
                     _currentTickNumber++;
@@ -405,9 +387,9 @@ public class NetworkedMovement : NetworkBehaviour {
         currentState.position = rigidbody.position;
         currentState.rotation = rigidbody.rotation;
 
-        PrePhysicsStep(rigidbody, inputs);
+        //PrePhysicsStep(rigidbody, inputs);
+        OnInputExecutionRequest(inputs);
         PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
-        //Physics.Simulate(deltaTime);
     }
 
     [ClientRpc]
@@ -450,51 +432,11 @@ public class NetworkedMovement : NetworkBehaviour {
         else InterpolateTransform();
 	}
 
-
-    //Apply inputs to the Rigidbody, before triggering the physics simulation 
-    private void PrePhysicsStep(Rigidbody rigidbody, Inputs inputs)
-    {
-        if (_cameraTransform != null)
-        {
-            if (inputs.up)
-            {
-                rigidbody.AddForce(_cameraTransform.forward * _movementImpulse, ForceMode.Impulse);
-            }
-            if (inputs.down)
-            {
-                rigidbody.AddForce(-_cameraTransform.forward * _movementImpulse, ForceMode.Impulse);
-            }
-            if (inputs.left)
-            {
-                rigidbody.AddForce(-_cameraTransform.right * _movementImpulse, ForceMode.Impulse);
-            }
-            if (inputs.right)
-            {
-                rigidbody.AddForce(_cameraTransform.right * _movementImpulse, ForceMode.Impulse);
-            }
-            if (rigidbody.transform.position.y <= _jumpThresholdY && inputs.jump)
-            {
-                rigidbody.AddForce(_cameraTransform.up * _movementImpulse, ForceMode.Impulse);
-            }
-        }
-    }
-
-
     private void OnDestroy()
     {
         PhysicsNetworkUpdater.Instance.DestroyPhysicsSceneOfGO(this.gameObject);
     }
 
-}
-
-[System.Serializable]
-public struct Inputs
-{
-    public bool up;
-    public bool down;
-    public bool left;
-    public bool right;
-    public bool jump;
 }
 
 class PredictedMessage : MessageBase

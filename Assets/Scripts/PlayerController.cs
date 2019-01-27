@@ -73,10 +73,15 @@ public class PlayerController : NetworkBehaviour {
 
        Inputs CurrentInputs = new Inputs();
 
-       CurrentInputs.up = Input.GetKey(UP);
+      /* CurrentInputs.up = Input.GetKey(UP);
        CurrentInputs.down = Input.GetKey(DOWN);
        CurrentInputs.left = Input.GetKey(LEFT);
        CurrentInputs.right = Input.GetKey(RIGHT);
+       CurrentInputs.jump = Input.GetKey(JUMP);*/
+
+      CurrentInputs.horizontal = Input.GetAxis("Horizontal");
+      CurrentInputs.vertical = Input.GetAxis("Vertical");
+
        CurrentInputs.jump = Input.GetKey(JUMP);
 
        _movementComponent.CurrentInputState = CurrentInputs;
