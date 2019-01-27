@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(Rigidbody))]
 public class NetworkedMovement : NetworkBehaviour {
 
-    private short _InputMessageReceivedID = 1002;
+    private short _PredictedMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
 
     PhysicsScene LocalPhysicsScene;
@@ -58,8 +58,8 @@ public class NetworkedMovement : NetworkBehaviour {
     private uint _serverSnapshotRate;
     // private uint _serverTickNumber;
     private uint _serverTickAccumulator;
-    private BinaryHeap<InputMessage> _serverInputMessageQueue;
-    private HashSet<uint> _serverInputMessagesIDs;
+    private BinaryHeap<PredictedMessage> _serverPredictedMessageQueue;
+    private HashSet<uint> _serverPredictedMessagesIDs;
     private uint serverPacketID;
 
     //inputs
@@ -68,6 +68,8 @@ public class NetworkedMovement : NetworkBehaviour {
     private bool _isPressingLeft;
     private bool _isPressingRight;
     private bool _isPressingJump;
+
+    public Inputs CurrentInputState;
 
     //client non local player
     private Vector3 _nonLocalClientTargetPosition;
@@ -106,7 +108,7 @@ public class NetworkedMovement : NetworkBehaviour {
             PhysicsNetworkUpdater.Instance.CreatePhysicsSceneForGO(this.gameObject);
         }
 
-        _InputMessageReceivedID += System.Convert.ToInt16(netId.Value);
+        _PredictedMessageReceivedID += System.Convert.ToInt16(netId.Value);
         _StateMessageReceivedID += System.Convert.ToInt16(netId.Value);
 
         _currentTickNumber = 0;
@@ -127,8 +129,8 @@ public class NetworkedMovement : NetworkBehaviour {
         #region Initializing Server properties
 
         _serverTickAccumulator = 0;
-        _serverInputMessageQueue = new BinaryHeap<InputMessage>();
-        _serverInputMessagesIDs = new HashSet<uint>(); 
+        _serverPredictedMessageQueue = new BinaryHeap<PredictedMessage>();
+        _serverPredictedMessagesIDs = new HashSet<uint>(); 
 
         #endregion
 
@@ -163,21 +165,21 @@ public class NetworkedMovement : NetworkBehaviour {
         }
 
 
-        NetworkServer.RegisterHandler(_InputMessageReceivedID, OnInputMessageReceived);
+        NetworkServer.RegisterHandler(_PredictedMessageReceivedID, OnPredictedMessageReceived);
 
     }
 
     #region Network Messages Handlers
 
-    void OnInputMessageReceived(NetworkMessage netMsg)
+    void OnPredictedMessageReceived(NetworkMessage netMsg)
     {
-        var message = netMsg.ReadMessage<InputMessage>();
+        var message = netMsg.ReadMessage<PredictedMessage>();
 
-        if (_serverInputMessagesIDs.Contains(message.packetId)) return;
+        if (_serverPredictedMessagesIDs.Contains(message.packetId)) return;
 
-        _serverInputMessagesIDs.Add(message.packetId);
+        _serverPredictedMessagesIDs.Add(message.packetId);
 
-        _serverInputMessageQueue.Enqueue(new HeapElement<InputMessage>(message,message.packetId));
+        _serverPredictedMessageQueue.Enqueue(new HeapElement<PredictedMessage>(message,message.packetId));
 
     }
 
@@ -216,7 +218,7 @@ public class NetworkedMovement : NetworkBehaviour {
                         
             StateMessage state_msg = new StateMessage();
             state_msg.packetId = serverPacketID;
-            state_msg.deliveryTime = _currentTime + _serverInputMessageQueue.Peek().Element.rtt / 2;
+            state_msg.deliveryTime = _currentTime + _serverPredictedMessageQueue.Peek().Element.rtt / 2;
             state_msg.tickNumber = _currentTickNumber;
             state_msg.position = _rigidbody.position;
             state_msg.rotation = _rigidbody.rotation;
@@ -228,9 +230,6 @@ public class NetworkedMovement : NetworkBehaviour {
             serverPacketID++;
                     
         }
-        
-        _smoothedPlayerModel.transform.position = _rigidbody.position;
-        _smoothedPlayerModel.transform.rotation = _rigidbody.rotation;
     }
 
 
@@ -238,12 +237,12 @@ public class NetworkedMovement : NetworkBehaviour {
     {
         _currentTime += Time.deltaTime;
 
-        while (_serverInputMessageQueue.Count > 0 && _currentTime >= _serverInputMessageQueue.Peek().Element.deliveryTime)
+        while (_serverPredictedMessageQueue.Count > 0 && _currentTime >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
         {
-            InputMessage inputMessage = _serverInputMessageQueue.Dequeue().Element;
+            PredictedMessage PredictedMessage = _serverPredictedMessageQueue.Dequeue().Element;
 
             // message contains an array of inputs, calculate what tick the final one is
-            uint maxTick = inputMessage.startTickNumber + (uint)inputMessage.inputs.Length - 1;
+            uint maxTick = PredictedMessage.startTickNumber + (uint)PredictedMessage.inputs.Length - 1;
 
             // if that tick is greater than or equal to the current tick we're on, then it
             // has inputs which are new
@@ -251,12 +250,12 @@ public class NetworkedMovement : NetworkBehaviour {
             {
                 // there may be some inputs in the array that we've already had,
                 // so figure out where to start
-                uint startIndex = _currentTickNumber > inputMessage.startTickNumber ? (_currentTickNumber - inputMessage.startTickNumber) : 0;
+                uint startIndex = _currentTickNumber > PredictedMessage.startTickNumber ? (_currentTickNumber - PredictedMessage.startTickNumber) : 0;
 
                 // run through all relevant inputs, and step player forward
-                for (int i = (int)startIndex; i < inputMessage.inputs.Length; ++i)
+                for (int i = (int)startIndex; i < PredictedMessage.inputs.Length; ++i)
                 {
-                    PrePhysicsStep(_rigidbody, inputMessage.inputs[i]);
+                    PrePhysicsStep(_rigidbody, PredictedMessage.inputs[i]);
 
                     //PhysicsNetworkUpdater.Instance.OnReadyToSimulate();
                     PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
@@ -286,36 +285,29 @@ public class NetworkedMovement : NetworkBehaviour {
 
             uint buffer_slot = _currentTickNumber % _clientBufferSize;
 
-            // sample and store inputs for this tick
-            Inputs inputs;
-            inputs.up = _isPressingUp;
-            inputs.down = _isPressingDown;
-            inputs.left = _isPressingLeft;
-            inputs.right = _isPressingRight;
-            inputs.jump = _isPressingJump;
-            _clientInputBuffer[buffer_slot] = inputs;
+            _clientInputBuffer[buffer_slot] = CurrentInputState;
 
             // store state for this tick, then use current state + input to step simulation
-            ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],_rigidbody,inputs, Time.fixedDeltaTime);
+            ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],_rigidbody,CurrentInputState, Time.fixedDeltaTime);
        
-            InputMessage inputMessage = new InputMessage();
+            PredictedMessage PredictedMessage = new PredictedMessage();
             var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
-            inputMessage.packetId = _clientPacketID;
-            inputMessage.deliveryTime = _currentTime + rtt / 2 ;
-            inputMessage.rtt = rtt;
-            inputMessage.startTickNumber = _sendRedundantInputsToServer ? _clientLastRecivedStateTickNumber : _currentTickNumber;
+            PredictedMessage.packetId = _clientPacketID;
+            PredictedMessage.deliveryTime = _currentTime + rtt / 2 ;
+            PredictedMessage.rtt = rtt;
+            PredictedMessage.startTickNumber = _sendRedundantInputsToServer ? _clientLastRecivedStateTickNumber : _currentTickNumber;
 
             var inputList = new List<Inputs>();
 
-            for (uint tick = inputMessage.startTickNumber; tick <= _currentTickNumber; tick++)
+            for (uint tick = PredictedMessage.startTickNumber; tick <= _currentTickNumber; tick++)
             {
                 inputList.Add(_clientInputBuffer[tick % _clientBufferSize]);
             }
 
-            inputMessage.inputs = inputList.ToArray();
+            PredictedMessage.inputs = inputList.ToArray();
 
             //Send Input Message To Server
-            connectionToServer.Send(_InputMessageReceivedID, inputMessage);
+            connectionToServer.Send(_PredictedMessageReceivedID, PredictedMessage);
 
             _clientPacketID++;
 
@@ -505,7 +497,7 @@ public struct Inputs
     public bool jump;
 }
 
-class InputMessage : MessageBase
+class PredictedMessage : MessageBase
 {
     public uint packetId;
     public float deliveryTime;

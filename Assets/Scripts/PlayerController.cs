@@ -71,12 +71,16 @@ public class PlayerController : NetworkBehaviour {
 
         if(HUD.playerColorImage.color != _playerColor) SetColorPlayer(_playerColor);
 
-        _movementComponent.IsPressingUp = Input.GetKey(UP);
-        _movementComponent.IsPressingDown = Input.GetKey(DOWN);
-        _movementComponent.IsPressingLeft = Input.GetKey(LEFT);
-        _movementComponent.IsPressingRight = Input.GetKey(RIGHT);
-        _movementComponent.IsPressingJump = Input.GetKey(JUMP);
-	}
+       Inputs CurrentInputs = new Inputs();
+
+       CurrentInputs.up = Input.GetKey(UP);
+       CurrentInputs.down = Input.GetKey(DOWN);
+       CurrentInputs.left = Input.GetKey(LEFT);
+       CurrentInputs.right = Input.GetKey(RIGHT);
+       CurrentInputs.jump = Input.GetKey(JUMP);
+
+       _movementComponent.CurrentInputState = CurrentInputs;
+    }
 
     public override void OnNetworkDestroy()
     {

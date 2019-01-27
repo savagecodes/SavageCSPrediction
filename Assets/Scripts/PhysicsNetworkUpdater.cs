@@ -63,7 +63,7 @@ public class PhysicsNetworkUpdater : MonoBehaviour
     public void UpdatePhysics(NetworkedMovement NM)
     {
         _PhysicsScenes[NM.gameObject].Item2.Simulate(Time.fixedDeltaTime);
-        NM.OnPhysiscsUpdated();
+       if(NM.isServer) NM.OnPhysiscsUpdated();
 
     }
 
