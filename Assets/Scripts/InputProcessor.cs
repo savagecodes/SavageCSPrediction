@@ -5,14 +5,14 @@ using UnityEngine;
 public abstract class InputProcessor : MonoBehaviour
 {
 
-    protected ServerPredictionSyncer serverPredictionSyncer;
+    protected PredicetdNetworkMovement predicetdNetworkMovement;
 
     private Inputs _currentInputs;
 
     private void Awake()
     {
-        serverPredictionSyncer = GetComponent<ServerPredictionSyncer>();
-        serverPredictionSyncer.OnInputExecutionRequest += ExecuteInputs;
+        predicetdNetworkMovement = GetComponent<PredicetdNetworkMovement>();
+        predicetdNetworkMovement.OnInputExecutionRequest += ExecuteInputs;
     }
 
     public virtual void ExecuteInputs(Inputs input)

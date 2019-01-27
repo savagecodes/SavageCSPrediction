@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ServerPredictionSyncer : NetworkBehaviour {
+public class PredicetdNetworkMovement : NetworkBehaviour {
 
     private short _PredictedMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
@@ -311,57 +311,18 @@ public class ServerPredictionSyncer : NetworkBehaviour {
             _serverGhostModel.transform.position = serverStateMessage.serverState.position;
             _serverGhostModel.transform.rotation = serverStateMessage.serverState.rotation;
 
-     
             uint bufferSlot = serverStateMessage.tickNumber % _clientBufferSize;
 
             Vector3 positionError = serverStateMessage.serverState.position - _clientStateBuffer[bufferSlot].position;
             float rotationError = 1.0f - Quaternion.Dot(serverStateMessage.serverState.rotation, _clientStateBuffer[bufferSlot].rotation);
             
             OnServerStateExecutionRequest(serverStateMessage.serverState);
-
+            
             if (positionError.sqrMagnitude > 0.0000001f || rotationError > 0.00001f)
             {
-                OnServerStateExecutionRequest(serverStateMessage.serverState);
-                
-                if (isLocalPlayer)
-                {
-                    _correctionsMadeOnClient++;
-                }
-
-                // capture the current predicted pos for smoothing
-                Vector3 prevPosition = _rigidbody.position + _clientPositionError;
-                Quaternion prevRotation = _rigidbody.rotation * _clientRotationError;
-
-                // rewind & replay
-                _rigidbody.position = serverStateMessage.serverState.position;
-                _rigidbody.rotation = serverStateMessage.serverState.rotation;
-                _rigidbody.velocity = serverStateMessage.serverState.velocity;
-                _rigidbody.angularVelocity = serverStateMessage.serverState.angularVelocity;
-              
-
-                uint rewindTickNumber = serverStateMessage.tickNumber;
-
-                while (rewindTickNumber < _currentTickNumber)
-                {
-                    bufferSlot = rewindTickNumber % _clientBufferSize;
-
-                    ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_rigidbody,_clientInputBuffer[bufferSlot],Time.fixedDeltaTime);
-
-                    rewindTickNumber++;
-                }
-
-                // if more than 2mts apart, just snap
-                if ((prevPosition - _rigidbody.position).sqrMagnitude >= 4.0f)
-                {
-                    _clientPositionError = Vector3.zero;
-                    _clientRotationError = Quaternion.identity;
-                }
-                else
-                {
-                    _clientPositionError = prevPosition - _rigidbody.position;
-                    _clientRotationError = Quaternion.Inverse(_rigidbody.rotation) * prevRotation;
-                }
-            }    
+                ApplyCorrectionsWithServerState(serverStateMessage,bufferSlot);
+            }
+    
         }
         
        _clientPositionError *= 0.9f;
@@ -369,6 +330,51 @@ public class ServerPredictionSyncer : NetworkBehaviour {
         
        _smoothedPlayerModel.transform.position = _rigidbody.position + _clientPositionError;
        _smoothedPlayerModel.transform.rotation = _rigidbody.rotation * _clientRotationError;
+    }
+
+    public void ApplyCorrectionsWithServerState(ServerStateMessage serverStateMessage,uint bufferSlot)
+    {
+       
+            OnServerStateExecutionRequest(serverStateMessage.serverState);
+             
+            _correctionsMadeOnClient++;
+
+            // capture the current predicted pos for smoothing
+            Vector3 prevPosition = _rigidbody.position + _clientPositionError;
+            Quaternion prevRotation = _rigidbody.rotation * _clientRotationError;
+
+            // rewind & replay
+            _rigidbody.position = serverStateMessage.serverState.position;
+            _rigidbody.rotation = serverStateMessage.serverState.rotation;
+            _rigidbody.velocity = serverStateMessage.serverState.velocity;
+            _rigidbody.angularVelocity = serverStateMessage.serverState.angularVelocity;
+            _rigidbody.drag = serverStateMessage.serverState.drag;
+            _rigidbody.angularDrag = serverStateMessage.serverState.angularDrag;
+              
+
+            uint rewindTickNumber = serverStateMessage.tickNumber;
+
+            while (rewindTickNumber < _currentTickNumber)
+            {
+                bufferSlot = rewindTickNumber % _clientBufferSize;
+
+                ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_rigidbody,_clientInputBuffer[bufferSlot],Time.fixedDeltaTime);
+
+                rewindTickNumber++;
+            }
+
+            // if more than 2mts apart, just snap
+            if ((prevPosition - _rigidbody.position).sqrMagnitude >= 4.0f)
+            {
+                _clientPositionError = Vector3.zero;
+                _clientRotationError = Quaternion.identity;
+            }
+            else
+            {
+                _clientPositionError = prevPosition - _rigidbody.position;
+                _clientRotationError = Quaternion.Inverse(_rigidbody.rotation) * prevRotation;
+            }
+          
     }
     
 

@@ -14,6 +14,8 @@ public struct ServerState
     public Quaternion rotation;
     public Vector3 velocity;
     public Vector3 angularVelocity;
+    public float angularDrag;
+    public float drag;
 }
 
 [System.Serializable]

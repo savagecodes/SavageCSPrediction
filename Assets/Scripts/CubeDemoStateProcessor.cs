@@ -18,6 +18,8 @@ public class CubeDemoStateProcessor : StateProcessor
         state.rotation = _rb.rotation;
         state.velocity = _rb.velocity;
         state.angularVelocity = _rb.angularVelocity;
+        state.drag = _rb.drag;
+        state.angularDrag = _rb.angularDrag;
         return state;
 
     }
