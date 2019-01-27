@@ -15,10 +15,10 @@
             <e p="DynArray.cs" t="Include" />
           </e>
           <e p="InputExecuter.cs" t="Include" />
-          <e p="NetworkedMovement.cs" t="Include" />
           <e p="PhysicsNetworkUpdater.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="ServerHUD.cs" t="Include" />
+          <e p="ServerPredictionSyncer.cs" t="Include" />
         </e>
       </e>
       <e p="Library" t="ExcludeRecursive" />

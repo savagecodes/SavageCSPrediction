@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeDemoInputExecuter : InputExecuter
+public class CubeDemoInputProcessor : InputProcessor
 {
     
     private Rigidbody _rb;

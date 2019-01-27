@@ -31,7 +31,7 @@ public class PhysicsNetworkUpdater : MonoBehaviour
     {
         CreateSceneParameters csp = new CreateSceneParameters(LocalPhysicsMode.Physics3D);
         Scene PhysicsScene =
-            SceneManager.CreateScene("PSFor: " + GO.name + " NetID " + GO.GetComponent<NetworkedMovement>().netId.Value,
+            SceneManager.CreateScene("PSFor: " + GO.name + " NetID " + GO.GetComponent<ServerPredictionSyncer>().netId.Value,
                 csp);
 
         _PhysicsScenes.Add(GO, Tuple.Create(PhysicsScene, PhysicsScene.GetPhysicsScene()));
@@ -60,7 +60,7 @@ public class PhysicsNetworkUpdater : MonoBehaviour
         return world;
     }
 
-    public void UpdatePhysics(NetworkedMovement NM)
+    public void UpdatePhysics(ServerPredictionSyncer NM)
     {
         _PhysicsScenes[NM.gameObject].Item2.Simulate(Time.fixedDeltaTime);
        if(NM.isServer) NM.OnPhysiscsUpdated();

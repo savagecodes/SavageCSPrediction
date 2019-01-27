@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(NetworkedMovement))]
+[RequireComponent(typeof(ServerPredictionSyncer))]
 public class PlayerController : NetworkBehaviour {
 
-    NetworkedMovement _movementComponent;
+    ServerPredictionSyncer _movementComponent;
     [SyncVar]
     Color _playerColor;
     public GameObject correctionsHudPrefab;
@@ -27,7 +27,7 @@ public class PlayerController : NetworkBehaviour {
 
 	void Start () {
 
-        _movementComponent = GetComponent<NetworkedMovement>();
+        _movementComponent = GetComponent<ServerPredictionSyncer>();
         meshRenderer = GetComponent<MeshRenderer>();
 
 
@@ -36,7 +36,7 @@ public class PlayerController : NetworkBehaviour {
             
             var chud = Instantiate(correctionsHudPrefab);
             HUD = chud.GetComponent<CorrectiosHUD>();
-            HUD.SetMovementComponent(GetComponent<NetworkedMovement>());
+            HUD.SetMovementComponent(GetComponent<ServerPredictionSyncer>());
 
         }
 
@@ -84,7 +84,7 @@ public class PlayerController : NetworkBehaviour {
 
        CurrentInputs.jump = Input.GetKey(JUMP);
 
-       _movementComponent.CurrentInputState = CurrentInputs;
+       _movementComponent.InputProcessorComponent.SetInputs(CurrentInputs);
     }
 
     public override void OnNetworkDestroy()

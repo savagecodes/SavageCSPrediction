@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 114096760053619792}
   - component: {fileID: 114023348372408016}
   - component: {fileID: 3745228085043374451}
+  - component: {fileID: 8438156063034069444}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -313,12 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6ada0ce0731b6499debf3d4a0cb633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraTransform: {fileID: 4104845449139318, guid: 4e77eef2f95d75e4ca0e7ee59cce3e66,
-    type: 3}
   _serverGhostModel: {fileID: 1169352070377068}
   _smoothedPlayerModel: {fileID: 1218203373154552}
-  _movementImpulse: 5
-  _jumpThresholdY: 1.5
   _enableCorrectionsInClient: 1
   _enableCorrectionSmoothing: 1
   _sendRedundantInputsToServer: 1
@@ -365,3 +362,15 @@ MonoBehaviour:
   _jumpThresholdY: 1.5
   _cameraTransform: {fileID: 4104845449139318, guid: 4e77eef2f95d75e4ca0e7ee59cce3e66,
     type: 3}
+--- !u!114 &8438156063034069444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774796142526076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 369f2735e54c3f649bc6f54fdc120045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
