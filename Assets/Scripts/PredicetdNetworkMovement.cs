@@ -139,7 +139,13 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
                 r.enabled = false;
             }
             
-           // _smoothedPlayerModel.GetComponent<MeshRenderer>().enabled = false;
+            var renderersPlayer = _smoothedPlayerModel.GetComponentsInChildren<MeshRenderer>();
+            
+            foreach (var r in renderersPlayer)
+            {
+                r.enabled = false;
+            }
+        
             //
             //-----------------
 
@@ -153,11 +159,11 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
             //-----------------
             // Visual Debug , this component only should give/Expose the positions
-            
-           
-            
+ 
             _serverGhostModel.transform.SetParent(null);
+     
             _smoothedPlayerModel.transform.SetParent(null);
+            
             var renderers = GetComponentsInChildren<MeshRenderer>();
             
             foreach (var r in renderers)
@@ -334,6 +340,8 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             
             if (positionError.sqrMagnitude > 0.0000001f || rotationError > 0.00001f)
             {
+                //Debug.Log(positionError.magnitude + "Rotation : " + rotationError);
+                
                 ApplyCorrectionsWithServerState(serverStateMessage,bufferSlot);
             }
     

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+using UnityStandardAssets.Cameras;
 using UnityStandardAssets.Vehicles.Aeroplane;
 
 public class AircraftPlayerController : NetworkBehaviour
@@ -12,11 +14,15 @@ public class AircraftPlayerController : NetworkBehaviour
     public GameObject correctionsHudPrefab;
     public CorrectiosHUD HUD;
     public MeshRenderer meshRenderer;
+    public GameObject Camera;
+  //  private GameObject CameraInstance;
     
     // reference to the aeroplane that we're controlling
     private AeroplaneController m_Aeroplane;
 
     private Rigidbody _rb;
+
+    private AutoCam camera;
     
     private void Awake()
     {
@@ -31,15 +37,25 @@ public class AircraftPlayerController : NetworkBehaviour
 
         _movementComponent = GetComponent<PredicetdNetworkMovement>();
         meshRenderer = GetComponentInChildren<MeshRenderer>();
-
+        
 
         if (isLocalPlayer)
         {
+            
+           /* var cam = Instantiate(Camera);
+            SceneManager.MoveGameObjectToScene(cam,
+                PhysicsNetworkUpdater.Instance.PhysicsScenes[this.gameObject].Item1);
+
+            cam.GetComponentInChildren<AutoCam>().SetTarget(_movementComponent.SmoothedPlayerModel.transform);*/
             
             var chud = Instantiate(correctionsHudPrefab);
             HUD = chud.GetComponent<CorrectiosHUD>();
             HUD.SetMovementComponent(GetComponent<PredicetdNetworkMovement>());
 
+        }
+        else
+        {
+            Camera.SetActive(false);
         }
 
         if (isServer)

@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Cameras;
 
 public class PhysicsNetworkUpdater : MonoBehaviour
 {
@@ -15,15 +16,23 @@ public class PhysicsNetworkUpdater : MonoBehaviour
     public GameObject ServerHUDPreab;
     public GameObject ServerHudInstance;
     public GameObject StaticWorld;
+    private AutoCam Camera;
 
     Dictionary<GameObject, Tuple<Scene, PhysicsScene>> _PhysicsScenes =
         new Dictionary<GameObject, Tuple<Scene, PhysicsScene>>();
 
+    public Dictionary<GameObject, Tuple<Scene, PhysicsScene>> PhysicsScenes => _PhysicsScenes;
 
     void Awake()
     {
         if (_instance != null) Destroy(_instance);
         _instance = this;
+    }
+
+    private void Start()
+    {
+        
+//        Camera = GameObject.FindGameObjectWithTag("Camera").GetComponent<AutoCam>();
     }
 
 
@@ -64,6 +73,7 @@ public class PhysicsNetworkUpdater : MonoBehaviour
     {
         _PhysicsScenes[NM.gameObject].Item2.Simulate(Time.fixedDeltaTime);
        if(NM.isServer) NM.OnPhysiscsUpdated();
+       if(Camera != null) Camera.ManualUpdate(Time.fixedDeltaTime);
 
     }
 

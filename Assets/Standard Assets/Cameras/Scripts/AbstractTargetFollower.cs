@@ -29,6 +29,7 @@ namespace UnityStandardAssets.Cameras
             }
             if (m_Target == null) return;
             targetRigidbody = m_Target.GetComponent<Rigidbody>();
+            
         }
 
 
@@ -73,6 +74,20 @@ namespace UnityStandardAssets.Cameras
             if (m_UpdateType == UpdateType.ManualUpdate)
             {
                 FollowTarget(Time.deltaTime);
+            }
+        }
+        
+        public void ManualUpdate(float DeltaTime)
+        {
+            // we update from here if updatetype is set to Late, or in auto mode,
+            // if the target does not have a rigidbody, or - does have a rigidbody but is set to kinematic.
+            if (m_AutoTargetPlayer && (m_Target == null || !m_Target.gameObject.activeSelf))
+            {
+                FindAndTargetPlayer();
+            }
+            if (m_UpdateType == UpdateType.ManualUpdate)
+            {
+                FollowTarget(DeltaTime);
             }
         }
 

@@ -17,8 +17,8 @@ public class AircraftInputProcessor : InputProcessor
 
     public override void ExecuteInputs(Inputs input)
     {
-        _rb.drag = input.drag;
-        _rb.angularDrag = input.angularDrag;
+        //_rb.drag = input.drag;
+        //_rb.angularDrag = input.angularDrag;
         
         m_Aeroplane.Move(input.horizontal, input.vertical, 0, input.throttle, input.jump);
     }
