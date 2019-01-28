@@ -58,12 +58,12 @@ public class PhysicsNetworkUpdater : MonoBehaviour
     {
         var world = Instantiate(StaticWorld);
         var renderes = world.GetComponentsInChildren<MeshRenderer>();
-        var meshes = world.GetComponentsInChildren<MeshFilter>();
+       // var meshes = world.GetComponentsInChildren<MeshFilter>();
 
         for (int i = 0; i < renderes.Length; i++)
         {
             Destroy(renderes[i]);
-            Destroy(meshes[i]);
+           // Destroy(meshes[i]);
         }
 
         return world;
