@@ -29,13 +29,13 @@ public class CubeDemoInputProcessor : InputProcessor
 
     public void PreStepPhysics(Inputs input)
     {
-        _rb.AddForce(_cameraTransform.forward * _movementImpulse * input.vertical, ForceMode.Impulse);
+     /*   _rb.AddForce(_cameraTransform.forward * _movementImpulse * input.vertical, ForceMode.Impulse);
         _rb.AddForce(_cameraTransform.right * _movementImpulse * input.horizontal, ForceMode.Impulse);
         
      if (_rb.transform.position.y <= _jumpThresholdY && input.jump)
      {
          _rb.AddForce(_cameraTransform.up * _movementImpulse, ForceMode.Impulse);
-     }
+     }*/
      
     }
 }

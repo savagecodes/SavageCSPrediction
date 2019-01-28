@@ -131,8 +131,15 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
             _serverGhostModel.transform.SetParent(null);
             _smoothedPlayerModel.transform.SetParent(null);
-            _serverGhostModel.GetComponent<MeshRenderer>().enabled = false;
-            _smoothedPlayerModel.GetComponent<MeshRenderer>().enabled = false;
+            
+            var renderers = _serverGhostModel.GetComponentsInChildren<MeshRenderer>();
+            
+            foreach (var r in renderers)
+            {
+                r.enabled = false;
+            }
+            
+           // _smoothedPlayerModel.GetComponent<MeshRenderer>().enabled = false;
             //
             //-----------------
 
@@ -146,10 +153,17 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
             //-----------------
             // Visual Debug , this component only should give/Expose the positions
-            GetComponent<MeshRenderer>().enabled = false;
+            
+           
+            
             _serverGhostModel.transform.SetParent(null);
             _smoothedPlayerModel.transform.SetParent(null);
-            //
+            var renderers = GetComponentsInChildren<MeshRenderer>();
+            
+            foreach (var r in renderers)
+            {
+                r.enabled = false;
+            }
             //-----------------
         }
 

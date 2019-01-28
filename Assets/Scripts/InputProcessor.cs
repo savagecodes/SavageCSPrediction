@@ -9,7 +9,7 @@ public abstract class InputProcessor : MonoBehaviour
 
     private Inputs _currentInputs;
 
-    private void Awake()
+    public virtual void Awake()
     {
         predicetdNetworkMovement = GetComponent<PredicetdNetworkMovement>();
         predicetdNetworkMovement.OnInputExecutionRequest += ExecuteInputs;

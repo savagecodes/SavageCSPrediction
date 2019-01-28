@@ -29,6 +29,9 @@ public struct ClientState
 public struct Inputs
 {
     public float horizontal;
-    public float vertical; 
+    public float vertical;
+    public float throttle;
     public bool jump;
+    public float drag;
+    public float angularDrag;
 }
