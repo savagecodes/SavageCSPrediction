@@ -26,9 +26,20 @@ public struct ClientState
 }
 
 [System.Serializable]
-public struct Inputs
+/*public struct Inputs
 {
     public float horizontal;
     public float vertical; 
     public bool jump;
+}*/
+
+public struct Inputs
+{
+    public bool jump;
+    public bool run;
+    public float XMoveInput;
+    public float YMoveinput;
+
+    public float cameralookX;
+    public float cameralookY;
 }

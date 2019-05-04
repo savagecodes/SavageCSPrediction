@@ -221,7 +221,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     void ServerUpdate()
     {
-        _currentTime += Time.deltaTime;
+        _currentTime += Time.fixedDeltaTime;
 
         while (_serverPredictedMessageQueue.Count > 0 && _currentTime >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
         {
@@ -259,9 +259,9 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     void ClientUpdate()
     {
-        _currentTime += Time.deltaTime;
+        _currentTime += Time.fixedDeltaTime;
 
-        _clientTimer += Time.deltaTime;
+        _clientTimer += Time.fixedDeltaTime;
 
         while (_clientTimer >= Time.fixedDeltaTime)
         {
@@ -390,7 +390,6 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
         currentState.position = rigidbody.position;
         currentState.rotation = rigidbody.rotation;
 
-        //PrePhysicsStep(rigidbody, inputs);
         OnInputExecutionRequest(inputs);
         PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
     }
@@ -416,12 +415,12 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
         if (transform.position != _nonLocalClientTargetPosition)
         {
-            transform.position = Vector3.Lerp(transform.position, _nonLocalClientTargetPosition, 4f * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, _nonLocalClientTargetPosition, 4f * Time.fixedDeltaTime);
         }
 
         if (transform.rotation != _nonLocalClientTargetRotation && _nonLocalClientTargetRotation != new Quaternion(0, 0, 0, 0))
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, _nonLocalClientTargetRotation, 14f * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, _nonLocalClientTargetRotation, 14f * Time.fixedDeltaTime);
         }
     }
 
@@ -429,7 +428,6 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     void Update ()
     {
-
         if (isServer) ServerUpdate();
         else if (isLocalPlayer) ClientUpdate();
         else InterpolateTransform();

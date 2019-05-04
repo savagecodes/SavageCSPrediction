@@ -24,6 +24,9 @@ public class PlayerController : NetworkBehaviour {
     KeyCode RIGHT;
     [SerializeField]
     KeyCode JUMP;
+    
+    [SerializeField]
+    KeyCode RUN;
 
 	void Start () {
 
@@ -65,11 +68,11 @@ public class PlayerController : NetworkBehaviour {
     {
         if (_movementComponent == null) return;
 
-        if (_movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color != _playerColor) SetColorPlayer(_playerColor);
+//        if (_movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color != _playerColor) SetColorPlayer(_playerColor);
 
         if (!isLocalPlayer) return;
 
-        if(HUD.playerColorImage.color != _playerColor) SetColorPlayer(_playerColor);
+       // if(HUD.playerColorImage.color != _playerColor) SetColorPlayer(_playerColor);
 
        Inputs CurrentInputs = new Inputs();
 
@@ -79,8 +82,13 @@ public class PlayerController : NetworkBehaviour {
        CurrentInputs.right = Input.GetKey(RIGHT);
        CurrentInputs.jump = Input.GetKey(JUMP);*/
 
-      CurrentInputs.horizontal = Input.GetAxis("Horizontal");
-      CurrentInputs.vertical = Input.GetAxis("Vertical");
+      CurrentInputs.XMoveInput = Input.GetAxis("Horizontal");
+      CurrentInputs.YMoveinput = Input.GetAxis("Vertical");
+      
+      CurrentInputs.cameralookX = Input.GetAxis("Mouse X");
+      CurrentInputs.cameralookY = Input.GetAxis("Mouse Y");
+
+       CurrentInputs.run = Input.GetKey(JUMP);
 
        CurrentInputs.jump = Input.GetKey(JUMP);
 
