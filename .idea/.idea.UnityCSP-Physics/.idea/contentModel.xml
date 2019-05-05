@@ -18,6 +18,10 @@
         <e p="Scripts" t="Include">
           <e p="ClientPredictionTypes.cs" t="Include" />
           <e p="CorrectiosHUD.cs" t="Include" />
+          <e p="CubeDemo" t="Include">
+            <e p="CubeInputProcessor.cs" t="Include" />
+            <e p="CubeStateprocessor.cs" t="Include" />
+          </e>
           <e p="CubeDemoInputProcessor.cs" t="Include" />
           <e p="CubeDemoStateProcessor.cs" t="Include" />
           <e p="DataTypes" t="Include">
@@ -41,6 +45,7 @@
           <e p="PredicetdNetworkMovement.cs" t="Include" />
           <e p="PredictedRigidBodyHelper.cs" t="Include" />
           <e p="ServerHUD.cs" t="Include" />
+          <e p="SimpleCubeMovement.cs" t="Include" />
           <e p="StateProcessor.cs" t="Include" />
           <e p="Utility.cs" t="Include" />
         </e>

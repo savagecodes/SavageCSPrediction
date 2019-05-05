@@ -214,8 +214,8 @@ public class RigidbodyFirstPersonController : NetworkBehaviour
 
     public void Rotate(Vector2 inputRotation)
     { 
-       //m_RigidBody.transform.Rotate(inputRotation.x*70 *Time.fixedDeltaTime * Vector3.up,Space.World);
-       m_RigidBody.transform.eulerAngles += inputRotation.x * 70 * Time.fixedDeltaTime * Vector3.up;
+       m_RigidBody.transform.Rotate(inputRotation.x*70 *Time.fixedDeltaTime * Vector3.up,Space.Self);
+       //m_RigidBody.transform.eulerAngles += inputRotation.x * 70 * Time.fixedDeltaTime * Vector3.up;
        cam.transform.Rotate(Vector3.right * 60 * -inputRotation.y * Time.fixedDeltaTime);
     }
 
