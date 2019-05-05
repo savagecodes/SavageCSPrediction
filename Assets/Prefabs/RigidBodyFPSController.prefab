@@ -260,7 +260,7 @@ MonoBehaviour:
     type: 3}
   _smoothedPlayerModel: {fileID: 5274623333318842247, guid: 54223cc7f64580247be32eb640d9e36b,
     type: 3}
-  _sendRedundantInputsToServer: 1
+  _sendRedundantInputsToServer: 0
   _serverSnapshotRate: 128
   _nonLocalSyncInterval: 0.1
 --- !u!114 &1980361328884055144

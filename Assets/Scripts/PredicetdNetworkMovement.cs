@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+[NetworkSettings(sendInterval = 0.005f)]
 public class PredicetdNetworkMovement : NetworkBehaviour {
 
     private short _PredictedMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
 
     private int _correctionsMadeOnClient;
+    private int _successfullPredictionOnClient;
+    private int _messagesSent;
+    private int _messagesReceived;
 
     private InputProcessor _inputProcessorComponent;
     private StateProcessor _stateProcessorComponent;
@@ -146,19 +149,24 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
         var message = netMsg.ReadMessage<ClientPredictedMessage>();
 
         if (_serverPredictedMessagesIDs.Contains(message.packetId)) return;
+        
+        _messagesReceived++;
 
         _serverPredictedMessagesIDs.Add(message.packetId);
 
         _serverPredictedMessageQueue.Enqueue(new HeapElement<ClientPredictedMessage>(message,message.packetId));
+        
 
     }
 
     void OnStateMessageReceived(NetworkMessage netMsg)
     {
         var message = netMsg.ReadMessage<ServerStateMessage>();
-
+    
         if (_clientStateMessageIDs.Contains(message.packetId)) return;
         _clientStateMessageIDs.Add(message.packetId);
+        
+        _messagesReceived++;
 
         _clientStateMessageQueue.Enqueue(new HeapElement<ServerStateMessage>(message, message.packetId));
     }
@@ -181,7 +189,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     public void OnServerStateUpdated()
     {            
         _serverTickAccumulator++;
-
+        
         if (_serverTickAccumulator >= _serverSnapshotRate)
         {
             _serverTickAccumulator = 0;
@@ -193,6 +201,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             
             serverStateMsg.serverState = StateProcessorComponent.GetCurrentState();
             //Send Message To Client
+            _messagesSent++;
             NetworkServer.SendToClientOfPlayer(this.gameObject, _StateMessageReceivedID, serverStateMsg);
             serverPacketID++;
                     
@@ -202,6 +211,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     void ServerUpdate()
     {
+        Debug.Log("Server Messages Sent => "+ _messagesSent );
         _currentTime += Time.deltaTime;
 
         while (_serverPredictedMessageQueue.Count > 0 && _currentTime >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
@@ -242,6 +252,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     void ClientUpdate()
     {
+        Debug.Log("Client Messages Received => "+ _messagesReceived );
         _currentTime += Time.deltaTime;
 
         _clientTimer += Time.deltaTime;
@@ -276,6 +287,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             //Debug.Log("Client tick => "+ _currentTickNumber + " | Mouse X => " + InputProcessorComponent.GetCurrentInputs().cameralookX);
 
             //Send Input Message To Server
+            _messagesSent++;
             connectionToServer.Send(_PredictedMessageReceivedID, clientPredictedMessage);
 
             _clientPacketID++;
@@ -306,6 +318,11 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             if (positionError.sqrMagnitude > 0.0000001f  || rotationError > 0.00001f)
             {
                 ApplyCorrectionsWithServerState(serverStateMessage,bufferSlot);
+            }
+            else
+            {
+                //_successfullPredictionOnClient++;
+                //Debug.Log(_successfullPredictionOnClient);
             }
     
         }
