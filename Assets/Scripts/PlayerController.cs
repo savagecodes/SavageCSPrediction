@@ -88,9 +88,9 @@ public class PlayerController : NetworkBehaviour {
       CurrentInputs.cameralookX = Input.GetAxis("Mouse X");
       CurrentInputs.cameralookY = Input.GetAxis("Mouse Y");
 
-       CurrentInputs.run = Input.GetKey(JUMP);
+       CurrentInputs.run = Input.GetKey(RUN);
 
-       CurrentInputs.jump = Input.GetKey(JUMP);
+       CurrentInputs.jump = Input.GetKeyDown(JUMP);
 
        _movementComponent.InputProcessorComponent.SetInputs(CurrentInputs);
     }

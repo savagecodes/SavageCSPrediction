@@ -180,7 +180,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                 if (!m_Jumping && Mathf.Abs(input.x) < float.Epsilon && Mathf.Abs(input.y) < float.Epsilon && m_RigidBody.velocity.magnitude < 1f)
                 {
-                    m_RigidBody.Sleep();
+                   // m_RigidBody.Sleep();
                 }
             }
             else
@@ -226,8 +226,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void Rotate(Vector2 inputRotation)
         {
                   
-            m_RigidBody.AddTorque(0,inputRotation.x * rotationSpeed,0);
-
+           // Quaternion velRotation = Quaternion.AngleAxis(150 *inputRotation.x *Time.fixedDeltaTime, Vector3.up);
+            //m_RigidBody.velocity = velRotation*m_RigidBody.velocity;
+            
+            m_RigidBody.angularVelocity = inputRotation.x*150 *Time.fixedDeltaTime * Vector3.up;
+            
+            cam.transform.Rotate(Vector3.right * 60 * -inputRotation.y * Time.fixedDeltaTime);
             /* if (m_IsGrounded || advancedSettings.airControl)
               {
                   // Rotate the rigidbody velocity to match the new direction that the character is looking

@@ -128,12 +128,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 10
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
+  m_Constraints: 80
+  m_CollisionDetection: 3
 --- !u!136 &5274623333318842245
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   movementSettings:
     ForwardSpeed: 8
     BackwardSpeed: 4
-    StrafeSpeed: 4
+    StrafeSpeed: 6
     RunMultiplier: 2
     RunKey: 304
     JumpForce: 50
@@ -269,7 +269,7 @@ MonoBehaviour:
   _smoothedPlayerModel: {fileID: 5274623333318842247, guid: 54223cc7f64580247be32eb640d9e36b,
     type: 3}
   _sendRedundantInputsToServer: 1
-  _serverSnapshotRate: 64
+  _serverSnapshotRate: 128
   _nonLocalSyncInterval: 0.1
 --- !u!114 &1980361328884055144
 MonoBehaviour:
