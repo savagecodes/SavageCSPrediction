@@ -327,7 +327,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             
             OnServerStateExecutionRequest(serverStateMessage.serverState);
             
-            if (positionError.sqrMagnitude > 0.0000001f || rotationError > 0.00001f)
+            if (positionError.sqrMagnitude > 0.0000001f || Utility.Log(rotationError) > 0.00001f)
             {
                 ApplyCorrectionsWithServerState(serverStateMessage,bufferSlot);
             }
@@ -348,9 +348,9 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
              
             _correctionsMadeOnClient++;
 
-            
-            Vector3 prevPosition = _rigidbody.position + _clientPositionError;
-            Quaternion prevRotation = _rigidbody.rotation * _clientRotationError;
+
+            Vector3 prevPosition;
+            Quaternion prevRotation;
             
             if (syncPhysics)
             {
@@ -400,7 +400,8 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             }
 
             // if more than 2mts apart, just snap
-            if ((prevPosition - _rigidbody.position).sqrMagnitude >= 4.0f)
+            
+            if ((prevPosition - (syncPhysics? _rigidbody.position: transform.position)).sqrMagnitude >= 4.0f)
             {
                 _clientPositionError = Vector3.zero;
                 _clientRotationError = Quaternion.identity;

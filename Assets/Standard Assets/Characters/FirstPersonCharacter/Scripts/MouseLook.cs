@@ -36,10 +36,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void LookRotation(Transform character, Transform camera)
         {
-            float yRot = _lookRotationInput.x * XSensitivity;
+            //float yRot = _lookRotationInput.x * XSensitivity;
             float xRot = _lookRotationInput.y * YSensitivity;
 
-            m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
+           //m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
 
             if(clampVerticalRotation)
@@ -54,7 +54,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-                character.localRotation = m_CharacterTargetRot;
+               // character.localRotation = m_CharacterTargetRot;
                 camera.localRotation = m_CameraTargetRot;
             }
 

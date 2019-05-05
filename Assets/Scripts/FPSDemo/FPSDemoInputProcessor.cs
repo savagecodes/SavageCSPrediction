@@ -22,7 +22,7 @@ public class FPSDemoInputProcessor : InputProcessor
 
     public void PreStepPhysics(Inputs input)
     {
-       // _FPSController.SetRotationInput(new Vector2(input.cameralookX,input.cameralookY));
+        _FPSController.SetRotationInput(new Vector2(input.cameralookX,input.cameralookY));
         _FPSController.IsRunning(input.run);
         if (input.jump)
         {

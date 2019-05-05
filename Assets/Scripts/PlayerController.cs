@@ -90,7 +90,7 @@ public class PlayerController : NetworkBehaviour {
 
        CurrentInputs.run = Input.GetKey(JUMP);
 
-       CurrentInputs.jump = Input.GetKey(JUMP);
+       CurrentInputs.jump = Input.GetKeyDown(JUMP);
 
        _movementComponent.InputProcessorComponent.SetInputs(CurrentInputs);
     }

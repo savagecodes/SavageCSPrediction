@@ -132,12 +132,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         public void SetRotationInput(Vector2 input)
         {
-            m_MouseLook.SetLookRotationInput(input);
+           // m_MouseLook.SetLookRotationInput(input);
+           m_Camera.transform.Rotate(-input.y*m_MouseLook.XSensitivity,0,0);
+           transform.Rotate(0,input.x*m_MouseLook.YSensitivity,0);
         }
         private void RotateView()
         {
            
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+           
         }
 
     }
