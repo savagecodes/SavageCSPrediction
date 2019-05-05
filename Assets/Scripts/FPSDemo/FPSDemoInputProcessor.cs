@@ -10,14 +10,12 @@ public class FPSDemoInputProcessor : InputProcessor
     private void Start()
     {
         _FPSController = GetComponent<RigidbodyFirstPersonController>();
-  
     }
 
     public override void ExecuteInputs(Inputs input)
     {
-        base.ExecuteInputs(input);
-        
         PreStepPhysics(input);
+        base.ExecuteInputs(input);
     }
 
     public void PreStepPhysics(Inputs input)

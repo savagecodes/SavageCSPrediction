@@ -11,7 +11,7 @@ public class CubeDemoStateProcessor : StateProcessor
         _rb = GetComponent<Rigidbody>();
     }
 
-    public override ServerState GetServerState()
+    public override ServerState GetCurrentState()
     {
         var state = new ServerState();
         state.position = _rb.position;

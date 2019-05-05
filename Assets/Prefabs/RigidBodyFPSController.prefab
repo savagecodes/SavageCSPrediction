@@ -92,10 +92,11 @@ GameObject:
   - component: {fileID: 5274623333318842241}
   - component: {fileID: 5274623333318842240}
   - component: {fileID: 1980361328884055144}
-  - component: {fileID: 9829353170331050}
   - component: {fileID: 5477768520555744328}
   - component: {fileID: 2920365854402279370}
   - component: {fileID: 663564825251371593}
+  - component: {fileID: 3239972037386220764}
+  - component: {fileID: 3573488283232830632}
   m_Layer: 0
   m_Name: RigidBodyFPSController
   m_TagString: Untagged
@@ -274,18 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369778f2ba250a143a0a81ec543f219f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9829353170331050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5274623333318842247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 369f2735e54c3f649bc6f54fdc120045, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!23 &5477768520555744328
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -353,3 +342,27 @@ MonoBehaviour:
   RIGHT: 0
   JUMP: 32
   RUN: 304
+--- !u!114 &3239972037386220764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5274623333318842247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1afcf9cd8d6b1fe41b5a8c50ac0298a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3573488283232830632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5274623333318842247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adaa5ec822cdd5a47a0a94d854ce06bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

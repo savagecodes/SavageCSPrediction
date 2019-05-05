@@ -16,13 +16,23 @@ public abstract class StateProcessor : MonoBehaviour
     private void Awake()
     {
         ServerSyncer = GetComponent<PredicetdNetworkMovement>();
+      //  ServerSyncer.OnServerStateExecutionRequest += ExecuteState;
     }
 
-    public virtual ServerState GetServerState()
+    public virtual ServerState GetCurrentState()
     {
         return _currentState;
     }
-    
+
+   /* public virtual ServerState GetCurrentState()
+    {
+        return default(ServerState);
+    }*/
+
+    public virtual void ExecuteState(ServerState state)
+    {
+        
+    }
     
     
     

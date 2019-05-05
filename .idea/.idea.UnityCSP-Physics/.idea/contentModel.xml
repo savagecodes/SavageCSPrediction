@@ -39,6 +39,7 @@
           <e p="PhysicsNetworkUpdater.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
           <e p="PredicetdNetworkMovement.cs" t="Include" />
+          <e p="PredictedRigidBodyHelper.cs" t="Include" />
           <e p="ServerHUD.cs" t="Include" />
           <e p="StateProcessor.cs" t="Include" />
           <e p="Utility.cs" t="Include" />
