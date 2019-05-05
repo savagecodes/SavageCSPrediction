@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FPSDemoStateProcessor : MonoBehaviour
+public class FPSDemoStateProcessor : StateProcessor
 {
-    // Start is called before the first frame update
-    void Start()
+    public override ServerState GetServerState()
     {
-        
-    }
+        var state = new ServerState();
+        state.position = transform.position;
+        state.rotation = transform.rotation;
+        return state;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

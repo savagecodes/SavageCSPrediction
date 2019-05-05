@@ -10,7 +10,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     private short _PredictedMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
 
-    PhysicsScene LocalPhysicsScene;
+    //PhysicsScene LocalPhysicsScene;
 
     private int _correctionsMadeOnClient;
     
@@ -63,6 +63,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     private float _nonLocalSyncInterval = 0.1f;
     private bool _firstSyncMessageRecived;
     private bool _firstSynced;
+    public bool syncPhysics;
 
     #region Getters
 
@@ -271,8 +272,16 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
             _clientInputBuffer[buffer_slot] = InputProcessorComponent.GetCurrentInputs();
 
-            // store state for this tick, then use current state + input to step simulation
-            ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],_rigidbody,InputProcessorComponent.GetCurrentInputs(), Time.fixedDeltaTime);
+            if (syncPhysics)
+            {
+                // store state for this tick, then use current state + input to step simulation
+                ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],_rigidbody,InputProcessorComponent.GetCurrentInputs(), Time.fixedDeltaTime);
+            }
+            else
+            {
+                ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],InputProcessorComponent.GetCurrentInputs(), Time.fixedDeltaTime);
+            }
+           
        
             ClientPredictedMessage clientPredictedMessage = new ClientPredictedMessage();
             var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
@@ -328,8 +337,8 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
        _clientPositionError *= 0.9f;
        _clientRotationError = Quaternion.Slerp(_clientRotationError, Quaternion.identity, 0.1f);
         
-       _smoothedPlayerModel.transform.position = _rigidbody.position + _clientPositionError;
-       _smoothedPlayerModel.transform.rotation = _rigidbody.rotation * _clientRotationError;
+       _smoothedPlayerModel.transform.position = syncPhysics ? _rigidbody.position + _clientPositionError : transform.position + _clientPositionError;
+       _smoothedPlayerModel.transform.rotation = syncPhysics ? _rigidbody.rotation * _clientRotationError : transform.rotation * _clientRotationError;
     }
 
     public void ApplyCorrectionsWithServerState(ServerStateMessage serverStateMessage,uint bufferSlot)
@@ -339,9 +348,16 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
              
             _correctionsMadeOnClient++;
 
-            // capture the current predicted pos for smoothing
+            
             Vector3 prevPosition = _rigidbody.position + _clientPositionError;
             Quaternion prevRotation = _rigidbody.rotation * _clientRotationError;
+            
+            if (syncPhysics)
+            {
+                     
+            // capture the current predicted pos for smoothing
+             prevPosition = _rigidbody.position + _clientPositionError;
+             prevRotation = _rigidbody.rotation * _clientRotationError;
 
             // rewind & replay
             _rigidbody.position = serverStateMessage.serverState.position;
@@ -350,6 +366,18 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             _rigidbody.angularVelocity = serverStateMessage.serverState.angularVelocity;
             _rigidbody.drag = serverStateMessage.serverState.drag;
             _rigidbody.angularDrag = serverStateMessage.serverState.angularDrag;
+            
+            }
+            else
+            {
+                prevPosition = transform.position + _clientPositionError;
+                prevRotation = transform.rotation * _clientRotationError;
+
+                // rewind & replay
+                transform.position = serverStateMessage.serverState.position;
+                transform.rotation = serverStateMessage.serverState.rotation;
+              
+            }
               
 
             uint rewindTickNumber = serverStateMessage.tickNumber;
@@ -358,7 +386,15 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             {
                 bufferSlot = rewindTickNumber % _clientBufferSize;
 
-                ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_rigidbody,_clientInputBuffer[bufferSlot],Time.fixedDeltaTime);
+                if (syncPhysics)
+                {
+                    ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_rigidbody,_clientInputBuffer[bufferSlot],Time.fixedDeltaTime);
+                }
+                else
+                {
+                    ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_clientInputBuffer[bufferSlot],Time.fixedDeltaTime);
+                }
+              
 
                 rewindTickNumber++;
             }
@@ -371,8 +407,8 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             }
             else
             {
-                _clientPositionError = prevPosition - _rigidbody.position;
-                _clientRotationError = Quaternion.Inverse(_rigidbody.rotation) * prevRotation;
+                _clientPositionError = syncPhysics ? prevPosition - _rigidbody.position :  prevPosition - transform.position;
+                _clientRotationError = syncPhysics ? Quaternion.Inverse(_rigidbody.rotation) * prevRotation : Quaternion.Inverse(transform.rotation) * prevRotation;
             }
           
     }
@@ -392,6 +428,15 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
         OnInputExecutionRequest(inputs);
         PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
+    }
+    
+    private void ClientStoreCurrentStateAndStep(ref ClientState currentState, Inputs inputs, float deltaTime)
+    {
+        currentState.position = transform.position;
+        currentState.rotation = transform.rotation;
+
+        OnInputExecutionRequest(inputs);
+        //PhysicsNetworkUpdater.Instance.UpdatePhysics(this);
     }
 
     [ClientRpc]
@@ -435,6 +480,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     private void OnDestroy()
     {
+        if(syncPhysics)
         PhysicsNetworkUpdater.Instance.DestroyPhysicsSceneOfGO(this.gameObject);
     }
 
