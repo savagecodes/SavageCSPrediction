@@ -68,19 +68,9 @@ public class PlayerController : NetworkBehaviour {
     {
         if (_movementComponent == null) return;
 
-//        if (_movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color != _playerColor) SetColorPlayer(_playerColor);
-
         if (!isLocalPlayer) return;
 
-       // if(HUD.playerColorImage.color != _playerColor) SetColorPlayer(_playerColor);
-
        Inputs CurrentInputs = new Inputs();
-
-      /* CurrentInputs.up = Input.GetKey(UP);
-       CurrentInputs.down = Input.GetKey(DOWN);
-       CurrentInputs.left = Input.GetKey(LEFT);
-       CurrentInputs.right = Input.GetKey(RIGHT);
-       CurrentInputs.jump = Input.GetKey(JUMP);*/
 
       CurrentInputs.XMoveInput = Input.GetAxis("Horizontal");
       CurrentInputs.YMoveinput = Input.GetAxis("Vertical");

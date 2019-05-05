@@ -132,7 +132,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 3
 --- !u!136 &5274623333318842245
 CapsuleCollider:
@@ -166,7 +166,7 @@ MonoBehaviour:
     ForwardSpeed: 8
     BackwardSpeed: 4
     StrafeSpeed: 6
-    RunMultiplier: 2
+    RunMultiplier: 1.5
     RunKey: 304
     JumpForce: 50
     SlopeCurveModifier:
@@ -204,15 +204,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     CurrentTargetSpeed: 8
   rotationSpeed: 20000
-  mouseLook:
-    XSensitivity: 2
-    YSensitivity: 2
-    clampVerticalRotation: 1
-    MinimumX: -45
-    MaximumX: 90
-    smooth: 1
-    smoothTime: 18
-    lockCursor: 1
   advancedSettings:
     groundCheckDistance: 0.1
     stickToGroundHelperDistance: 0.6

@@ -221,7 +221,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     void ServerUpdate()
     {
-        _currentTime += Time.fixedDeltaTime;
+        _currentTime += Time.deltaTime;
 
         while (_serverPredictedMessageQueue.Count > 0 && _currentTime >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
         {
@@ -259,20 +259,20 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
     void ClientUpdate()
     {
-        _currentTime += Time.fixedDeltaTime;
+        _currentTime += Time.deltaTime;
 
-        _clientTimer += Time.fixedDeltaTime;
+        _clientTimer += Time.deltaTime;
 
         while (_clientTimer >= Time.fixedDeltaTime)
         {
-            _clientTimer -= Time.fixedDeltaTime;
+            _clientTimer -= Time.deltaTime;
 
             uint buffer_slot = _currentTickNumber % _clientBufferSize;
 
             _clientInputBuffer[buffer_slot] = InputProcessorComponent.GetCurrentInputs();
 
             // store state for this tick, then use current state + input to step simulation
-            ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],_rigidbody,InputProcessorComponent.GetCurrentInputs(), Time.fixedDeltaTime);
+            ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],_rigidbody,InputProcessorComponent.GetCurrentInputs());
        
             ClientPredictedMessage clientPredictedMessage = new ClientPredictedMessage();
             var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
@@ -318,7 +318,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             
             OnServerStateExecutionRequest(serverStateMessage.serverState);
             
-            if (positionError.sqrMagnitude > 0.0000001f || rotationError > 0.00001f)
+            if (positionError.sqrMagnitude > 0.0000001f  || rotationError > 0.00001f)
             {
                 ApplyCorrectionsWithServerState(serverStateMessage,bufferSlot);
             }
@@ -358,12 +358,13 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             {
                 bufferSlot = rewindTickNumber % _clientBufferSize;
 
-                ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_rigidbody,_clientInputBuffer[bufferSlot],Time.fixedDeltaTime);
+                ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],_rigidbody,_clientInputBuffer[bufferSlot]);
 
                 rewindTickNumber++;
             }
+            
 
-            // if more than 2mts apart, just snap
+
             if ((prevPosition - _rigidbody.position).sqrMagnitude >= 4.0f)
             {
                 _clientPositionError = Vector3.zero;
@@ -372,7 +373,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             else
             {
                 _clientPositionError = prevPosition - _rigidbody.position;
-                _clientRotationError = Quaternion.Inverse(_rigidbody.rotation) * prevRotation;
+                //_clientRotationError = Quaternion.Inverse(_rigidbody.rotation) * prevRotation;
             }
           
     }
@@ -385,7 +386,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
         return _clientStateMessageQueue.Count > 0 && _currentTime >= _clientStateMessageQueue.Peek().Element.deliveryTime;
     }
 
-    private void ClientStoreCurrentStateAndStep(ref ClientState currentState, Rigidbody rigidbody, Inputs inputs, float deltaTime)
+    private void ClientStoreCurrentStateAndStep(ref ClientState currentState, Rigidbody rigidbody, Inputs inputs)
     {
         currentState.position = rigidbody.position;
         currentState.rotation = rigidbody.rotation;
@@ -415,7 +416,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
 
         if (transform.position != _nonLocalClientTargetPosition)
         {
-            transform.position = Vector3.Lerp(transform.position, _nonLocalClientTargetPosition, 4f * Time.fixedDeltaTime);
+            transform.position = Vector3.Slerp(transform.position, _nonLocalClientTargetPosition, 4f * Time.fixedDeltaTime);
         }
 
         if (transform.rotation != _nonLocalClientTargetRotation && _nonLocalClientTargetRotation != new Quaternion(0, 0, 0, 0))
