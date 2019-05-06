@@ -3,16 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-[NetworkSettings(sendInterval = 0.005f)]
+//[NetworkSettings(sendInterval = 0.005f)]
 public class PredicetdNetworkMovement : NetworkBehaviour {
 
     private short _PredictedMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
 
     private int _correctionsMadeOnClient;
-    private int _successfullPredictionOnClient;
-    private int _messagesSent;
-    private int _messagesReceived;
 
     private InputProcessor _inputProcessorComponent;
     private StateProcessor _stateProcessorComponent;
@@ -54,9 +51,7 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     //client non local player
     private Vector3 _nonLocalClientTargetPosition;
     private Quaternion _nonLocalClientTargetRotation;
-    [SerializeField]
-    private float _nonLocalSyncInterval = 0.1f;
-    private bool _firstSyncMessageRecived;
+    private bool _firstSyncMessageReceived;
     private bool _firstSynced;
 
     #region Getters
@@ -119,14 +114,12 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             _smoothedPlayerModel.GetComponent<MeshRenderer>().enabled = false;
             //
             //-----------------
-
-            StartCoroutine(SyncNonLocalClientTransform());
-            connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
+           // connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
         }
         else
         {
             NetworkManager.singleton.client.RegisterHandler(_StateMessageReceivedID, OnStateMessageReceived);
-            connectionToServer.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
+          //  connectionToServer.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
 
             //-----------------
             // Visual Debug , this component only should give/Expose the positions
@@ -149,9 +142,6 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
         var message = netMsg.ReadMessage<ClientPredictedMessage>();
 
         if (_serverPredictedMessagesIDs.Contains(message.packetId)) return;
-        
-        _messagesReceived++;
-
         _serverPredictedMessagesIDs.Add(message.packetId);
 
         _serverPredictedMessageQueue.Enqueue(new HeapElement<ClientPredictedMessage>(message,message.packetId));
@@ -165,8 +155,6 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     
         if (_clientStateMessageIDs.Contains(message.packetId)) return;
         _clientStateMessageIDs.Add(message.packetId);
-        
-        _messagesReceived++;
 
         _clientStateMessageQueue.Enqueue(new HeapElement<ServerStateMessage>(message, message.packetId));
     }
@@ -174,17 +162,6 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     #endregion
 
     #region Server Logic
-
-    IEnumerator SyncNonLocalClientTransform()
-    {
-        var wait = new WaitForSeconds(_nonLocalSyncInterval);
-
-        while (true)
-        {
-            RpcTransformUpdate(transform.position, transform.rotation);
-            yield return wait;
-        }
-    }
 
     public void OnServerStateUpdated()
     {            
@@ -201,17 +178,18 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             
             serverStateMsg.serverState = StateProcessorComponent.GetCurrentState();
             //Send Message To Client
-            _messagesSent++;
             NetworkServer.SendToClientOfPlayer(this.gameObject, _StateMessageReceivedID, serverStateMsg);
             serverPacketID++;
                     
         }
+        //Send RPC Call to sync non local clients positions
+        //TODO: Optimize this 
+        RpcTransformUpdate(StateProcessorComponent.GetCurrentState().position, StateProcessorComponent.GetCurrentState().rotation);
     }
 
 
     void ServerUpdate()
     {
-        Debug.Log("Server Messages Sent => "+ _messagesSent );
         _currentTime += Time.deltaTime;
 
         while (_serverPredictedMessageQueue.Count > 0 && _currentTime >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
@@ -283,11 +261,8 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             }
 
             clientPredictedMessage.inputs = inputList.ToArray();
-            
-            //Debug.Log("Client tick => "+ _currentTickNumber + " | Mouse X => " + InputProcessorComponent.GetCurrentInputs().cameralookX);
 
             //Send Input Message To Server
-            _messagesSent++;
             connectionToServer.Send(_PredictedMessageReceivedID, clientPredictedMessage);
 
             _clientPacketID++;
@@ -397,28 +372,28 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     {
         _nonLocalClientTargetPosition = position;
         _nonLocalClientTargetRotation = rotation;
-        _firstSyncMessageRecived = true;
+        _firstSyncMessageReceived = true;
     }
 
     //Only should be called on non-local Clients Players
     private void InterpolateTransform()
     {
-        if (!_firstSyncMessageRecived) return;
+        if (!_firstSyncMessageReceived) return;
         if (!_firstSynced)
         {
-            transform.position = _nonLocalClientTargetPosition;
-            transform.rotation = _nonLocalClientTargetRotation;
+            _smoothedPlayerModel.transform.position = _nonLocalClientTargetPosition;
+            _smoothedPlayerModel.transform.rotation = _nonLocalClientTargetRotation;
             _firstSynced = true;
         }
 
-        if (transform.position != _nonLocalClientTargetPosition)
+        if ( _smoothedPlayerModel.transform.position != _nonLocalClientTargetPosition)
         {
-            transform.position = Vector3.Slerp(transform.position, _nonLocalClientTargetPosition, 4f * Time.fixedDeltaTime);
+            _smoothedPlayerModel.transform.position = Vector3.Slerp( _smoothedPlayerModel.transform.position, _nonLocalClientTargetPosition, 4f * Time.fixedDeltaTime);
         }
 
-        if (transform.rotation != _nonLocalClientTargetRotation && _nonLocalClientTargetRotation != new Quaternion(0, 0, 0, 0))
+        if ( _smoothedPlayerModel.transform.rotation != _nonLocalClientTargetRotation && _nonLocalClientTargetRotation != new Quaternion(0, 0, 0, 0))
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, _nonLocalClientTargetRotation, 14f * Time.fixedDeltaTime);
+            _smoothedPlayerModel.transform.rotation = Quaternion.Lerp( _smoothedPlayerModel.transform.rotation, _nonLocalClientTargetRotation, 14f * Time.fixedDeltaTime);
         }
     }
 
