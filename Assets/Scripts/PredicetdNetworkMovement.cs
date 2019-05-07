@@ -99,30 +99,13 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
         #endregion
 
 
-        if (isServer)
-        {
-            //-----------------
-            // Visual Debug , this component only should give/Expose the positions
-           // _smoothedPlayerModel.transform.SetParent(null);
-           // _smoothedPlayerModel.GetComponent<MeshRenderer>().enabled = false;
-            //
-            //-----------------
-            //connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
-        }
-        else
-        {
+        if (!isServer)
+        {           
             NetworkManager.singleton.client.RegisterHandler(_StateMessageReceivedID, OnStateMessageReceived);
-           // connectionToServer.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
-
-            //-----------------
-            // Visual Debug , this component only should give/Expose the positions
-          //  GetComponent<MeshRenderer>().enabled = false;
-            //_smoothedPlayerModel.transform.SetParent(null);
-            //
-            //-----------------
+            connectionToServer.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
         }
 
-
+        connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
         NetworkServer.RegisterHandler(_PredictedMessageReceivedID, OnPredictedMessageReceived);
 
     }
@@ -273,7 +256,10 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
             _clientLastReceivedStateTickNumber = serverStateMessage.tickNumber;
 
             //Broadcast this server state for easy access for debugging purposes
-            OnValidSercerStateReceived(serverStateMessage.serverState);
+            if (OnValidSercerStateReceived != null)
+            {
+                OnValidSercerStateReceived(serverStateMessage.serverState);
+            }
             //-----------------------------
 
             uint bufferSlot = (serverStateMessage.tickNumber % _clientBufferSize)+1;

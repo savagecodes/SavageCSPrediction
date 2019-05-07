@@ -11,7 +11,7 @@ public class PlayerController : NetworkBehaviour {
     Color _playerColor;
     public GameObject correctionsHudPrefab;
     public CorrectiosHUD HUD;
-    public MeshRenderer meshRenderer;
+    //public MeshRenderer meshRenderer;
 
     [Header("Input Mapping")]
     [SerializeField]
@@ -31,7 +31,6 @@ public class PlayerController : NetworkBehaviour {
 	void Start () {
 
         _movementComponent = GetComponent<PredicetdNetworkMovement>();
-        meshRenderer = GetComponent<MeshRenderer>();
 
 
         if (isLocalPlayer)
@@ -47,8 +46,6 @@ public class PlayerController : NetworkBehaviour {
         {
             _playerColor = new Color(Random.Range(0f, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
 
-            meshRenderer.material.color = _playerColor;
-
             if (PhysicsNetworkUpdater.Instance.ServerHudInstance == null)
             {
                 PhysicsNetworkUpdater.Instance.ServerHudInstance = Instantiate(PhysicsNetworkUpdater.Instance.ServerHUDPreab);
@@ -61,7 +58,6 @@ public class PlayerController : NetworkBehaviour {
     {
         _playerColor = c;
         if (isLocalPlayer) HUD.SetColor(c);
-//        _movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color = _playerColor;
     }
 	
 	void Update ()
