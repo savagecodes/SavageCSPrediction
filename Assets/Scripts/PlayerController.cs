@@ -61,7 +61,7 @@ public class PlayerController : NetworkBehaviour {
     {
         _playerColor = c;
         if (isLocalPlayer) HUD.SetColor(c);
-        _movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color = _playerColor;
+//        _movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color = _playerColor;
     }
 	
 	void Update ()
