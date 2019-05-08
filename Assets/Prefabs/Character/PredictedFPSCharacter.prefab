@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 3573488283232830632}
   - component: {fileID: 4286644033892033423}
   m_Layer: 0
-  m_Name: RigidBodyFPSController
+  m_Name: PredictedFPSCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,11 +215,10 @@ MonoBehaviour:
   correctionsHudPrefab: {fileID: 1645973854640804, guid: bed7273fd96024d429f2e427c008d100,
     type: 3}
   HUD: {fileID: 0}
-  meshRenderer: {fileID: 0}
-  UP: 0
-  DOWN: 0
-  LEFT: 0
-  RIGHT: 0
+  _moveXAxis: Horizontal
+  _moveYAxis: Vertical
+  _lookXAxis: Mouse X
+  _lookYAxis: Mouse Y
   JUMP: 32
   RUN: 304
 --- !u!114 &3239972037386220764

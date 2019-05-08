@@ -5,10 +5,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-
+//TODO: this class need a huge clean up and maybe optimizations
 public class PhysicsNetworkUpdater : MonoBehaviour
 {
-
     private static PhysicsNetworkUpdater _instance;
 
     //remove this when we have time

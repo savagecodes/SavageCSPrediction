@@ -7,35 +7,31 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour {
 
     PredictedNetworkMovement _movementComponent;
-    [SyncVar]
-    Color _playerColor;
+//TODO: Remove this from player Controller
+//Make a hud Controller tha handles all this UI related
     public GameObject correctionsHudPrefab;
     public CorrectiosHUD HUD;
-    //public MeshRenderer meshRenderer;
 
-    [Header("Input Mapping")]
+    [Header("Input Mapping")] 
     [SerializeField]
-    KeyCode UP;
+    private string _moveXAxis;
     [SerializeField]
-    KeyCode DOWN;
+    private string _moveYAxis;
     [SerializeField]
-    KeyCode LEFT;
+    private string _lookXAxis;
     [SerializeField]
-    KeyCode RIGHT;
+    private string _lookYAxis;
     [SerializeField]
     KeyCode JUMP;
-    
     [SerializeField]
     KeyCode RUN;
 
-	void Start () {
+    private void Start () {
 
         _movementComponent = GetComponent<PredictedNetworkMovement>();
 
-
         if (isLocalPlayer)
         {
-            
             var chud = Instantiate(correctionsHudPrefab);
             HUD = chud.GetComponent<CorrectiosHUD>();
             HUD.SetMovementComponent(GetComponent<PredictedNetworkMovement>());
@@ -44,7 +40,6 @@ public class PlayerController : NetworkBehaviour {
 
         if (isServer)
         {
-            _playerColor = new Color(Random.Range(0f, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
 
             if (PhysicsNetworkUpdater.Instance.ServerHudInstance == null)
             {
@@ -53,32 +48,29 @@ public class PlayerController : NetworkBehaviour {
         }
 
     }
-
-    public void SetColorPlayer(Color c)
-    {
-        _playerColor = c;
-        if (isLocalPlayer) HUD.SetColor(c);
-    }
 	
-	void Update ()
+    private void Update ()
     {
         if (_movementComponent == null) return;
 
         if (!isLocalPlayer) return;
 
-       Inputs CurrentInputs = new Inputs();
+        ProcessInputs();
+    }
 
-      CurrentInputs.XMoveInput = Input.GetAxis("Horizontal");
-      CurrentInputs.YMoveinput = Input.GetAxis("Vertical");
-      
-      CurrentInputs.cameralookX = Input.GetAxis("Mouse X");
-      CurrentInputs.cameralookY = Input.GetAxis("Mouse Y");
+    private void ProcessInputs()
+    {
+        Inputs currentInputs = new Inputs
+        {
+            XMoveInput = Input.GetAxis(_moveXAxis),
+            YMoveinput = Input.GetAxis(_moveYAxis),
+            cameralookX = Input.GetAxis(_lookXAxis),
+            cameralookY = Input.GetAxis(_lookYAxis),
+            run = Input.GetKey(RUN),
+            jump = Input.GetKeyDown(JUMP)
+        };
 
-       CurrentInputs.run = Input.GetKey(RUN);
-
-       CurrentInputs.jump = Input.GetKeyDown(JUMP);
-
-       _movementComponent.InputProcessorComponent.SetInputs(CurrentInputs);
+        _movementComponent.InputProcessorComponent.SetInputs(currentInputs);
     }
 
     public override void OnNetworkDestroy()
@@ -87,7 +79,7 @@ public class PlayerController : NetworkBehaviour {
         Destroy(gameObject);
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if(!isServer) Destroy(HUD.gameObject);
     }

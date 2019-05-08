@@ -8,15 +8,9 @@ public abstract class StateProcessor : MonoBehaviour
 
     private ServerState _currentState;
     
-    public ServerState CurrentServerState
-    {
-        set { _currentState = value; }
-    }
-
     private void Awake()
     {
         ServerSyncer = GetComponent<PredictedNetworkMovement>();
-      //  ServerSyncer.OnServerStateExecutionRequest += ExecuteState;
     }
 
     public virtual ServerState GetCurrentState()
@@ -24,16 +18,9 @@ public abstract class StateProcessor : MonoBehaviour
         return _currentState;
     }
 
-   /* public virtual ServerState GetCurrentState()
-    {
-        return default(ServerState);
-    }*/
-
     public virtual void ExecuteState(ServerState state)
     {
-        
+        //nothing to do here
     }
-    
-    
-    
+      
 }
