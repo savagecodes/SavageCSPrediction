@@ -48,8 +48,10 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     private uint serverPacketID;
 
     //client non local player
-    private Vector3 _nonLocalClientTargetPosition;
-    private Quaternion _nonLocalClientTargetRotation;
+    
+    private PredictedSmoothedTransform _lastInterpolatedTransform;
+    private PredictedSmoothedTransform _lastReceivedFromServerTransform;
+
     private bool _firstSyncMessageReceived;
     private bool _firstSynced;
 
@@ -99,14 +101,15 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
         #endregion
 
 
+        
         if (!isServer)
-        {           
+        {
             NetworkManager.singleton.client.RegisterHandler(_StateMessageReceivedID, OnStateMessageReceived);
-            connectionToServer.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
         }
 
-        connectionToClient.SetChannelOption(0, ChannelOption.MaxPendingBuffers, 128);
+
         NetworkServer.RegisterHandler(_PredictedMessageReceivedID, OnPredictedMessageReceived);
+        
 
     }
 
@@ -360,45 +363,33 @@ public class PredicetdNetworkMovement : NetworkBehaviour {
     [ClientRpc]
     void RpcTransformUpdate(Vector3 position, Quaternion rotation)
     {
-        _nonLocalClientTargetPosition = position;
-        _nonLocalClientTargetRotation = rotation;
+       _lastReceivedFromServerTransform.position = position;
+       _lastReceivedFromServerTransform.rotation = rotation;
         _firstSyncMessageReceived = true;
     }
 
     //Only should be called on non-local Clients Players
     private void InterpolateTransform()
     {
-        if (!_firstSyncMessageReceived) return;
-
-        PredictedSmoothedTransform smoothedTransform = new PredictedSmoothedTransform();
+        if (!_firstSyncMessageReceived)
+            return;
         
         if (!_firstSynced)
         {
-            smoothedTransform.position = _nonLocalClientTargetPosition;
-            smoothedTransform.rotation = _nonLocalClientTargetRotation;
-            
-            OnSmoothedPositionReady(smoothedTransform);
+                  
+            OnSmoothedPositionReady(_lastReceivedFromServerTransform);
             
             _firstSynced = true;
             
             return;
         }
-        
+
         //TODO: Implement a better smoothing technique
-        smoothedTransform.position = Vector3.Slerp( smoothedTransform.position, _nonLocalClientTargetPosition, 4f * Time.fixedDeltaTime);
-        smoothedTransform.rotation = Quaternion.Lerp(  smoothedTransform.rotation, _nonLocalClientTargetRotation, 14f * Time.fixedDeltaTime);
+        _lastInterpolatedTransform.position = Vector3.Slerp( _lastInterpolatedTransform.position, _lastReceivedFromServerTransform.position, 4f * Time.fixedDeltaTime);
+        _lastInterpolatedTransform.rotation = Quaternion.Lerp(  _lastInterpolatedTransform.rotation, _lastReceivedFromServerTransform.rotation, 14f * Time.fixedDeltaTime);
 
-        OnSmoothedPositionReady(smoothedTransform);
+        OnSmoothedPositionReady(_lastInterpolatedTransform);
 
-        /* if ( _smoothedPlayerModel.transform.position != _nonLocalClientTargetPosition)
-         {*/
-        // _smoothedPlayerModel.transform.position = Vector3.Slerp( _smoothedPlayerModel.transform.position, _nonLocalClientTargetPosition, 4f * Time.fixedDeltaTime);
-        /* }*/
-
-        /*if ( _smoothedPlayerModel.transform.rotation != _nonLocalClientTargetRotation && _nonLocalClientTargetRotation != new Quaternion(0, 0, 0, 0))
-        {*/
-        // _smoothedPlayerModel.transform.rotation = Quaternion.Lerp( _smoothedPlayerModel.transform.rotation, _nonLocalClientTargetRotation, 14f * Time.fixedDeltaTime);
-        /* }*/
     }
 
     #endregion

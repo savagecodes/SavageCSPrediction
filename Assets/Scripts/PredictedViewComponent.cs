@@ -48,11 +48,16 @@ public class PredictedViewComponent : NetworkBehaviour
            
            _predictedMovementComponent.OnSmoothedPositionReady += x =>
            {
-            if(x.position != _nonLocalClientInstance.transform.position)
-               _nonLocalClientInstance.transform.position = x.position;
-            if(x.rotation != _nonLocalClientInstance.transform.rotation && x.rotation != new Quaternion(0, 0, 0, 0))
-               _nonLocalClientInstance.transform.rotation= x.rotation;
-               
+               if (x.position != _nonLocalClientInstance.transform.position)
+               {
+                   _nonLocalClientInstance.transform.position = x.position;
+               }
+
+               if (x.rotation != _nonLocalClientInstance.transform.rotation && x.rotation != new Quaternion(0, 0, 0, 0))
+               {
+                   _nonLocalClientInstance.transform.rotation = x.rotation;
+               }
+
            };
        }    
              
@@ -66,5 +71,21 @@ public class PredictedViewComponent : NetworkBehaviour
            _serverModelInstance.transform.rotation = transform.rotation;
        }
    }
-   
+
+   private void OnDestroy()
+   {
+       if (isServer)
+       {
+           Destroy(_serverModelInstance);
+       }
+       else if (isLocalPlayer)
+       {
+           Destroy(_localClientModelInstance);
+          
+       }
+       else
+       {
+           Destroy(_nonLocalClientInstance);
+       }
+   }
 }
