@@ -7,9 +7,9 @@ public class CorrectiosHUD : MonoBehaviour {
 
     public Text correctionsHUD;
     public Image playerColorImage;
-    PredicetdNetworkMovement _movementComponent;
+    PredictedNetworkMovement _movementComponent;
 
-    public void SetMovementComponent(PredicetdNetworkMovement mc)
+    public void SetMovementComponent(PredictedNetworkMovement mc)
     {
         _movementComponent = mc;
     }

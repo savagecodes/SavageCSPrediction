@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 public class PredictedRigidBodyHelper : NetworkBehaviour
 {
     private Rigidbody _rigidbody;
-    private PredicetdNetworkMovement _predictedMovement;
+    private PredictedNetworkMovement _predictedMovement;
 
     void Start()
     {
-        _predictedMovement = GetComponent<PredicetdNetworkMovement>();
+        _predictedMovement = GetComponent<PredictedNetworkMovement>();
         _rigidbody = GetComponent<Rigidbody>();
 
         if (!isServer && !isLocalPlayer)

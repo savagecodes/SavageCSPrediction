@@ -42,7 +42,7 @@
           <e p="InputProcessor.cs" t="Include" />
           <e p="PhysicsNetworkUpdater.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
-          <e p="PredicetdNetworkMovement.cs" t="Include" />
+          <e p="PredictedNetworkMovement.cs" t="Include" />
           <e p="PredictedRigidBodyHelper.cs" t="Include" />
           <e p="PredictedViewComponent.cs" t="Include" />
           <e p="ServerHUD.cs" t="Include" />

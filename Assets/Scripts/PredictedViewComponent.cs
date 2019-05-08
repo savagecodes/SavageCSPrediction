@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(PredicetdNetworkMovement))]
+[RequireComponent(typeof(PredictedNetworkMovement))]
 public class PredictedViewComponent : NetworkBehaviour
 {
    [Header("Required")] 
@@ -20,11 +20,11 @@ public class PredictedViewComponent : NetworkBehaviour
    private GameObject _nonLocalClientInstance;
    private GameObject _serverModelInstance; //for debugging
    
-   private PredicetdNetworkMovement _predictedMovementComponent;
+   private PredictedNetworkMovement _predictedMovementComponent;
 
    void Awake()
    {
-      _predictedMovementComponent = GetComponent<PredicetdNetworkMovement>();
+      _predictedMovementComponent = GetComponent<PredictedNetworkMovement>();
    }
 
    void Start()

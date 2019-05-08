@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class InputProcessor : MonoBehaviour
 {
 
-    protected PredicetdNetworkMovement predicetdNetworkMovement;
+    protected PredictedNetworkMovement predictedNetworkMovement;
 
     public event Action OnInputExecuted = () => { };
 
@@ -14,15 +14,15 @@ public abstract class InputProcessor : MonoBehaviour
 
     private void Awake()
     {
-        predicetdNetworkMovement = GetComponent<PredicetdNetworkMovement>();
+        predictedNetworkMovement = GetComponent<PredictedNetworkMovement>();
     }
 
     public virtual void ExecuteInputs(Inputs input)
     {
         OnInputExecuted();
-        if (predicetdNetworkMovement.isServer)
+        if (predictedNetworkMovement.isServer)
         {
-            predicetdNetworkMovement.OnServerStateUpdated();
+            predictedNetworkMovement.OnServerStateUpdated();
         }
     }
 

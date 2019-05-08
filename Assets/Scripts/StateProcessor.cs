@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class StateProcessor : MonoBehaviour
 {
-    private PredicetdNetworkMovement ServerSyncer;
+    private PredictedNetworkMovement ServerSyncer;
 
     private ServerState _currentState;
     
@@ -15,7 +15,7 @@ public abstract class StateProcessor : MonoBehaviour
 
     private void Awake()
     {
-        ServerSyncer = GetComponent<PredicetdNetworkMovement>();
+        ServerSyncer = GetComponent<PredictedNetworkMovement>();
       //  ServerSyncer.OnServerStateExecutionRequest += ExecuteState;
     }
 

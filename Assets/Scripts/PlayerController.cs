@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(PredicetdNetworkMovement))]
+[RequireComponent(typeof(PredictedNetworkMovement))]
 public class PlayerController : NetworkBehaviour {
 
-    PredicetdNetworkMovement _movementComponent;
+    PredictedNetworkMovement _movementComponent;
     [SyncVar]
     Color _playerColor;
     public GameObject correctionsHudPrefab;
@@ -30,7 +30,7 @@ public class PlayerController : NetworkBehaviour {
 
 	void Start () {
 
-        _movementComponent = GetComponent<PredicetdNetworkMovement>();
+        _movementComponent = GetComponent<PredictedNetworkMovement>();
 
 
         if (isLocalPlayer)
@@ -38,7 +38,7 @@ public class PlayerController : NetworkBehaviour {
             
             var chud = Instantiate(correctionsHudPrefab);
             HUD = chud.GetComponent<CorrectiosHUD>();
-            HUD.SetMovementComponent(GetComponent<PredicetdNetworkMovement>());
+            HUD.SetMovementComponent(GetComponent<PredictedNetworkMovement>());
 
         }
 

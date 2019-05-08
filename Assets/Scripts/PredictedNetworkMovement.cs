@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.Serialization;
 
 //[NetworkSettings(sendInterval = 0.005f)]
-public class PredicetdNetworkMovement : NetworkBehaviour {
+public class PredictedNetworkMovement : NetworkBehaviour {
 
     private short _PredictedMessageReceivedID = 1002;
     private short _StateMessageReceivedID = 1003;
