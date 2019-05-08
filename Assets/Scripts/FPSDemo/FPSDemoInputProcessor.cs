@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityStandardAssets.Characters.FirstPerson;
-
+﻿using UnityEngine;
 public class FPSDemoInputProcessor : InputProcessor
 {
     private RigidbodyFirstPersonController _FPSController;

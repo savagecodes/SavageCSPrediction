@@ -205,6 +205,11 @@ PrefabInstance:
       propertyPath: m_CustomConfig
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3421448051014115657, guid: a6627136afadaf8488cd8c4f800c8fa8,
+        type: 3}
+      propertyPath: m_OnlineScene
+      value: NetworkedScene
+      objectReference: {fileID: 0}
     - target: {fileID: 3381333431396357636, guid: a6627136afadaf8488cd8c4f800c8fa8,
         type: 3}
       propertyPath: StaticWorld
@@ -277,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 1268981903}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
