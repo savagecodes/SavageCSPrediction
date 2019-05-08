@@ -5,18 +5,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+
 //TODO: this class need a huge clean up and maybe optimizations
 public class PhysicsNetworkUpdater : MonoBehaviour
 {
     private static PhysicsNetworkUpdater _instance;
-
-    //remove this when we have time
-    public GameObject ServerHUDPreab;
-    public GameObject ServerHudInstance;
-    public GameObject StaticWorld;
-
     Dictionary<GameObject, Tuple<Scene, PhysicsScene>> _PhysicsScenes =
         new Dictionary<GameObject, Tuple<Scene, PhysicsScene>>();
+
+    [FormerlySerializedAs("StaticWorld")] [SerializeField]
+    public GameObject _staticWorld;
+    public static PhysicsNetworkUpdater Instance => _instance;
 
 
     void Awake()
@@ -46,13 +46,13 @@ public class PhysicsNetworkUpdater : MonoBehaviour
 
     GameObject GetStaticWorldNoRenderer()
     {
-        var world = Instantiate(StaticWorld);
-        var renderes = world.GetComponentsInChildren<MeshRenderer>();
+        var world = Instantiate(_staticWorld);
+        var renderers = world.GetComponentsInChildren<MeshRenderer>();
         var meshes = world.GetComponentsInChildren<MeshFilter>();
 
-        for (int i = 0; i < renderes.Length; i++)
+        for (int i = 0; i < renderers.Length; i++)
         {
-            Destroy(renderes[i]);
+            Destroy(renderers[i]);
             Destroy(meshes[i]);
         }
 
@@ -64,9 +64,4 @@ public class PhysicsNetworkUpdater : MonoBehaviour
         _PhysicsScenes[NM.gameObject].Item2.Simulate(Time.fixedDeltaTime);
     }
 
-
-    public static PhysicsNetworkUpdater Instance
-    {
-        get { return _instance; }
-    }
 }

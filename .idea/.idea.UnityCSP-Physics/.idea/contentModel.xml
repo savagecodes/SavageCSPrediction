@@ -1,70 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Sergio\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Sergio\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_UnityCSP-Physics.-755894796.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Sergio\AppData\local\Android\Sdk\platforms\android-28\data\res" t="IncludeRecursive" />
-    <e p="C:\Users\Sergio\AppData\local\Android\Sdk\sources\android-28" t="IncludeRecursive" />
-    <e p="D:\Projects\UnityCSP-Physics" t="IncludeRecursive">
-      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
+    <e p="C:\Projects\UnityCSP-Physics" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="FPSCounter.cs" t="Include" />
-        <e p="SampleScenes" t="Include">
+        <e p="Art" t="Include">
           <e p="Shaders" t="Include">
             <e p="Skybox-Procedural.shader" t="Include" />
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="ClientPredictionTypes.cs" t="Include" />
-          <e p="CorrectiosHUD.cs" t="Include" />
-          <e p="CubeDemo" t="Include">
-            <e p="CubeInputProcessor.cs" t="Include" />
-            <e p="CubeStateprocessor.cs" t="Include" />
+          <e p="CorePredictionSystem" t="Include">
+            <e p="DataTypes" t="Include">
+              <e p="BinaryHeap.cs" t="Include" />
+              <e p="ClientPredictionTypes.cs" t="Include" />
+              <e p="DynArray.cs" t="Include" />
+            </e>
+            <e p="InputProcessor.cs" t="Include" />
+            <e p="PhysicsNetworkUpdater.cs" t="Include" />
+            <e p="PredictedNetworkMovement.cs" t="Include" />
+            <e p="PredictedRigidBodyHelper.cs" t="Include" />
+            <e p="PredictedViewComponent.cs" t="Include" />
+            <e p="StateProcessor.cs" t="Include" />
           </e>
-          <e p="CubeDemoInputProcessor.cs" t="Include" />
-          <e p="CubeDemoStateProcessor.cs" t="Include" />
-          <e p="DataTypes" t="Include">
-            <e p="BinaryHeap.cs" t="Include" />
-            <e p="DynArray.cs" t="Include" />
-          </e>
-          <e p="ExtensionMethods.cs" t="Include" />
           <e p="FPSDemo" t="Include">
             <e p="FPSDemoInputProcessor.cs" t="Include" />
             <e p="FPSDemoStateProcessor.cs" t="Include" />
+            <e p="RigidbodyFirstPersonController.cs" t="Include" />
           </e>
-          <e p="FSM" t="Include">
-            <e p="EventFSM.cs" t="Include" />
-            <e p="State.cs" t="Include" />
-            <e p="StateConfigurer.cs" t="Include" />
-            <e p="Transition.cs" t="Include" />
-          </e>
-          <e p="InputProcessor.cs" t="Include" />
-          <e p="PhysicsNetworkUpdater.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />
-          <e p="PredictedNetworkMovement.cs" t="Include" />
-          <e p="PredictedRigidBodyHelper.cs" t="Include" />
-          <e p="PredictedViewComponent.cs" t="Include" />
-          <e p="ServerHUD.cs" t="Include" />
-          <e p="SimpleCubeMovement.cs" t="Include" />
-          <e p="StateProcessor.cs" t="Include" />
-          <e p="Utility.cs" t="Include" />
-        </e>
-        <e p="Standard Assets" t="Include">
-          <e p="Characters" t="Include">
-            <e p="FirstPersonCharacter" t="Include">
-              <e p="FirstPersonCharacterGuidelines.txt" t="Include" />
-              <e p="Scripts" t="Include">
-                <e p="HeadBob.cs" t="Include" />
-                <e p="MouseLook.cs" t="Include" />
-                <e p="RigidbodyFirstPersonController.cs" t="Include" />
-              </e>
-            </e>
+          <e p="UI" t="Include">
+            <e p="ClientHUDManager.cs" t="Include" />
+            <e p="CorrectiosHUD.cs" t="Include" />
+            <e p="ServerHUD.cs" t="Include" />
+            <e p="ServerHUDManager.cs" t="Include" />
           </e>
-          <e p="Prototyping" t="Include">
-            <e p="Shaders" t="Include">
-              <e p="WorldCoordDiffuse.shader" t="Include" />
-            </e>
+          <e p="Utility" t="Include">
+            <e p="ExtensionMethods.cs" t="Include" />
+            <e p="FPSCounter.cs" t="Include" />
+            <e p="Utility.cs" t="Include" />
           </e>
         </e>
       </e>
@@ -76,5 +50,7 @@
       </e>
       <e p="UnityCSP-Physics.sln" t="IncludeFlat" />
     </e>
+    <e p="C:\Users\NGD_8700_04\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\NGD_8700_04\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_UnityCSP-Physics.-748135437.00" t="ExcludeRecursive" />
   </component>
 </project>

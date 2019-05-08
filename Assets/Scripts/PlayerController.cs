@@ -7,10 +7,6 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour {
 
     PredictedNetworkMovement _movementComponent;
-//TODO: Remove this from player Controller
-//Make a hud Controller tha handles all this UI related
-    public GameObject correctionsHudPrefab;
-    public CorrectiosHUD HUD;
 
     [Header("Input Mapping")] 
     [SerializeField]
@@ -26,26 +22,10 @@ public class PlayerController : NetworkBehaviour {
     [SerializeField]
     KeyCode RUN;
 
-    private void Start () {
+    private void Start () 
+    {
 
         _movementComponent = GetComponent<PredictedNetworkMovement>();
-
-        if (isLocalPlayer)
-        {
-            var chud = Instantiate(correctionsHudPrefab);
-            HUD = chud.GetComponent<CorrectiosHUD>();
-            HUD.SetMovementComponent(GetComponent<PredictedNetworkMovement>());
-
-        }
-
-        if (isServer)
-        {
-
-            if (PhysicsNetworkUpdater.Instance.ServerHudInstance == null)
-            {
-                PhysicsNetworkUpdater.Instance.ServerHudInstance = Instantiate(PhysicsNetworkUpdater.Instance.ServerHUDPreab);
-            }
-        }
 
     }
 	
@@ -73,14 +53,4 @@ public class PlayerController : NetworkBehaviour {
         _movementComponent.InputProcessorComponent.SetInputs(currentInputs);
     }
 
-    public override void OnNetworkDestroy()
-    {
-        base.OnNetworkDestroy();
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if(!isServer) Destroy(HUD.gameObject);
-    }
 }
