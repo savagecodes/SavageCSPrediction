@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(PredicetdNetworkMovement))]
+[RequireComponent(typeof(PredictedNetworkMovement))]
 public class PlayerController : NetworkBehaviour {
 
-    PredicetdNetworkMovement _movementComponent;
+    PredictedNetworkMovement _movementComponent;
     [SyncVar]
     Color _playerColor;
     public GameObject correctionsHudPrefab;
     public CorrectiosHUD HUD;
-    public MeshRenderer meshRenderer;
+    //public MeshRenderer meshRenderer;
 
     [Header("Input Mapping")]
     [SerializeField]
@@ -24,11 +24,13 @@ public class PlayerController : NetworkBehaviour {
     KeyCode RIGHT;
     [SerializeField]
     KeyCode JUMP;
+    
+    [SerializeField]
+    KeyCode RUN;
 
 	void Start () {
 
-        _movementComponent = GetComponent<PredicetdNetworkMovement>();
-        meshRenderer = GetComponent<MeshRenderer>();
+        _movementComponent = GetComponent<PredictedNetworkMovement>();
 
 
         if (isLocalPlayer)
@@ -36,15 +38,13 @@ public class PlayerController : NetworkBehaviour {
             
             var chud = Instantiate(correctionsHudPrefab);
             HUD = chud.GetComponent<CorrectiosHUD>();
-            HUD.SetMovementComponent(GetComponent<PredicetdNetworkMovement>());
+            HUD.SetMovementComponent(GetComponent<PredictedNetworkMovement>());
 
         }
 
         if (isServer)
         {
             _playerColor = new Color(Random.Range(0f, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
-
-            meshRenderer.material.color = _playerColor;
 
             if (PhysicsNetworkUpdater.Instance.ServerHudInstance == null)
             {
@@ -58,31 +58,25 @@ public class PlayerController : NetworkBehaviour {
     {
         _playerColor = c;
         if (isLocalPlayer) HUD.SetColor(c);
-        _movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color = _playerColor;
     }
 	
 	void Update ()
     {
         if (_movementComponent == null) return;
 
-        if (_movementComponent.SmoothedPlayerModel.GetComponent<MeshRenderer>().material.color != _playerColor) SetColorPlayer(_playerColor);
-
         if (!isLocalPlayer) return;
-
-        if(HUD.playerColorImage.color != _playerColor) SetColorPlayer(_playerColor);
 
        Inputs CurrentInputs = new Inputs();
 
-      /* CurrentInputs.up = Input.GetKey(UP);
-       CurrentInputs.down = Input.GetKey(DOWN);
-       CurrentInputs.left = Input.GetKey(LEFT);
-       CurrentInputs.right = Input.GetKey(RIGHT);
-       CurrentInputs.jump = Input.GetKey(JUMP);*/
+      CurrentInputs.XMoveInput = Input.GetAxis("Horizontal");
+      CurrentInputs.YMoveinput = Input.GetAxis("Vertical");
+      
+      CurrentInputs.cameralookX = Input.GetAxis("Mouse X");
+      CurrentInputs.cameralookY = Input.GetAxis("Mouse Y");
 
-      CurrentInputs.horizontal = Input.GetAxis("Horizontal");
-      CurrentInputs.vertical = Input.GetAxis("Vertical");
+       CurrentInputs.run = Input.GetKey(RUN);
 
-       CurrentInputs.jump = Input.GetKey(JUMP);
+       CurrentInputs.jump = Input.GetKeyDown(JUMP);
 
        _movementComponent.InputProcessorComponent.SetInputs(CurrentInputs);
     }

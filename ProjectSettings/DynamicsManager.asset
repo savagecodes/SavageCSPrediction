@@ -30,4 +30,4 @@ PhysicsManager:
   m_WorldSubdivisions: 8
   m_FrictionType: 0
   m_EnableEnhancedDeterminism: 1
-  m_EnableUnifiedHeightmaps: 1
+  m_EnableUnifiedHeightmaps: 0
