@@ -8,8 +8,8 @@ using UnityEngine.Serialization;
 //[NetworkSettings(sendInterval = 0.005f)]
 public class PredictedNetworkMovement : NetworkBehaviour {
 
-    private short _PredictedMessageReceivedID = 1002;
-    private short _StateMessageReceivedID = 1003;
+    private short _predictedMessageReceivedID = 1002;
+    private short _stateMessageReceivedID = 1003;
 
     private int _correctionsMadeOnClient;
 
@@ -74,8 +74,8 @@ public class PredictedNetworkMovement : NetworkBehaviour {
 
     void Start () {
 
-        _PredictedMessageReceivedID += System.Convert.ToInt16(netId.Value);
-        _StateMessageReceivedID += System.Convert.ToInt16(netId.Value);
+        _predictedMessageReceivedID += System.Convert.ToInt16(netId.Value);
+        _stateMessageReceivedID += System.Convert.ToInt16(netId.Value);
 
         _currentTickNumber = 0;
 
@@ -104,11 +104,11 @@ public class PredictedNetworkMovement : NetworkBehaviour {
         
         if (!isServer)
         {
-            NetworkManager.singleton.client.RegisterHandler(_StateMessageReceivedID, OnStateMessageReceived);
+            NetworkManager.singleton.client.RegisterHandler(_stateMessageReceivedID, OnStateMessageReceived);
         }
 
 
-        NetworkServer.RegisterHandler(_PredictedMessageReceivedID, OnPredictedMessageReceived);
+        NetworkServer.RegisterHandler(_predictedMessageReceivedID, OnPredictedMessageReceived);
         
 
     }
@@ -159,7 +159,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
             serverStateMsg.serverState = StateProcessorComponent.GetCurrentState();
             
             //Send Message To Client
-            NetworkServer.SendToClientOfPlayer(this.gameObject, _StateMessageReceivedID, serverStateMsg);
+            NetworkServer.SendToClientOfPlayer(this.gameObject, _stateMessageReceivedID, serverStateMsg);
             serverPacketID++;
                     
         }
@@ -240,7 +240,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
             clientPredictedMessage.inputs = inputList.ToArray();
 
             //Send Input Message To Server
-            connectionToServer.Send(_PredictedMessageReceivedID, clientPredictedMessage);
+            connectionToServer.Send(_predictedMessageReceivedID, clientPredictedMessage);
 
             _clientPacketID++;
 
@@ -331,6 +331,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
             rewindTickNumber++;
         }
 
+        //if the position error is greater than 2 meters, just snap 
         if ((prevPosition - StateProcessorComponent.GetCurrentState().position).sqrMagnitude >= 4.0f)
         {
             _clientPositionError = Vector3.zero;
