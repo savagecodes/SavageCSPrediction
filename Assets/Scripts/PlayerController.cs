@@ -24,16 +24,12 @@ public class PlayerController : NetworkBehaviour {
 
     private void Start () 
     {
-
         _movementComponent = GetComponent<PredictedNetworkMovement>();
-
     }
 	
     private void Update ()
     {
-        if (_movementComponent == null) return;
-
-        if (!isLocalPlayer) return;
+        if (_movementComponent == null || !isLocalPlayer) return;
 
         ProcessInputs();
     }

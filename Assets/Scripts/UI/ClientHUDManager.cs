@@ -14,8 +14,8 @@ public class ClientHUDManager : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            var chud = Instantiate(_correctionsHudPrefab);
-            _clientHud = chud.GetComponent<CorrectiosHUD>();
+            var cHud = Instantiate(_correctionsHudPrefab);
+            _clientHud = cHud.GetComponent<CorrectiosHUD>();
             _clientHud.SetMovementComponent(GetComponent<PredictedNetworkMovement>());
 
         }

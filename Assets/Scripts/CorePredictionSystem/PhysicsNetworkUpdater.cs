@@ -14,14 +14,20 @@ public class PhysicsNetworkUpdater : MonoBehaviour
     Dictionary<GameObject, Tuple<Scene, PhysicsScene>> _PhysicsScenes =
         new Dictionary<GameObject, Tuple<Scene, PhysicsScene>>();
 
-    [FormerlySerializedAs("StaticWorld")] [SerializeField]
+    [FormerlySerializedAs("StaticWorld")] 
+    [SerializeField]
     public GameObject _staticWorld;
+    
     public static PhysicsNetworkUpdater Instance => _instance;
 
 
     void Awake()
     {
-        if (_instance != null) Destroy(_instance);
+        if (_instance != null)
+        {
+            Destroy(_instance);
+        }
+        
         _instance = this;
     }
 
