@@ -46,6 +46,12 @@ public class NetworkClock : NetworkBehaviour
         {
             NetworkManager.singleton.client.RegisterHandler(_timeReceivedFromServerID, OnTimeReceivedFromServer);
         }
+        _serverClock = DateTime.UtcNow;
+    }
+
+    void Update()
+    {
+        _serverClock = _serverClock.AddMilliseconds((Time.deltaTime * 1000));
     }
 
     void OnTimeReceivedFromClient(NetworkMessage netMsg)
@@ -87,7 +93,7 @@ public class NetworkClock : NetworkBehaviour
     void CalculateTimeDelta(TimeMessage timeMessage)
     {
         _roundTripTime = (int)((long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds - timeMessage.clientTimeStamp);
-        _latency = _timeDelta / 2; 
+        _latency = _roundTripTime / 2; 
         int serverDelta = (int)(timeMessage.serverTimeStamp - (long)(DateTime.UtcNow - new DateTime (1970, 1, 1, 0, 0, 0)).TotalMilliseconds);
         _timeDelta = serverDelta + _latency;
     }
