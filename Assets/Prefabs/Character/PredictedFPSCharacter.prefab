@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 4286644033892033423}
   - component: {fileID: 137185446029154939}
   - component: {fileID: 1060680736379149016}
+  - component: {fileID: 2235317988658912470}
   m_Layer: 0
   m_Name: PredictedFPSCharacter
   m_TagString: Untagged
@@ -288,3 +289,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _correctionsHudPrefab: {fileID: 1645973854640804, guid: bed7273fd96024d429f2e427c008d100,
     type: 3}
+--- !u!114 &2235317988658912470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5274623333318842247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82adb9bd99b75b34dbf3304f5a27085b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
