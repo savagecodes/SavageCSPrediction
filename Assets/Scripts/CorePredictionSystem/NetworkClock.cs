@@ -6,8 +6,6 @@ using UnityEngine.Networking;
 
 public class NetworkClock : NetworkBehaviour
 {
-    private DateTime _serverClock;
-
     private int _latency;
     private int _roundTripTime;
     private int _timeDelta;
@@ -16,8 +14,6 @@ public class NetworkClock : NetworkBehaviour
     private short _timeReceivedFromServerID = 2003;
 
     #region Getters
-
-    public DateTime ServerClock => _serverClock;
 
     public int Latency => _latency;
 
@@ -46,13 +42,14 @@ public class NetworkClock : NetworkBehaviour
         {
             NetworkManager.singleton.client.RegisterHandler(_timeReceivedFromServerID, OnTimeReceivedFromServer);
         }
-        _serverClock = DateTime.UtcNow;
     }
 
-    void Update()
+    public DateTime GetSyncedTime()
     {
-        _serverClock = _serverClock.AddMilliseconds((Time.deltaTime * 1000));
+        DateTime dateNow = DateTime.UtcNow;
+       return dateNow.AddMilliseconds(_timeDelta).ToLocalTime();
     }
+
 
     void OnTimeReceivedFromClient(NetworkMessage netMsg)
     {
@@ -68,7 +65,7 @@ public class NetworkClock : NetworkBehaviour
         var timeMessage =  netMsg.ReadMessage<TimeMessage>();
         
         CalculateTimeDelta(timeMessage);
-        SyncClock(timeMessage);
+        //SyncClock(timeMessage);
     }
     
     IEnumerator SendTimeStamp()
@@ -98,12 +95,6 @@ public class NetworkClock : NetworkBehaviour
         _timeDelta = serverDelta + _latency;
     }
 
-    void SyncClock(TimeMessage timeMessage)
-    {
-        DateTime dateNow = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc); 
-        _serverClock = dateNow.AddMilliseconds (timeMessage.clientTimeStamp + _timeDelta).ToLocalTime (); 
-    }
-    
     void OnGUI(){
 
         if (isServer)
@@ -113,7 +104,7 @@ public class NetworkClock : NetworkBehaviour
         }
         if(!isLocalPlayer) 
             return;
-        GUI.Label (new Rect(10, 250, 400, 30), "Server Time:"+ _serverClock.TimeOfDay);
+        GUI.Label (new Rect(10, 250, 400, 30), "Server Time:"+ GetSyncedTime().TimeOfDay);
         GUI.Label (new Rect(10, 270, 400, 30), "Latency:"+ _latency.ToString()+"ms");
         GUI.Label (new Rect(10, 290, 400, 30), "Time Delta:"+ _timeDelta.ToString()+"ms");
     }

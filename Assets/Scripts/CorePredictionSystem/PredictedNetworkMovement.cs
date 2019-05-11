@@ -271,20 +271,20 @@ public class PredictedNetworkMovement : NetworkBehaviour {
            
             float rotationError = 1.0f - Quaternion.Dot(serverStateMessage.serverState.rotation, _clientStateBuffer[bufferSlot].rotation);
             
-            Debug.Log("STATE VERIFICATION -------------- Server tick => "+serverStateMessage.tickNumber+" ----------------");
+          //  Debug.Log("STATE VERIFICATION -------------- Server tick => "+serverStateMessage.tickNumber+" ----------------");
             if (positionError.sqrMagnitude > 0.0000001f  || rotationError > 0.00001f)
             {
-                Debug.Log("PosError => " +positionError.sqrMagnitude + " | RotError => " + rotationError);
-                Debug.Log("["+_clientStateBuffer[bufferSlot-1].position + "|" + _clientStateBuffer[bufferSlot].position + "|" +_clientStateBuffer[bufferSlot+1].position +"]" + " => " + serverStateMessage.serverState.position );
-                Debug.Log("["+_clientStateBuffer[bufferSlot-1].rotation + "|" + _clientStateBuffer[bufferSlot].rotation + "|" +_clientStateBuffer[bufferSlot+1].rotation +"]" + " => " + serverStateMessage.serverState.rotation );
-                Debug.Log("------------------------------");
+            //    Debug.Log("PosError => " +positionError.sqrMagnitude + " | RotError => " + rotationError);
+              //  Debug.Log("["+_clientStateBuffer[bufferSlot-1].position + "|" + _clientStateBuffer[bufferSlot].position + "|" +_clientStateBuffer[bufferSlot+1].position +"]" + " => " + serverStateMessage.serverState.position );
+               // Debug.Log("["+_clientStateBuffer[bufferSlot-1].rotation + "|" + _clientStateBuffer[bufferSlot].rotation + "|" +_clientStateBuffer[bufferSlot+1].rotation +"]" + " => " + serverStateMessage.serverState.rotation );
+               // Debug.Log("------------------------------");
                 
                 ApplyCorrectionsWithServerState(serverStateMessage,bufferSlot);
             }
             else
             {
-                Debug.Log("SATE CORRECT------------------------------");
-                Debug.Log("------------------------------");
+                //Debug.Log("SATE CORRECT------------------------------");
+                //Debug.Log("------------------------------");
             }
     
         }
