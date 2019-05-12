@@ -20,6 +20,7 @@ public class SavageNetwork : NetworkManager
     void Start()
     {
         customConfig = true;
+        connectionConfig.PacketSize = 1470;
         connectionConfig.MaxCombinedReliableMessageCount = 40;
         connectionConfig.MaxCombinedReliableMessageSize = 800;
         connectionConfig.MaxSentMessageQueueSize = 2048;

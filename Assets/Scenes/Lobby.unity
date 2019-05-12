@@ -198,7 +198,7 @@ PrefabInstance:
     - target: {fileID: 3421448051014115657, guid: a6627136afadaf8488cd8c4f800c8fa8,
         type: 3}
       propertyPath: m_Channels.Array.data[0]
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3421448051014115657, guid: a6627136afadaf8488cd8c4f800c8fa8,
         type: 3}

@@ -20,9 +20,10 @@ public class NetworkClock : NetworkBehaviour
     public int RoundTripTime => _roundTripTime;
 
     public int TimeDelta => _timeDelta;
+    
+    public int CurrentTimeInInt => (int) ((isServer ? DateTime.UtcNow : GetSyncedTime()) - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
 
     #endregion
-
 
     void Start()
     {

@@ -19,8 +19,10 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     public Action<PredictedSmoothedTransform> OnSmoothedPositionReady;
     public Action<ServerState> OnValidSercerStateReceived;
 
-    private float _currentTime;
+   // private float _currentTime;
     private uint _currentTickNumber;
+    
+    NetworkClock _networkClock;
 
     //client specific
     private float _clientTimer;
@@ -67,6 +69,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
 
     private void Awake()
     {
+        _networkClock = GetComponent<NetworkClock>();
         Application.targetFrameRate = 60;
         _inputProcessorComponent = GetComponent <InputProcessor>();
         _stateProcessorComponent = GetComponent<StateProcessor>();
@@ -154,7 +157,8 @@ public class PredictedNetworkMovement : NetworkBehaviour {
                         
             ServerStateMessage serverStateMsg = new ServerStateMessage();
             serverStateMsg.packetId = serverPacketID;
-            serverStateMsg.deliveryTime = _currentTime + _serverPredictedMessageQueue.Peek().Element.rtt / 2;
+            //serverStateMsg.deliveryTime = _currentTime + _serverPredictedMessageQueue.Peek().Element.rtt / 2;
+            serverStateMsg.deliveryTime = _networkClock.CurrentTimeInInt;
             serverStateMsg.tickNumber = _currentTickNumber;
             serverStateMsg.serverState = StateProcessorComponent.GetCurrentState();
             
@@ -169,12 +173,11 @@ public class PredictedNetworkMovement : NetworkBehaviour {
         RpcTransformUpdate(StateProcessorComponent.GetCurrentState().position, StateProcessorComponent.GetCurrentState().rotation);
     }
 
-
     void ServerUpdate()
     {
-        _currentTime += Time.deltaTime;
+       // _currentTime += Time.deltaTime;
 
-        while (_serverPredictedMessageQueue.Count > 0 && _currentTime >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
+        while (_serverPredictedMessageQueue.Count > 0 && _networkClock.CurrentTimeInInt >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
         {
             ClientPredictedMessage clientPredictedMessage = _serverPredictedMessageQueue.Dequeue().Element;
 
@@ -208,7 +211,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
 
     void ClientUpdate()
     {
-        _currentTime += Time.deltaTime;
+        //_currentTime += Time.deltaTime;
 
         _clientTimer += Time.deltaTime;
 
@@ -224,10 +227,12 @@ public class PredictedNetworkMovement : NetworkBehaviour {
             ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],InputProcessorComponent.GetCurrentInputs());
        
             ClientPredictedMessage clientPredictedMessage = new ClientPredictedMessage();
-            var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
+           // var rtt = (NetworkManager.singleton.client.GetRTT() / 1000f);
             clientPredictedMessage.packetId = _clientPacketID;
-            clientPredictedMessage.deliveryTime = _currentTime + rtt / 2 ;
-            clientPredictedMessage.rtt = rtt;
+          /* clientPredictedMessage.deliveryTime = _currentTime + rtt / 2 ;
+            clientPredictedMessage.rtt = rtt;*/
+
+            clientPredictedMessage.deliveryTime = _networkClock.CurrentTimeInInt;
             clientPredictedMessage.startTickNumber = _sendRedundantInputsToServer ? _clientLastReceivedStateTickNumber : _currentTickNumber;
 
             var inputList = new List<Inputs>();
@@ -350,7 +355,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     {
         if (_clientStateMessageQueue.Peek() == null) return false;
         
-        return _clientStateMessageQueue.Count > 0 && _currentTime >= _clientStateMessageQueue.Peek().Element.deliveryTime;
+        return _clientStateMessageQueue.Count > 0 && _networkClock.CurrentTimeInInt >= _clientStateMessageQueue.Peek().Element.deliveryTime;
     }
 
     private void ClientStoreCurrentStateAndStep(ref ClientState currentState, Inputs inputs)
@@ -414,8 +419,8 @@ public struct PredictedSmoothedTransform
 class ClientPredictedMessage : MessageBase
 {
     public uint packetId;
-    public float deliveryTime;
-    public float rtt;
+    public int deliveryTime;
+   // public float rtt;
     public uint startTickNumber;
     public Inputs[] inputs;
 }
@@ -424,7 +429,7 @@ class ClientPredictedMessage : MessageBase
 public class ServerStateMessage : MessageBase
 {
     public uint packetId;
-    public float deliveryTime;
+    public int deliveryTime;
     public uint tickNumber;
     public ServerState serverState;
 }
