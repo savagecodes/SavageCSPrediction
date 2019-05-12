@@ -10,5 +10,5 @@ EditorBuildSettings:
     guid: bd6ec7469fa32a74e8e7b9d9e6e1be29
   - enabled: 1
     path: Assets/Scenes/NetworkedScene.unity
-    guid: 89cd5a5fcdd227e44b65aec50579cdcc
+    guid: f6f9150321f0bff4ebabc08cfcdb92b9
   m_configObjects: {}

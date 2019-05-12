@@ -6,17 +6,24 @@ using UnityEngine.Networking;
 
 public class NetworkClock : NetworkBehaviour
 {
+    [Header("Network Clock Settings")]
     [SerializeField]
     private bool _useAverageLatency;
     [SerializeField]
-    private int _latencyBufferSize = 4;
+    private int _latencyBufferSize = 4; 
+    [SerializeField]
+    private bool _useAverageTimeDelta;
+    [SerializeField]
+    private int _timeDeltaBufferSize = 4;
     
     private int _latency;
     private int _averageLatency;
+    private int _averageTiemDelta;
     private int _roundTripTime;
     private int _timeDelta;
 
-    private Queue<int> _latencyQueue;
+    private Queue<int> _latencyBuffer;
+    private Queue<int> _timeDeltaBuffer;
     
     private short _timeReceivedFromClientID = 2002;
     private short _timeReceivedFromServerID = 2003;
@@ -27,7 +34,7 @@ public class NetworkClock : NetworkBehaviour
 
     public int RoundTripTime => _roundTripTime;
 
-    public int TimeDelta => _timeDelta;
+    public int TimeDelta => _useAverageTimeDelta ? _averageTiemDelta : _timeDelta;
     
     public int CurrentTimeInInt => (int) ((isServer ? DateTime.UtcNow : GetSyncedTime()) - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
 
@@ -35,7 +42,9 @@ public class NetworkClock : NetworkBehaviour
 
     void Start()
     {
-        _latencyQueue = new Queue<int>(_latencyBufferSize);
+        _latencyBuffer = new Queue<int>();
+        _timeDeltaBuffer = new Queue<int>();
+        
         _timeReceivedFromClientID += System.Convert.ToInt16(netId.Value);
         _timeReceivedFromServerID += System.Convert.ToInt16(netId.Value);
         
@@ -76,7 +85,8 @@ public class NetworkClock : NetworkBehaviour
         var timeMessage =  netMsg.ReadMessage<TimeMessage>();
         
         CalculateTimeDelta(timeMessage);
-        CalculateAverageLatency();
+        CalculateAverage(ref _latencyBuffer, _latencyBufferSize, _latency, out _averageLatency);
+        CalculateAverage(ref _timeDeltaBuffer, _timeDeltaBufferSize, _timeDelta, out _averageTiemDelta);
     }
     
     IEnumerator SendTimeStamp()
@@ -106,23 +116,23 @@ public class NetworkClock : NetworkBehaviour
         _timeDelta = serverDelta + _latency;
     }
 
-    void CalculateAverageLatency()
+    void CalculateAverage(ref Queue<int> buffer,int bufferSize,int value,out int average)
     {
-        _latencyQueue.Enqueue(_latency);
+        buffer.Enqueue(value);
        
-        if (_latencyQueue.Count > _latencyBufferSize)
+        if (buffer.Count > bufferSize)
         {
-            _latencyQueue.Dequeue();
+            buffer.Dequeue();
         }
 
-        var latencyAccumulator = 0;
-        foreach (var _lat in _latencyQueue)
+        var accumulator = 0;
+        foreach (var val in buffer)
         {
-            latencyAccumulator += _lat;
+            accumulator += val;
         }
 
-        _averageLatency = latencyAccumulator /
-                          (_latencyBufferSize < _latencyQueue.Count ? _latencyQueue.Count : _latencyBufferSize);
+        average = accumulator /
+                          (bufferSize < buffer.Count ? buffer.Count : bufferSize);
     }
 
     void OnGUI(){
@@ -136,7 +146,7 @@ public class NetworkClock : NetworkBehaviour
             return;
         GUI.Label (new Rect(10, 250, 400, 30), "Server Time:"+ GetSyncedTime().TimeOfDay);
         GUI.Label (new Rect(10, 270, 400, 30), "Latency:"+ Latency.ToString()+"ms");
-        GUI.Label (new Rect(10, 290, 400, 30), "Time Delta:"+ _timeDelta.ToString()+"ms");
+        GUI.Label (new Rect(10, 290, 400, 30), "Time Delta:"+ TimeDelta.ToString()+"ms");
     }
 }
 

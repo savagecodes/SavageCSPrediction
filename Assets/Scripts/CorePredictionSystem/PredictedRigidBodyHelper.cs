@@ -21,10 +21,10 @@ public class PredictedRigidBodyHelper : NetworkBehaviour
       
         PhysicsNetworkUpdater.Instance.CreatePhysicsSceneForGO(this.gameObject);
         
-        _predictedMovement.InputProcessorComponent.OnInputExecuted += OnInputProcesedAndExecuted;
+        _predictedMovement.InputProcessorComponent.OnInputExecuted += OnInputProcessedAndExecuted;
     }
 
-    public void OnInputProcesedAndExecuted()
+    public void OnInputProcessedAndExecuted()
     {
         PhysicsNetworkUpdater.Instance.UpdatePhysics(_predictedMovement);
     }

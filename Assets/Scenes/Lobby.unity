@@ -237,6 +237,16 @@ PrefabInstance:
       propertyPath: m_OnlineScene
       value: NetworkedScene
       objectReference: {fileID: 0}
+    - target: {fileID: 1612426094837450352, guid: a6627136afadaf8488cd8c4f800c8fa8,
+        type: 3}
+      propertyPath: m_MaxBufferedPackets
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612426094837450352, guid: a6627136afadaf8488cd8c4f800c8fa8,
+        type: 3}
+      propertyPath: m_OfflineScene
+      value: Lobby
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3421448051014115657, guid: a6627136afadaf8488cd8c4f800c8fa8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6627136afadaf8488cd8c4f800c8fa8, type: 3}

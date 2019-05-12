@@ -16,7 +16,6 @@ public class SavageNetwork : NetworkManager
             Destroy(_instance);
             _instance = this;
         }
-
     }
 
     // Set custom connection parameters early, so they are not too late to be enforced

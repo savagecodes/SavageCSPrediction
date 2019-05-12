@@ -303,3 +303,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _useAverageLatency: 1
   _latencyBufferSize: 6
+  _useAverageTimeDelta: 1
+  _timeDeltaBufferSize: 4
