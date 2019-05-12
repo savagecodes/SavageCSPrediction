@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="be15d91e-0e87-405b-bc41-91c8a1ea8590" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UnityCSP-Physics/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/NetworkClock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/NetworkClock.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedRigidBodyHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedRigidBodyHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Character/PredictedFPSCharacter.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Character/PredictedFPSCharacter.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/DataTypes/ClientPredictionTypes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/DataTypes/ClientPredictionTypes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/StateProcessor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/StateProcessor.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,8 +35,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/InputProcessor.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+            <state relative-caret-position="256">
+              <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
               <folding>
                 <marker date="1557284058827" expanded="false" signature="6:92" ph="..." />
                 <marker date="1557284058827" expanded="true" signature="146:818" ph="{...}" />
@@ -54,92 +50,88 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/NetworkClock.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1056">
-              <caret line="85" column="8" lean-forward="true" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+            <state relative-caret-position="168">
+              <caret line="134" column="82" lean-forward="true" selection-start-line="134" selection-start-column="82" selection-end-line="134" selection-end-column="82" />
               <folding>
-                <marker date="1557677501083" expanded="false" signature="6:122" ph="..." />
-                <marker date="1557677501083" expanded="true" signature="168:4665" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="807:1197" ph="Getters" />
-                <marker date="1557677501083" expanded="true" signature="1215:1868" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="1502:1567" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="1590:1706" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="1719:1853" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="1905:2026" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="2085:2396" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="2454:2780" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="2817:3006" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="2844:2997" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="3042:3261" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="3098:3218" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="3315:3696" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="3787:4161" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="3871:3921" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="3987:4039" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="4179:4663" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="4203:4342" ph="{...}" />
-                <marker date="1557677501083" expanded="true" signature="4705:4775" ph="{...}" />
+                <marker date="1557677706444" expanded="false" signature="6:122" ph="..." />
+                <marker date="1557677706444" expanded="true" signature="168:4664" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="807:1197" ph="Getters" />
+                <marker date="1557677706444" expanded="true" signature="1215:1868" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="1502:1567" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="1590:1706" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="1719:1853" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="1905:2026" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="2085:2396" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="2454:2780" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="2817:3006" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="2844:2997" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="3042:3261" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="3098:3218" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="3315:3696" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="3787:4161" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="3871:3921" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="3987:4039" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="4179:4662" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="4203:4342" ph="{...}" />
+                <marker date="1557677706444" expanded="true" signature="4704:4774" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2912">
-              <caret line="304" column="1" selection-start-line="304" selection-start-column="1" selection-end-line="304" selection-end-column="1" />
+            <state relative-caret-position="180">
+              <caret line="266" column="80" lean-forward="true" selection-start-line="266" selection-start-column="80" selection-end-line="266" selection-end-column="80" />
               <folding>
-                <marker date="1557622540567" expanded="false" signature="6:155" ph="..." />
-                <marker date="1557622540567" expanded="true" signature="257:15316" ph="{...}" />
-                <marker date="1557622540567" expanded="false" signature="2024:2277" ph="Getters" />
-                <marker date="1557622540567" expanded="true" signature="2303:2546" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="2566:3768" ph="{...}" />
-                <marker date="1557622540567" expanded="false" signature="2759:3244" ph="Initializing Client Properties" />
-                <marker date="1557622540567" expanded="false" signature="3254:3490" ph="Initializing Server properties" />
-                <marker date="1557622540567" expanded="true" signature="3524:3654" ph="{...}" />
-                <marker date="1557622540567" expanded="false" signature="3774:4633" ph="Network Messages Handlers" />
-                <marker date="1557622540567" expanded="true" signature="3867:4226" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="4282:4617" ph="{...}" />
-                <marker date="1557622540567" expanded="false" signature="4639:7268" ph="Server Logic" />
-                <marker date="1557622540567" expanded="true" signature="4699:5807" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="4819:5569" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="5587:5669" ph="/* Send RPC Call to sync non local clients positions ... */" />
-                <marker date="1557622540567" expanded="true" signature="5832:7252" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="6030:7245" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="6368:6486" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
-                <marker date="1557622540567" expanded="true" signature="6533:7235" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="6564:6676" ph="/* there may be some inputs in the array that we've already had, ... */" />
-                <marker date="1557622540567" expanded="true" signature="7009:7221" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="7274:15161" ph="Client Logic" />
-                <marker date="1557622540567" expanded="true" signature="7319:11364" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="7461:9017" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="8143:8256" ph="/* clientPredictedMessage.deliveryTime = _currentTime + rtt / 2 ; ... */" />
-                <marker date="1557622540567" expanded="true" signature="8635:8740" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="9055:11312" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="9301:9410" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="9625:9729" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="10357:11114" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="10384:11003" ph="/* Debug.Log(&quot;PosError =&gt; &quot; +positionError.sqrMagnitude + &quot; | RotError =&gt; &quot; + rotationError); ... */" />
-                <marker date="1557622540567" expanded="true" signature="11131:11297" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="11162:11283" ph="/* Debug.Log(&quot;SATE CORRECT------------------------------&quot;); ... */" />
-                <marker date="1557622540567" expanded="true" signature="11401:11958" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="11876:11952" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="12062:13417" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="12618:12846" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="13018:13143" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="13156:13400" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="13464:13693" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="13787:14031" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="14115:14291" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="14389:15145" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="14491:14680" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="15181:15313" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="15358:15424" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="15469:15613" ph="{...}" />
-                <marker date="1557622540567" expanded="true" signature="15661:15784" ph="{...}" />
+                <marker date="1557688467035" expanded="false" signature="6:155" ph="..." />
+                <marker date="1557688467035" expanded="true" signature="257:14328" ph="{...}" />
+                <marker date="1557688467035" expanded="false" signature="2024:2277" ph="Getters" />
+                <marker date="1557688467035" expanded="true" signature="2303:2546" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="2566:3768" ph="{...}" />
+                <marker date="1557688467035" expanded="false" signature="2759:3244" ph="Initializing Client Properties" />
+                <marker date="1557688467035" expanded="false" signature="3254:3490" ph="Initializing Server properties" />
+                <marker date="1557688467035" expanded="true" signature="3524:3654" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="3774:4633" ph="Network Messages Handlers" />
+                <marker date="1557688467035" expanded="true" signature="3867:4226" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="4282:4617" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="4639:7227" ph="Server Logic" />
+                <marker date="1557688467035" expanded="true" signature="4699:5807" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="4819:5569" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="5587:5669" ph="/* Send RPC Call to sync non local clients positions ... */" />
+                <marker date="1557688467035" expanded="true" signature="5832:7211" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="6030:7204" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="6368:6486" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
+                <marker date="1557688467035" expanded="true" signature="6533:7194" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="6564:6676" ph="/* there may be some inputs in the array that we've already had, ... */" />
+                <marker date="1557688467035" expanded="true" signature="7009:7180" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="7233:14173" ph="Client Logic" />
+                <marker date="1557688467035" expanded="true" signature="7278:10375" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="7420:8775" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="8393:8498" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="8813:10323" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="9059:9168" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="9383:9487" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="10197:10308" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="10412:10969" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="10887:10963" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="11074:12429" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="11630:11858" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="12030:12155" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="12168:12412" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="12476:12705" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="12799:13043" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="13127:13303" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="13401:14157" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="13503:13692" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="14193:14325" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="14370:14436" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="14481:14601" ph="{...}" />
+                <marker date="1557688467035" expanded="true" signature="14648:14771" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -185,8 +177,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state relative-caret-position="400">
+              <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
               <folding>
                 <marker date="1557676765894" expanded="false" signature="6:122" ph="..." />
                 <marker date="1557676765894" expanded="true" signature="167:1080" ph="{...}" />
@@ -196,6 +188,15 @@
                 <marker date="1557676765894" expanded="true" signature="923:976" ph="{...}" />
                 <marker date="1557676765894" expanded="true" signature="1021:1074" ph="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/b5/36a27e99/PlayerController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -262,16 +263,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedViewComponent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/96/00c452ea/NetworkDiscovery.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/InputProcessor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedRigidBodyHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/e7/b42d2035/NetworkManagerHUD.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/NetworkClock.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PhysicsNetworkUpdater.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FPSDemo/FPSDemoInputProcessor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedViewComponent.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/96/00c452ea/NetworkDiscovery.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/InputProcessor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedRigidBodyHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/b5/36a27e99/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FPSDemo/FPSDemoStateProcessor.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -308,11 +310,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/ClientHUDManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PhysicsNetworkUpdater.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Utility/LightUnetNetworkManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedRigidBodyHelper.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/NetworkClock.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs" />
       </list>
     </option>
   </component>
@@ -322,8 +324,8 @@
     </ignored-facets>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
+    <option name="x" value="6" />
+    <option name="y" value="222" />
     <option name="width" value="1937" />
     <option name="height" value="1057" />
   </component>
@@ -407,12 +409,12 @@
       <workItem from="1557620367871" duration="950000" />
       <workItem from="1557622321908" duration="4409000" />
       <workItem from="1557630461263" duration="2174000" />
-      <workItem from="1557674577983" duration="2939000" />
+      <workItem from="1557674577983" duration="5377000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87291000" />
+    <option name="totallyTimeSpent" value="89729000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -424,7 +426,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1937" height="1057" extended-state="1" />
+    <frame x="-9" y="-9" width="1937" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.019712307" />
@@ -590,10 +592,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/e7/b42d2035/NetworkManagerHUD.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="944">
+          <caret line="62" column="34" lean-forward="true" selection-start-line="61" selection-start-column="28" selection-end-line="62" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/96/00c452ea/NetworkDiscovery.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="479" column="1" selection-start-line="479" selection-start-column="1" selection-end-line="535" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/b5/36a27e99/PlayerController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="35" column="5" lean-forward="true" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+          <folding>
+            <marker date="1557676765894" expanded="false" signature="6:122" ph="..." />
+            <marker date="1557676765894" expanded="true" signature="167:1080" ph="{...}" />
+            <marker date="1557676765894" expanded="true" signature="294:419" ph="{...}" />
+            <marker date="1557676765894" expanded="true" signature="331:413" ph="{...}" />
+            <marker date="1557676765894" expanded="true" signature="524:881" ph="{...}" />
+            <marker date="1557676765894" expanded="true" signature="923:976" ph="{...}" />
+            <marker date="1557676765894" expanded="true" signature="1021:1074" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/InputProcessor.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
+        <state relative-caret-position="256">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
           <folding>
             <marker date="1557284058827" expanded="false" signature="6:92" ph="..." />
             <marker date="1557284058827" expanded="true" signature="146:818" ph="{...}" />
@@ -606,59 +645,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/NetworkClock.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2912">
-          <caret line="304" column="1" selection-start-line="304" selection-start-column="1" selection-end-line="304" selection-end-column="1" />
+        <state relative-caret-position="168">
+          <caret line="134" column="82" lean-forward="true" selection-start-line="134" selection-start-column="82" selection-end-line="134" selection-end-column="82" />
           <folding>
-            <marker date="1557622540567" expanded="false" signature="6:155" ph="..." />
-            <marker date="1557622540567" expanded="true" signature="257:15316" ph="{...}" />
-            <marker date="1557622540567" expanded="false" signature="2024:2277" ph="Getters" />
-            <marker date="1557622540567" expanded="true" signature="2303:2546" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="2566:3768" ph="{...}" />
-            <marker date="1557622540567" expanded="false" signature="2759:3244" ph="Initializing Client Properties" />
-            <marker date="1557622540567" expanded="false" signature="3254:3490" ph="Initializing Server properties" />
-            <marker date="1557622540567" expanded="true" signature="3524:3654" ph="{...}" />
-            <marker date="1557622540567" expanded="false" signature="3774:4633" ph="Network Messages Handlers" />
-            <marker date="1557622540567" expanded="true" signature="3867:4226" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="4282:4617" ph="{...}" />
-            <marker date="1557622540567" expanded="false" signature="4639:7268" ph="Server Logic" />
-            <marker date="1557622540567" expanded="true" signature="4699:5807" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="4819:5569" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="5587:5669" ph="/* Send RPC Call to sync non local clients positions ... */" />
-            <marker date="1557622540567" expanded="true" signature="5832:7252" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="6030:7245" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="6368:6486" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
-            <marker date="1557622540567" expanded="true" signature="6533:7235" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="6564:6676" ph="/* there may be some inputs in the array that we've already had, ... */" />
-            <marker date="1557622540567" expanded="true" signature="7009:7221" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="7274:15161" ph="Client Logic" />
-            <marker date="1557622540567" expanded="true" signature="7319:11364" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="7461:9017" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="8143:8256" ph="/* clientPredictedMessage.deliveryTime = _currentTime + rtt / 2 ; ... */" />
-            <marker date="1557622540567" expanded="true" signature="8635:8740" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="9055:11312" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="9301:9410" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="9625:9729" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="10357:11114" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="10384:11003" ph="/* Debug.Log(&quot;PosError =&gt; &quot; +positionError.sqrMagnitude + &quot; | RotError =&gt; &quot; + rotationError); ... */" />
-            <marker date="1557622540567" expanded="true" signature="11131:11297" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="11162:11283" ph="/* Debug.Log(&quot;SATE CORRECT------------------------------&quot;); ... */" />
-            <marker date="1557622540567" expanded="true" signature="11401:11958" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="11876:11952" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="12062:13417" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="12618:12846" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="13018:13143" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="13156:13400" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="13464:13693" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="13787:14031" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="14115:14291" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="14389:15145" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="14491:14680" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="15181:15313" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="15358:15424" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="15469:15613" ph="{...}" />
-            <marker date="1557622540567" expanded="true" signature="15661:15784" ph="{...}" />
+            <marker date="1557677706444" expanded="false" signature="6:122" ph="..." />
+            <marker date="1557677706444" expanded="true" signature="168:4664" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="807:1197" ph="Getters" />
+            <marker date="1557677706444" expanded="true" signature="1215:1868" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="1502:1567" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="1590:1706" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="1719:1853" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="1905:2026" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="2085:2396" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="2454:2780" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="2817:3006" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="2844:2997" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="3042:3261" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="3098:3218" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="3315:3696" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="3787:4161" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="3871:3921" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="3987:4039" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="4179:4662" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="4203:4342" ph="{...}" />
+            <marker date="1557677706444" expanded="true" signature="4704:4774" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -681,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/e7/b42d2035/NetworkManagerHUD.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="944">
-          <caret line="62" column="34" lean-forward="true" selection-start-line="61" selection-start-column="28" selection-end-line="62" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedRigidBodyHelper.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="368">
@@ -703,55 +708,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B0DCFB5D-512A-4169-B2CE-89F7EBE9ECA8/96/00c452ea/NetworkDiscovery.cs">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/PredictedNetworkMovement.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="479" column="1" selection-start-line="479" selection-start-column="1" selection-end-line="535" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SavageNetwork.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="180">
+          <caret line="266" column="80" lean-forward="true" selection-start-line="266" selection-start-column="80" selection-end-line="266" selection-end-column="80" />
           <folding>
-            <marker date="1557676765894" expanded="false" signature="6:122" ph="..." />
-            <marker date="1557676765894" expanded="true" signature="167:1080" ph="{...}" />
-            <marker date="1557676765894" expanded="true" signature="294:419" ph="{...}" />
-            <marker date="1557676765894" expanded="true" signature="331:413" ph="{...}" />
-            <marker date="1557676765894" expanded="true" signature="524:881" ph="{...}" />
-            <marker date="1557676765894" expanded="true" signature="923:976" ph="{...}" />
-            <marker date="1557676765894" expanded="true" signature="1021:1074" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/CorePredictionSystem/NetworkClock.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1056">
-          <caret line="85" column="8" lean-forward="true" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
-          <folding>
-            <marker date="1557677501083" expanded="false" signature="6:122" ph="..." />
-            <marker date="1557677501083" expanded="true" signature="168:4665" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="807:1197" ph="Getters" />
-            <marker date="1557677501083" expanded="true" signature="1215:1868" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="1502:1567" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="1590:1706" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="1719:1853" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="1905:2026" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="2085:2396" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="2454:2780" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="2817:3006" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="2844:2997" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="3042:3261" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="3098:3218" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="3315:3696" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="3787:4161" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="3871:3921" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="3987:4039" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="4179:4663" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="4203:4342" ph="{...}" />
-            <marker date="1557677501083" expanded="true" signature="4705:4775" ph="{...}" />
+            <marker date="1557688467035" expanded="false" signature="6:155" ph="..." />
+            <marker date="1557688467035" expanded="true" signature="257:14328" ph="{...}" />
+            <marker date="1557688467035" expanded="false" signature="2024:2277" ph="Getters" />
+            <marker date="1557688467035" expanded="true" signature="2303:2546" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="2566:3768" ph="{...}" />
+            <marker date="1557688467035" expanded="false" signature="2759:3244" ph="Initializing Client Properties" />
+            <marker date="1557688467035" expanded="false" signature="3254:3490" ph="Initializing Server properties" />
+            <marker date="1557688467035" expanded="true" signature="3524:3654" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="3774:4633" ph="Network Messages Handlers" />
+            <marker date="1557688467035" expanded="true" signature="3867:4226" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="4282:4617" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="4639:7227" ph="Server Logic" />
+            <marker date="1557688467035" expanded="true" signature="4699:5807" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="4819:5569" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="5587:5669" ph="/* Send RPC Call to sync non local clients positions ... */" />
+            <marker date="1557688467035" expanded="true" signature="5832:7211" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="6030:7204" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="6368:6486" ph="/* if that tick is greater than or equal to the current tick we're on, then it ... */" />
+            <marker date="1557688467035" expanded="true" signature="6533:7194" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="6564:6676" ph="/* there may be some inputs in the array that we've already had, ... */" />
+            <marker date="1557688467035" expanded="true" signature="7009:7180" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="7233:14173" ph="Client Logic" />
+            <marker date="1557688467035" expanded="true" signature="7278:10375" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="7420:8775" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="8393:8498" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="8813:10323" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="9059:9168" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="9383:9487" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="10197:10308" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="10412:10969" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="10887:10963" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="11074:12429" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="11630:11858" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="12030:12155" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="12168:12412" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="12476:12705" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="12799:13043" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="13127:13303" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="13401:14157" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="13503:13692" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="14193:14325" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="14370:14436" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="14481:14601" ph="{...}" />
+            <marker date="1557688467035" expanded="true" signature="14648:14771" ph="{...}" />
           </folding>
         </state>
       </provider>

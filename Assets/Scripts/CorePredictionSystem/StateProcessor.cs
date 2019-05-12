@@ -13,6 +13,11 @@ public abstract class StateProcessor : MonoBehaviour
         ServerSyncer = GetComponent<PredictedNetworkMovement>();
     }
 
+    public virtual bool IsValidateState(ref ServerState receivedState, ref ServerState bufferedState)
+    {
+        return true;
+    }
+
     public virtual ServerState GetCurrentState()
     {
         return _currentState;

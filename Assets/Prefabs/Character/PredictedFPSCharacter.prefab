@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sendRedundantInputsToServer: 1
-  _serverSnapshotRate: 16
+  _serverSnapshotRate: 32
 --- !u!114 &1980361328884055144
 MonoBehaviour:
   m_ObjectHideFlags: 0
