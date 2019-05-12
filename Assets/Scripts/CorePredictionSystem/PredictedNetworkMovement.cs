@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Serialization;
 
-//[NetworkSettings(sendInterval = 0.005f)]
 public class PredictedNetworkMovement : NetworkBehaviour {
 
     private short _predictedMessageReceivedID = 1002;
@@ -19,10 +18,8 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     public Action<PredictedSmoothedTransform> OnSmoothedPositionReady;
     public Action<ServerState> OnValidSercerStateReceived;
 
-   // private float _currentTime;
     private uint _currentTickNumber;
-    
-    NetworkClock _networkClock;
+    private NetworkClock _networkClock;
 
     //client specific
     private float _clientTimer;
@@ -47,7 +44,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     private uint _serverTickAccumulator;
     private BinaryHeap<ClientPredictedMessage> _serverPredictedMessageQueue;
     private HashSet<uint> _serverPredictedMessagesIDs;
-    private uint serverPacketID;
+    private uint _serverPacketID;
 
     //client non local player
     
@@ -122,11 +119,13 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     {
         var message = netMsg.ReadMessage<ClientPredictedMessage>();
 
+        //Discard if is a duplicated packet
         if (_serverPredictedMessagesIDs.Contains(message.packetId)) 
             return;
         
         _serverPredictedMessagesIDs.Add(message.packetId);
 
+        //The binary heap will order the packets if they came out of order
         _serverPredictedMessageQueue.Enqueue(new HeapElement<ClientPredictedMessage>(message,message.packetId));      
 
     }
@@ -135,11 +134,13 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     {
         var message = netMsg.ReadMessage<ServerStateMessage>();
     
+        //Discard if is a duplicated packet
         if (_clientStateMessageIDs.Contains(message.packetId)) 
             return;
         
         _clientStateMessageIDs.Add(message.packetId);
-
+        
+        //The binary heap will order the packets if the came out of order
         _clientStateMessageQueue.Enqueue(new HeapElement<ServerStateMessage>(message, message.packetId));
     }
 
@@ -156,15 +157,14 @@ public class PredictedNetworkMovement : NetworkBehaviour {
             _serverTickAccumulator = 0;
                         
             ServerStateMessage serverStateMsg = new ServerStateMessage();
-            serverStateMsg.packetId = serverPacketID;
-            //serverStateMsg.deliveryTime = _currentTime + _serverPredictedMessageQueue.Peek().Element.rtt / 2;
+            serverStateMsg.packetId = _serverPacketID;
             serverStateMsg.deliveryTime = _networkClock.CurrentTimeInInt;
             serverStateMsg.tickNumber = _currentTickNumber;
             serverStateMsg.serverState = StateProcessorComponent.GetCurrentState();
             
             //Send Message To Client
             NetworkServer.SendToClientOfPlayer(this.gameObject, _stateMessageReceivedID, serverStateMsg);
-            serverPacketID++;
+            _serverPacketID++;
                     
         }
         
@@ -175,7 +175,6 @@ public class PredictedNetworkMovement : NetworkBehaviour {
 
     void ServerUpdate()
     {
-       // _currentTime += Time.deltaTime;
 
         while (_serverPredictedMessageQueue.Count > 0 && _networkClock.CurrentTimeInInt >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
         {
@@ -209,20 +208,18 @@ public class PredictedNetworkMovement : NetworkBehaviour {
 
     void ClientUpdate()
     {
-        //_currentTime += Time.deltaTime;
-
         _clientTimer += Time.deltaTime;
 
         while (_clientTimer >= Time.fixedDeltaTime)
         {
             _clientTimer -= Time.deltaTime;
 
-            uint buffer_slot = _currentTickNumber % _clientBufferSize;
+            uint bufferSlot = _currentTickNumber % _clientBufferSize;
 
-            _clientInputBuffer[buffer_slot] = InputProcessorComponent.GetCurrentInputs();
+            _clientInputBuffer[bufferSlot] = InputProcessorComponent.GetCurrentInputs();
 
             // store state for this tick, then use current state + input to step simulation
-            ClientStoreCurrentStateAndStep(ref _clientStateBuffer[buffer_slot],InputProcessorComponent.GetCurrentInputs());
+            ClientStoreCurrentStateAndStep(ref _clientStateBuffer[bufferSlot],InputProcessorComponent.GetCurrentInputs());
        
             ClientPredictedMessage clientPredictedMessage = new ClientPredictedMessage();
             clientPredictedMessage.packetId = _clientPacketID;
