@@ -302,7 +302,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     {
         _clientPositionError *= 0.9f;
         _clientRotationError = Quaternion.Slerp(_clientRotationError, Quaternion.identity, 0.1f);
-
+ 
         PredictedSmoothedTransform smoothedTransform;
         smoothedTransform.position = StateProcessorComponent.GetCurrentState().position + _clientPositionError;
         smoothedTransform.rotation = StateProcessorComponent.GetCurrentState().rotation * _clientRotationError;

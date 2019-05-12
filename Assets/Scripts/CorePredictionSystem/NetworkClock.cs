@@ -43,6 +43,7 @@ public class NetworkClock : NetworkBehaviour
         {
             NetworkManager.singleton.client.RegisterHandler(_timeReceivedFromServerID, OnTimeReceivedFromServer);
         }
+        
     }
 
     public DateTime GetSyncedTime()

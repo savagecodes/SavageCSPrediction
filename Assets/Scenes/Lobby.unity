@@ -222,7 +222,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 739503324694309251, guid: 0948999222485ad429eb32292e39ad8a,
         type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 1612426094837450352, guid: a6627136afadaf8488cd8c4f800c8fa8,
+        type: 3}
+      propertyPath: m_UseSimulator
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612426094837450352, guid: a6627136afadaf8488cd8c4f800c8fa8,
+        type: 3}
+      propertyPath: m_SimulatedLatency
+      value: 250
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3421448051014115657, guid: a6627136afadaf8488cd8c4f800c8fa8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a6627136afadaf8488cd8c4f800c8fa8, type: 3}
 --- !u!1 &1268981903
 GameObject:

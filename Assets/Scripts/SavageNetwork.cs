@@ -7,15 +7,18 @@ using UnityEngine.Networking;
 public class SavageNetwork : NetworkManager
 {
     private static SavageNetwork _instance;
-
-
     public static SavageNetwork Instance => _instance;
 
     private void Awake()
     {
-        _instance = this;
+        if (_instance != null)
+        {
+            Destroy(_instance);
+            _instance = this;
+        }
+
     }
- 
+
     // Set custom connection parameters early, so they are not too late to be enforced
     void Start()
     {
@@ -27,21 +30,15 @@ public class SavageNetwork : NetworkManager
         connectionConfig.IsAcksLong = true;
         globalConfig.ThreadAwakeTimeout = 1;
     }
-    
-    public override void OnStartServer() 
+
+    public override void OnStartServer()
     {
         Debug.Log("Server has started");
     }
     
-    void Update()
+    public override void OnStopServer()
     {
-        //_serverClock = _serverClock.AddMilliseconds((Time.deltaTime * 1000));
-       /* if (_serverStarted)
-        {
-            
-        }*/
-       
-      // Debug.Log(_serverClock.TimeOfDay);
+        Debug.Log("Server has stopped");
     }
-
+   
 }
