@@ -301,3 +301,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82adb9bd99b75b34dbf3304f5a27085b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _useAverageLatency: 1
+  _latencyBufferSize: 6
