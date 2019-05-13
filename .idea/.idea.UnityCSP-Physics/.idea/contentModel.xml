@@ -35,6 +35,7 @@
           </e>
           <e p="PlayerController.cs" t="Include" />
           <e p="SavageNetwork.cs" t="Include" />
+          <e p="SavageNetworkDiscovery.cs" t="Include" />
           <e p="UI" t="Include">
             <e p="ClientHUDManager.cs" t="Include" />
             <e p="CorrectiosHUD.cs" t="Include" />

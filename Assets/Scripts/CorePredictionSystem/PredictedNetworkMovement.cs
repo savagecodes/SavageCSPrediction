@@ -27,7 +27,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     private const int _clientBufferSize = 1024;
     private ServerState[] _clientStateBuffer; // client stores predicted moves here
     private Inputs[] _clientInputBuffer; // client stores predicted inputs here
-    private BinaryHeap<ServerStateMessage> _clientStateMessageQueue;
+    private BinaryHeap<ServerStateMessage> _clientServerStateMessageBuffer; // client store server states messages for validation 
     private HashSet<uint> _clientStateMessageIDs;
     private Vector3 _clientPositionError;
     private Quaternion _clientRotationError;
@@ -42,12 +42,11 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     [SerializeField]
     private uint _serverSnapshotRate;
     private uint _serverTickAccumulator;
-    private BinaryHeap<ClientPredictedMessage> _serverPredictedMessageQueue;
+    private BinaryHeap<ClientPredictedMessage> _serverPredictedMessageBuffer; //server stores the input messages in this buffer
     private HashSet<uint> _serverPredictedMessagesIDs;
     private uint _serverPacketID;
 
-    //client non local player
-    
+    //client non local player   
     private PredictedSmoothedTransform _lastInterpolatedTransform;
     private PredictedSmoothedTransform _lastReceivedFromServerTransform;
 
@@ -85,7 +84,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
         _clientLastReceivedStateTickNumber = 0;
         _clientStateBuffer = new ServerState[_clientBufferSize];
         _clientInputBuffer = new Inputs[_clientBufferSize];
-        _clientStateMessageQueue = new BinaryHeap<ServerStateMessage>();
+        _clientServerStateMessageBuffer = new BinaryHeap<ServerStateMessage>();
         _clientStateMessageIDs = new HashSet<uint>();
         _clientPositionError = Vector3.zero;
         _clientRotationError = Quaternion.identity;
@@ -95,7 +94,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
         #region Initializing Server properties
 
         _serverTickAccumulator = 0;
-        _serverPredictedMessageQueue = new BinaryHeap<ClientPredictedMessage>();
+        _serverPredictedMessageBuffer = new BinaryHeap<ClientPredictedMessage>();
         _serverPredictedMessagesIDs = new HashSet<uint>(); 
 
         #endregion
@@ -126,7 +125,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
         _serverPredictedMessagesIDs.Add(message.packetId);
 
         //The binary heap will order the packets if they came out of order
-        _serverPredictedMessageQueue.Enqueue(new HeapElement<ClientPredictedMessage>(message,message.packetId));      
+        _serverPredictedMessageBuffer.Enqueue(new HeapElement<ClientPredictedMessage>(message,message.packetId));      
 
     }
 
@@ -141,7 +140,7 @@ public class PredictedNetworkMovement : NetworkBehaviour {
         _clientStateMessageIDs.Add(message.packetId);
         
         //The binary heap will order the packets if the came out of order
-        _clientStateMessageQueue.Enqueue(new HeapElement<ServerStateMessage>(message, message.packetId));
+        _clientServerStateMessageBuffer.Enqueue(new HeapElement<ServerStateMessage>(message, message.packetId));
     }
 
     #endregion
@@ -176,9 +175,9 @@ public class PredictedNetworkMovement : NetworkBehaviour {
     void ServerUpdate()
     {
 
-        while (_serverPredictedMessageQueue.Count > 0 && _networkClock.CurrentTimeInInt >= _serverPredictedMessageQueue.Peek().Element.deliveryTime)
+        while (_serverPredictedMessageBuffer.Count > 0 && _networkClock.CurrentTimeInInt >= _serverPredictedMessageBuffer.Peek().Element.deliveryTime)
         {
-            ClientPredictedMessage clientPredictedMessage = _serverPredictedMessageQueue.Dequeue().Element;
+            ClientPredictedMessage clientPredictedMessage = _serverPredictedMessageBuffer.Dequeue().Element;
 
             // message contains an array of inputs, calculate what tick the final one is
             uint maxTick = clientPredictedMessage.startTickNumber + (uint)clientPredictedMessage.inputs.Length - 1;
@@ -245,11 +244,11 @@ public class PredictedNetworkMovement : NetworkBehaviour {
 
         if (ClientHasStateMessage())
         {
-            ServerStateMessage serverStateMessage = _clientStateMessageQueue.Dequeue().Element;
+            ServerStateMessage serverStateMessage = _clientServerStateMessageBuffer.Dequeue().Element;
             
             while (ClientHasStateMessage()) // make sure if there are any newer state messages available, we use those instead
             {
-                serverStateMessage = _clientStateMessageQueue.Dequeue().Element;
+                serverStateMessage = _clientServerStateMessageBuffer.Dequeue().Element;
             }
 
             _clientLastReceivedStateTickNumber = serverStateMessage.tickNumber;
@@ -334,9 +333,9 @@ public class PredictedNetworkMovement : NetworkBehaviour {
 
     private bool ClientHasStateMessage()
     {
-        if (_clientStateMessageQueue.Peek() == null) return false;
+        if (_clientServerStateMessageBuffer.Peek() == null) return false;
         
-        return _clientStateMessageQueue.Count > 0 && _networkClock.CurrentTimeInInt >= _clientStateMessageQueue.Peek().Element.deliveryTime;
+        return _clientServerStateMessageBuffer.Count > 0 && _networkClock.CurrentTimeInInt >= _clientServerStateMessageBuffer.Peek().Element.deliveryTime;
     }
 
     private void ClientStoreCurrentStateAndStep(ref ServerState currentState, Inputs inputs)
