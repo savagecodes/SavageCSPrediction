@@ -2,6 +2,7 @@ Library/
 unity_physics_csp.csproj
 unity_physics_csp.sln
 .vs/
+.idea/
 Assembly-CSharp.csproj
 obj/
 Temp/
