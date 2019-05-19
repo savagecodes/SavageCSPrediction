@@ -5,56 +5,9 @@
     <e p="C:\Users\Sergio\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_UnityCSP-Physics.-755894796.00" t="ExcludeRecursive" />
     <e p="C:\Users\Sergio\AppData\local\Android\Sdk\platforms\android-28\data\res" t="IncludeRecursive" />
     <e p="C:\Users\Sergio\AppData\local\Android\Sdk\sources\android-28" t="IncludeRecursive" />
-    <e p="D:\Projects\UnityCSP-Physics" t="IncludeRecursive">
-      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
-      <e p="Assets" t="Include">
-        <e p="Art" t="Include">
-          <e p="Shaders" t="Include">
-            <e p="Skybox-Procedural.shader" t="Include" />
-          </e>
-        </e>
-        <e p="Scripts" t="Include">
-          <e p="ClientSidePrediction" t="Include">
-            <e p="DataTypes" t="Include">
-              <e p="BinaryHeap.cs" t="Include" />
-              <e p="ClientPredictionTypes.cs" t="Include" />
-              <e p="DynArray.cs" t="Include" />
-            </e>
-            <e p="InputProcessor.cs" t="Include" />
-            <e p="NetworkClock.cs" t="Include" />
-            <e p="PhysicsNetworkUpdater.cs" t="Include" />
-            <e p="PredictedNetworkMovement.cs" t="Include" />
-            <e p="PredictedRigidBodyHelper.cs" t="Include" />
-            <e p="PredictedViewComponent.cs" t="Include" />
-            <e p="StateProcessor.cs" t="Include" />
-          </e>
-          <e p="FPSCounter.cs" t="Include" />
-          <e p="FPSDemo" t="Include">
-            <e p="FPSDemoInputProcessor.cs" t="Include" />
-            <e p="FPSDemoStateProcessor.cs" t="Include" />
-            <e p="RigidbodyFirstPersonController.cs" t="Include" />
-          </e>
-          <e p="PlayerController.cs" t="Include" />
-          <e p="SavageNetwork.cs" t="Include" />
-          <e p="SavageNetworkDiscovery.cs" t="Include" />
-          <e p="UI" t="Include">
-            <e p="ClientHUDManager.cs" t="Include" />
-            <e p="CorrectiosHUD.cs" t="Include" />
-            <e p="ServerHUD.cs" t="Include" />
-            <e p="ServerHUDManager.cs" t="Include" />
-          </e>
-          <e p="Utility" t="Include">
-            <e p="ExtensionMethods.cs" t="Include" />
-            <e p="Utility.cs" t="Include" />
-          </e>
-        </e>
-      </e>
+    <e p="D:\Projects\UnityCSP-Physics" t="IncludeFlat">
       <e p="Library" t="ExcludeRecursive" />
-      <e p="obj" t="ExcludeRecursive" />
-      <e p="packages" t="ExcludeRecursive" />
-      <e p="Temp" t="ExcludeRecursive">
-        <e p="bin" t="ExcludeRecursive" />
-      </e>
+      <e p="Temp" t="ExcludeRecursive" />
       <e p="UnityCSP-Physics.sln" t="IncludeFlat" />
     </e>
   </component>
