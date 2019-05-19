@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using SavageCodes.Networking.ClientSidePrediction;
 using UnityEngine;
 using UnityEngine.Networking;
-
 [RequireComponent(typeof(PredictedNetworkMovement))]
 public class PlayerController : NetworkBehaviour {
 

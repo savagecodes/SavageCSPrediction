@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using SavageCodes.Networking.ClientSidePrediction;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Serialization;

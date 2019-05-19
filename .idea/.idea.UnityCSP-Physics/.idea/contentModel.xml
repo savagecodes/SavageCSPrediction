@@ -14,7 +14,7 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="CorePredictionSystem" t="Include">
+          <e p="ClientSidePrediction" t="Include">
             <e p="DataTypes" t="Include">
               <e p="BinaryHeap.cs" t="Include" />
               <e p="ClientPredictionTypes.cs" t="Include" />
@@ -28,6 +28,7 @@
             <e p="PredictedViewComponent.cs" t="Include" />
             <e p="StateProcessor.cs" t="Include" />
           </e>
+          <e p="FPSCounter.cs" t="Include" />
           <e p="FPSDemo" t="Include">
             <e p="FPSDemoInputProcessor.cs" t="Include" />
             <e p="FPSDemoStateProcessor.cs" t="Include" />
@@ -44,7 +45,6 @@
           </e>
           <e p="Utility" t="Include">
             <e p="ExtensionMethods.cs" t="Include" />
-            <e p="FPSCounter.cs" t="Include" />
             <e p="Utility.cs" t="Include" />
           </e>
         </e>

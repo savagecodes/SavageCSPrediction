@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using SavageCodes.Networking.ClientSidePrediction;
 public class FPSDemoStateProcessor : StateProcessor
 {
     private Rigidbody _rb;

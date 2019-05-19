@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using SavageCodes.Networking.ClientSidePrediction;
+using UnityEngine;
+
 public class FPSDemoInputProcessor : InputProcessor
 {
     private RigidbodyFirstPersonController _FPSController;
