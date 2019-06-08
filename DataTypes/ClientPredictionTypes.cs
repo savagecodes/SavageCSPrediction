@@ -14,10 +14,10 @@ namespace SavageCodes.Networking.ClientSidePrediction
     {
         public Vector3 position;
         public Quaternion rotation;
-        public Vector3 velocity;
+       /* public Vector3 velocity;
         public Vector3 angularVelocity;
         public float angularDrag;
-        public float drag;
+        public float drag;*/
     }
 
     [System.Serializable]
