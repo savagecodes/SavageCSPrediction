@@ -8,17 +8,14 @@ namespace SavageCodes.Networking.ClientSidePrediction
     [RequireComponent(typeof(PredictedNetworkMovement))]
     public class PredictedViewComponent : NetworkBehaviour
     {
-        [Header("Required")] [SerializeField] private GameObject _localClientModelPrefab;
+        [Header("Required")] 
         [SerializeField] private GameObject _nonLocalClientModelPrefab;
-        [SerializeField] private GameObject _serverModelPrefab; //for debugging
+        [SerializeField] private Vector3 _offset; 
 
-
-
-        private GameObject _localClientModelInstance;
         private GameObject _nonLocalClientInstance;
-        private GameObject _serverModelInstance; //for debugging
-
         private PredictedNetworkMovement _predictedMovementComponent;
+
+        public GameObject NonLocalClientInstance => _nonLocalClientInstance;
 
         void Awake()
         {
@@ -27,20 +24,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
         void Start()
         {
-            if (isServer)
-            {
-                _serverModelInstance = Instantiate(_serverModelPrefab);
-            }
-            else if (isLocalPlayer)
-            {
-                _localClientModelInstance = Instantiate(_localClientModelPrefab);
-                _predictedMovementComponent.OnSmoothedPositionReady += x =>
-                {
-                    _localClientModelInstance.transform.position = x.position;
-                    _localClientModelInstance.transform.rotation = x.rotation;
-                };
-            }
-            else
+            if(!isLocalPlayer && !isServer)
             {
                 _nonLocalClientInstance = Instantiate(_nonLocalClientModelPrefab);
 
@@ -48,7 +32,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
                 {
                     if (x.position != _nonLocalClientInstance.transform.position)
                     {
-                        _nonLocalClientInstance.transform.position = x.position;
+                        _nonLocalClientInstance.transform.position = x.position + _offset;
                     }
 
                     if (x.rotation != _nonLocalClientInstance.transform.rotation &&
@@ -62,30 +46,9 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
         }
 
-        void Update()
-        {
-            if (isServer)
-            {
-                _serverModelInstance.transform.position = transform.position;
-                _serverModelInstance.transform.rotation = transform.rotation;
-            }
-        }
-
         private void OnDestroy()
-        {
-            if (isServer)
-            {
-                Destroy(_serverModelInstance);
-            }
-            else if (isLocalPlayer)
-            {
-                Destroy(_localClientModelInstance);
-
-            }
-            else
-            {
-                Destroy(_nonLocalClientInstance);
-            }
+        { 
+            Destroy(_nonLocalClientInstance);
         }
     }
 }
