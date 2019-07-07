@@ -394,8 +394,8 @@ namespace SavageCodes.Networking.ClientSidePrediction
             }
 
             //TODO: Implement a better smoothing technique
-            _lastInterpolatedTransform.position = Vector3.Slerp(_lastInterpolatedTransform.position,
-                _lastReceivedFromServerTransform.position, 4f * Time.fixedDeltaTime);
+            _lastInterpolatedTransform.position = Utility.InterpTo(_lastInterpolatedTransform.position,
+                _lastReceivedFromServerTransform.position, 25f);
             _lastInterpolatedTransform.rotation = Quaternion.Lerp(_lastInterpolatedTransform.rotation,
                 _lastReceivedFromServerTransform.rotation, 14f * Time.fixedDeltaTime);
 
