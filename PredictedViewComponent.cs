@@ -11,6 +11,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
         [Header("Required")] 
         [SerializeField] private GameObject _nonLocalClientModelPrefab;
         [SerializeField] private Vector3 _offset; 
+        [SerializeField] private bool _updateNonLocalPlayerControllerPosition = true; 
 
         private GameObject _nonLocalClientInstance;
         private PredictedNetworkMovement _predictedMovementComponent;
@@ -27,12 +28,19 @@ namespace SavageCodes.Networking.ClientSidePrediction
             if(!isLocalPlayer && !isServer)
             {
                 _nonLocalClientInstance = Instantiate(_nonLocalClientModelPrefab);
-
+                
                 _predictedMovementComponent.OnSmoothedPositionReady += x =>
                 {
+                    if (_updateNonLocalPlayerControllerPosition)
+                    {
+                        transform.position = x.position;
+                        transform.rotation = x.rotation;
+                    }
+
                     if (x.position != _nonLocalClientInstance.transform.position)
                     {
                         _nonLocalClientInstance.transform.position = x.position + _offset;
+                        
                     }
 
                     if (x.rotation != _nonLocalClientInstance.transform.rotation &&
