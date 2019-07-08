@@ -392,8 +392,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
                 return;
             }
-
-            //TODO: Implement a better smoothing technique
+            
             _lastInterpolatedTransform.position = Utility.InterpTo(_lastInterpolatedTransform.position,
                 _lastReceivedFromServerTransform.position, 25f);
             _lastInterpolatedTransform.rotation = Quaternion.Lerp(_lastInterpolatedTransform.rotation,
