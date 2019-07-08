@@ -25,5 +25,23 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
             return start + DeltaMove;
         }
+        
+        public static float InterpTo(float start, float end,float speed)
+        {
+
+            // Distance to reach
+            float dist = start - end;
+
+            // If distance is too small, just set the desired location
+            if( Mathf.Abs(dist) < 0.00001f)
+            {
+                return end;
+            }
+
+            // Delta Move, Clamp so we do not over shoot.
+            float DeltaMove = dist * Mathf.Clamp(Time.deltaTime * speed, 0, 1);
+
+            return start + DeltaMove;
+        }
     }
 }
