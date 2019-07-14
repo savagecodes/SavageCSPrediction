@@ -30,6 +30,8 @@ namespace SavageCodes.Networking.ClientSidePrediction
         public float YMoveinput;
         public bool startShoot;
         public bool stopShoot;
+        public bool teleportPlayer;
+        public Vector3 teleportPosition;
 
         public float cameralookX;
         public float cameralookY;
