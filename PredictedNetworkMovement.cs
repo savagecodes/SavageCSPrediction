@@ -125,6 +125,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
         void OnPredictedMessageReceived(NetworkMessage netMsg)
         {
+           // netMsg.reader.SeekZero();
             var message = netMsg.ReadMessage<ClientPredictedMessage>();
 
             //Discard if is a duplicated packet
@@ -140,6 +141,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
         void OnStateMessageReceived(NetworkMessage netMsg)
         {
+           // netMsg.reader.SeekZero();
             var message = netMsg.ReadMessage<ServerStateMessage>();
 
             //Discard if is a duplicated packet
@@ -166,7 +168,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
                 ServerStateMessage serverStateMsg = new ServerStateMessage();
                 serverStateMsg.packetId = _serverPacketID;
-                serverStateMsg.deliveryTime = _networkClock.CurrentTimeInInt;
+                serverStateMsg.deliveryTime = _networkClock.CurrentTime;
                 serverStateMsg.tickNumber = _currentTickNumber;
                 serverStateMsg.serverState = StateProcessorComponent.GetCurrentState();
 
@@ -185,7 +187,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
         void ServerUpdate()
         {
 
-            while (_serverPredictedMessageBuffer.Count > 0 && _networkClock.CurrentTimeInInt >=
+            while (_serverPredictedMessageBuffer.Count > 0 && _networkClock.CurrentTime >=
                    _serverPredictedMessageBuffer.Peek().Element.deliveryTime)
             {
                 ClientPredictedMessage clientPredictedMessage = _serverPredictedMessageBuffer.Dequeue().Element;
@@ -236,7 +238,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
                 ClientPredictedMessage clientPredictedMessage = new ClientPredictedMessage();
                 clientPredictedMessage.packetId = _clientPacketID;
-                clientPredictedMessage.deliveryTime = _networkClock.CurrentTimeInInt;
+                clientPredictedMessage.deliveryTime = _networkClock.CurrentTime;
                 clientPredictedMessage.startTickNumber = _sendRedundantInputsToServer
                     ? _clientLastReceivedStateTickNumber
                     : _currentTickNumber;
@@ -357,7 +359,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
         {
             if (_clientServerStateMessageBuffer.Peek() == null) return false;
 
-            return _clientServerStateMessageBuffer.Count > 0 && _networkClock.CurrentTimeInInt >=
+            return _clientServerStateMessageBuffer.Count > 0 && _networkClock.CurrentTime >=
                    _clientServerStateMessageBuffer.Peek().Element.deliveryTime;
         }
 
@@ -423,7 +425,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
     class ClientPredictedMessage : MessageBase
     {
         public uint packetId;
-        public int deliveryTime;
+        public double deliveryTime;
         public uint startTickNumber;
         public Inputs[] inputs;
     }
@@ -431,7 +433,7 @@ namespace SavageCodes.Networking.ClientSidePrediction
     public class ServerStateMessage : MessageBase
     {
         public uint packetId;
-        public int deliveryTime;
+        public double deliveryTime;
         public uint tickNumber;
         public ServerState serverState;
     }

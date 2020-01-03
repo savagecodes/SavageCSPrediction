@@ -37,9 +37,9 @@ namespace SavageCodes.Networking.ClientSidePrediction
 
         public int TimeDelta => _useAverageTimeDelta ? _averageTimeDelta : _timeDelta;
 
-        public int CurrentTimeInInt =>
-            (int) ((isServer ? DateTime.UtcNow : GetSyncedTime()) - new DateTime(1970, 1, 1, 0, 0, 0))
-            .TotalMilliseconds;
+        public double CurrentTime =>
+             ((isServer ? DateTime.UtcNow : GetSyncedTime()) - new DateTime(1970, 1, 1, 0, 0, 0))
+                    .TotalMilliseconds;
 
         public DateTime GetSyncedTime()
         {
