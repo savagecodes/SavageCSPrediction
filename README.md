@@ -8,6 +8,6 @@
 
 Based on [https://github.com/spectre1989/unity_physics_csp](https://github.com/spectre1989/unity_physics_csp)
 
-You can download a demo project that uses this plugin here [https://github.com/savagecodes/UnityCSP-Demo](https://github.com/spectre1989/unity_physics_csp)
+You can download a demo project that uses this plugin here [https://github.com/savagecodes/UnityCSP-Demo](https://github.com/savagecodes/UnityCSP-Demo)
 
 [Savage Codes](http://www.savagecodes.com "Savage Codes") &copy; 2019
